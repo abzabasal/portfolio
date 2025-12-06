@@ -78,7 +78,7 @@ export function ContactForm() {
               >
                 <Mail className="w-4 h-4" />
                 <span className="underline underline-offset-2 decoration-zinc-500 group-hover/email:decoration-white transition-colors">
-                  hello@shinekka.dev
+                  abzaeko@gmail.com
                 </span>
               </a>
             </p>

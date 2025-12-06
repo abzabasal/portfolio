@@ -14,12 +14,12 @@ export function Footer() {
   const socialLinks = [
     {
       icon: Github,
-      href: "https://github.com",
+      href: "https://github.com/abzaek",
       label: "GitHub",
     },
     {
       icon: Linkedin,
-      href: "https://linkedin.com",
+      href: "https://linkedin.com/in/abzaek",
       label: "LinkedIn",
     },
     {
@@ -29,7 +29,7 @@ export function Footer() {
     },
     {
       icon: Mail,
-      href: "mailto:hello@shinekka.dev",
+      href: "mailto:abzaeko@gmail.com",
       label: "Email",
     },
   ]
@@ -67,7 +67,7 @@ export function Footer() {
                   textShadow: "0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1)",
                 }}
               >
-                SHINEKKA
+                Abdulazez Zeinu
               </h3>
               <p className="text-zinc-400 text-lg">
                 Developed with <span className="text-red-400">❤️</span> by Abdulazez Zeinu.
