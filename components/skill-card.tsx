@@ -10,17 +10,17 @@ interface SkillCardProps {
   name: string
   description: string
   color:
-    | "violet"
-    | "cyan"
-    | "magenta"
-    | "purple-blue"
-    | "aqua"
-    | "lavender"
-    | "green"
-    | "orange"
-    | "blue"
-    | "red"
-    | "yellow"
+  | "violet"
+  | "cyan"
+  | "magenta"
+  | "purple-blue"
+  | "aqua"
+  | "lavender"
+  | "green"
+  | "orange"
+  | "blue"
+  | "red"
+  | "yellow"
   size?: "small" | "medium" | "large"
   icon?: string
 }
@@ -111,7 +111,7 @@ export function SkillCard({ name, description, color, size = "small", icon }: Sk
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
   const colors = colorMap[color]
-  const gradientId = useMemo(() => `skill-gradient-${name}-${Math.random()}`, [name])
+  const gradientId = useMemo(() => `skill-gradient-${name.replace(/\s+/g, '-').toLowerCase()}`, [name])
 
   const sizeClass =
     size === "large"

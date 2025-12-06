@@ -15,6 +15,7 @@ export interface ProjectData {
   caseStudy: {
     title: string
     description: string
+    markdownContent: string
     images: {
       src: string
       size: "hero" | "vertical" | "square" | "small"
@@ -35,10 +36,31 @@ const projects: ProjectData[] = [
       title: "E-commerce Platform",
       description:
         "A full-stack e-commerce platform with real-time inventory management, payment processing, and analytics dashboard.",
+      markdownContent: `
+# Project Overview
+
+This e-commerce platform was built to provide a seamless shopping experience with high performance and scalability. We utilized **Next.js** for server-side rendering and **Stripe** for secure payments.
+
+## Key Features
+
+- **Real-time Inventory:** Updates instantly as purchases are made.
+- **Secure Payments:** Integrated with Stripe for safe transactions.
+- **Analytics Dashboard:** Comprehensive insights into sales and user behavior.
+
+## Technical Challenges
+
+One of the main challenges was ensuring data consistency across the distributed system. We implemented a robust event-driven architecture to handle inventory updates and order processing.
+
+## Contribution
+
+I was responsible for the backend architecture and the integration of the payment gateway. I also worked on the frontend performance optimization.
+      `,
       images: [
         { src: "/ecommerce-dashboard.png", size: "hero" },
         { src: "/product-catalog-view.jpg", size: "vertical" },
         { src: "/modern-checkout-page.png", size: "square" },
+        { src: "/ecommerce-dashboard.png", size: "hero" },
+        { src: "/product-catalog-view.jpg", size: "vertical" },
       ],
       liveUrl: "https://example.com",
       githubUrl: "https://github.com",
@@ -54,10 +76,30 @@ const projects: ProjectData[] = [
       title: "Task Management App",
       description:
         "Real-time collaborative task management with team workspaces, granular permissions, and advanced analytics.",
+      markdownContent: `
+# Project Overview
+
+A collaborative tool designed to help teams stay organized and efficient. Built with **React** and **Firebase**, it offers real-time updates and seamless collaboration.
+
+## Key Features
+
+- **Real-time Collaboration:** See changes as they happen.
+- **Team Workspaces:** Organize tasks by team or project.
+- **Granular Permissions:** Control who can see and edit what.
+
+## Technical Challenges
+
+Implementing real-time synchronization was a complex task. We used Firebase's real-time database to ensure that all users see the same data at the same time.
+
+## Contribution
+
+I led the frontend development team and designed the user interface. I also implemented the real-time collaboration features.
+      `,
       images: [
         { src: "/task-management-dashboard.png", size: "hero" },
         { src: "/team-collaboration-board.jpg", size: "vertical" },
         { src: "/task-details-view.jpg", size: "square" },
+        { src: "/task-management-dashboard.png", size: "hero" },
       ],
       liveUrl: "https://example.com",
       githubUrl: "https://github.com",
@@ -73,10 +115,30 @@ const projects: ProjectData[] = [
       title: "AI Content Generator",
       description:
         "Intelligent content generation powered by GPT-4 with custom templates, batch processing, and content analytics.",
+      markdownContent: `
+# Project Overview
+
+This tool leverages the power of **OpenAI's GPT-4** to generate high-quality content for various purposes. It includes custom templates and batch processing capabilities.
+
+## Key Features
+
+- **AI-Powered Generation:** High-quality content in seconds.
+- **Custom Templates:** Tailor the output to your specific needs.
+- **Batch Processing:** Generate multiple pieces of content at once.
+
+## Technical Challenges
+
+Integrating with the OpenAI API and handling rate limits were significant challenges. We implemented a queueing system to manage requests efficiently.
+
+## Contribution
+
+I developed the backend API and the integration with OpenAI. I also worked on the frontend interface for the content editor.
+      `,
       images: [
         { src: "/ai-content-generator-interface.png", size: "hero" },
         { src: "/content-creation-editor.jpg", size: "vertical" },
         { src: "/generated-content-preview.jpg", size: "square" },
+        { src: "/ai-content-generator-interface.png", size: "hero" },
       ],
       liveUrl: "https://example.com",
       githubUrl: "https://github.com",
@@ -87,6 +149,20 @@ const projects: ProjectData[] = [
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const handleNext = () => {
+    if (!selectedProject) return
+    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id)
+    const nextIndex = (currentIndex + 1) % projects.length
+    setSelectedProject(projects[nextIndex])
+  }
+
+  const handlePrev = () => {
+    if (!selectedProject) return
+    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id)
+    const prevIndex = (currentIndex - 1 + projects.length) % projects.length
+    setSelectedProject(projects[prevIndex])
+  }
 
   return (
     <section id="projects" className="py-32 relative overflow-hidden">
@@ -138,7 +214,14 @@ export function ProjectsSection() {
 
       {/* Case Study Modal */}
       <AnimatePresence>
-        {selectedProject && <CaseStudyModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
+        {selectedProject && (
+          <CaseStudyModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+            onNext={handleNext}
+            onPrev={handlePrev}
+          />
+        )}
       </AnimatePresence>
     </section>
   )
