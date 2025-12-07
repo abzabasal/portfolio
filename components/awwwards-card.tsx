@@ -18,7 +18,7 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
   const [cursor, setCursor] = useState({ x: 0.5, y: 0.5 })
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const gradientId = useMemo(() => `gradient-${project.id}-${Math.random()}`, [project.id])
+  const gradientId = useMemo(() => `gradient-${project.id}`, [project.id])
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return

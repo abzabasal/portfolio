@@ -143,10 +143,8 @@ export function SkillCard({ name, description, color, size = "small", icon }: Sk
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
-      viewport={{ once: true }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
