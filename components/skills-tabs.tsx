@@ -61,7 +61,7 @@ function TabButton({
           <div
             className="absolute inset-0 rounded-full animate-spin-slow"
             style={{
-              background: "conic-gradient(from 0deg, #a855f7, #ec4899, #3b82f6, #06b6d4, #a855f7)",
+              background: "conic-gradient(from 0deg, #71717a, #d4d4d8, #a1a1aa, #e4e4e7, #71717a)",
               padding: "2px",
             }}
           >
@@ -78,7 +78,7 @@ function TabButton({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
           style={{
-            background: "radial-gradient(ellipse at center, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at center, rgba(113, 113, 122, 0.2) 0%, transparent 70%)",
             filter: "blur(8px)",
           }}
         />
@@ -91,9 +91,8 @@ function TabButton({
 
       {/* Text */}
       <span
-        className={`relative z-10 transition-colors duration-300 ${
-          isActive ? "text-white" : "text-zinc-400 hover:text-white"
-        }`}
+        className={`relative z-10 transition-colors duration-300 ${isActive ? "text-white" : "text-zinc-400 hover:text-white"
+          }`}
       >
         {label}
       </span>
