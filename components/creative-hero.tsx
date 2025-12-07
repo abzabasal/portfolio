@@ -39,11 +39,11 @@ export function CreativeHero() {
   // Generate particles on mount
   useEffect(() => {
     const colors = [
-      "rgba(236, 72, 153, 0.6)", // pink
-      "rgba(6, 182, 212, 0.6)",  // cyan
-      "rgba(168, 85, 247, 0.6)", // purple
-      "rgba(59, 130, 246, 0.6)", // blue
-      "rgba(251, 146, 60, 0.6)", // orange
+      "rgba(161, 161, 170, 0.3)", // muted gray
+      "rgba(212, 212, 216, 0.2)", // light gray
+      "rgba(113, 113, 122, 0.3)", // medium gray
+      "rgba(228, 228, 231, 0.2)", // very light gray
+      "rgba(82, 82, 91, 0.3)",    // dark gray
     ]
 
     const newParticles: Particle[] = Array.from({ length: 50 }, (_, i) => ({
@@ -102,22 +102,22 @@ export function CreativeHero() {
       icon: Github,
       href: "https://github.com",
       label: "GitHub",
-      color: "from-zinc-400 to-zinc-200",
-      glow: "rgba(161, 161, 170, 0.6)",
+      color: "from-zinc-800 to-zinc-900",
+      glow: "rgba(82, 82, 91, 0.4)",
     },
     {
       icon: Linkedin,
       href: "https://linkedin.com",
       label: "LinkedIn",
-      color: "from-blue-400 to-blue-500",
-      glow: "rgba(59, 130, 246, 0.6)",
+      color: "from-zinc-800 to-zinc-900",
+      glow: "rgba(82, 82, 91, 0.4)",
     },
     {
       icon: FileText,
       href: "/resume.pdf",
       label: "Resume",
-      color: "from-emerald-400 to-emerald-500",
-      glow: "rgba(52, 211, 153, 0.6)",
+      color: "from-zinc-800 to-zinc-900",
+      glow: "rgba(82, 82, 91, 0.4)",
     },
   ]
 
@@ -158,19 +158,19 @@ export function CreativeHero() {
 
       {/* Floating Geometric Shapes */}
       <motion.div
-        className="absolute top-20 left-20 w-32 h-32 border-2 border-pink-500/30 rounded-full blur-sm"
+        className="absolute top-20 left-20 w-32 h-32 border-2 border-zinc-700/20 rounded-full blur-sm"
         style={{ x: parallaxX, y: parallaxY }}
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute bottom-32 left-40 w-24 h-24 border-2 border-cyan-500/30 blur-sm"
+        className="absolute bottom-32 left-40 w-24 h-24 border-2 border-zinc-600/20 blur-sm"
         style={{ x: parallaxXSlow, y: parallaxYSlow, rotate: 45 }}
         animate={{ rotate: [45, 405] }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute animate-float-slow top-40 right-32 w-20 h-20 bg-purple-500/10 rounded-full blur-md"
+        className="absolute animate-float-slow top-40 right-32 w-20 h-20 bg-zinc-700/10 rounded-full blur-md"
         style={{ x: parallaxX, y: parallaxYSlow }}
 
       />
@@ -187,7 +187,7 @@ export function CreativeHero() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
+              <div className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance leading-none">
                 {/* "Creative" with character animation */}
                 <motion.div
                   className="block relative"
@@ -198,12 +198,12 @@ export function CreativeHero() {
                     {creativeText.split("").map((char, index) => (
                       <motion.span
                         key={`creative-${index}`}
-                        className={`inline-block animate-holographic text-transparent bg-clip-text ${isHoveringText ? "animate-glitch" : ""
+                        className={`inline-block text-transparent bg-clip-text ${isHoveringText ? "animate-glitch" : ""
                           }`}
                         style={{
-                          backgroundImage: "linear-gradient(135deg, #ec4899, #06b6d4, #a855f7, #ec4899)",
+                          backgroundImage: "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7, #ffffff)",
                           backgroundSize: "300% 300%",
-                          textShadow: "0 0 30px rgba(236, 72, 153, 0.5), 0 0 60px rgba(6, 182, 212, 0.3)",
+                          textShadow: "0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(228, 228, 231, 0.2)",
                         }}
                         initial={{ opacity: 0, y: 50, rotateX: -90 }}
                         animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -262,11 +262,11 @@ export function CreativeHero() {
                 <a
                   ref={buttonRef}
                   href="#projects"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white font-semibold text-lg hover:shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 relative overflow-hidden group"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-black via-zinc-900 to-zinc-800 text-white font-semibold text-lg hover:shadow-2xl hover:shadow-zinc-800/50 transition-all duration-300 relative overflow-hidden group border border-zinc-700"
                   style={{ willChange: "transform" }}
                 >
                   {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
 
                   <Sparkles className="w-5 h-5 animate-pulse" />
                   View My Work
@@ -288,7 +288,7 @@ export function CreativeHero() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <div className="absolute -inset-4 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity animate-pulse-glow" />
+                <div className="absolute -inset-4 bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-700 rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity animate-pulse-glow" />
                 <motion.div
                   className="relative w-52 h-52 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl"
                   style={{
@@ -305,8 +305,8 @@ export function CreativeHero() {
                     alt="Developer portrait"
                     className="w-full h-full object-cover"
                   />
-                  {/* Holographic overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-transparent to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Subtle overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </motion.div>
               </motion.div>
 
@@ -349,7 +349,7 @@ export function CreativeHero() {
                     <div
                       className={`relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br ${link.color} shadow-lg group-hover:shadow-2xl transition-all duration-300`}
                     >
-                      <link.icon className="w-7 h-7 text-zinc-900 group-hover:scale-110 transition-transform" />
+                      <link.icon className="w-7 h-7 text-white group-hover:scale-110 transition-transform" />
                     </div>
 
                     {/* Tooltip */}

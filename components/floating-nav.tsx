@@ -34,34 +34,26 @@ export function FloatingNav() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <div className="relative bg-zinc-900/60 backdrop-blur-xl border-b border-white/5">
+        <div className="relative bg-transparent">
           {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-pink-500/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-700/5 via-transparent to-zinc-600/5 pointer-events-none" />
 
           <div className="container mx-auto px-6">
             <div className="relative flex items-center justify-between h-16">
               <Link href="/" className="relative group">
-                <span className="font-bold text-xl tracking-tight">
+                <span className="font-sans font-light text-xl tracking-tight">
                   <span
                     className="relative text-transparent bg-clip-text"
                     style={{
-                      backgroundImage: "linear-gradient(135deg, #a855f7, #ec4899)",
-                      textShadow: "0 0 30px rgba(168, 85, 247, 0.5)",
-                    }}
-                  >
-                    SHINE
-                  </span>
-                  <span
-                    className="text-white"
-                    style={{
+                      backgroundImage: "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7)",
                       textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
                     }}
                   >
-                    KKA
+                    Abdulazez
                   </span>
                 </span>
                 {/* Glow effect on hover */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute -inset-2 bg-gradient-to-r from-zinc-700/10 to-zinc-600/10 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
 
               {/* Desktop Navigation */}
@@ -76,15 +68,15 @@ export function FloatingNav() {
                     >
                       {item.name}
                       {/* Hover underline effect */}
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-3/4 transition-all duration-300" />
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-zinc-400 to-white group-hover:w-3/4 transition-all duration-300" />
                     </Link>
                   ))}
 
                   <Button
                     size="sm"
-                    className="ml-4 relative overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 border-0 rounded-full px-6 font-semibold shadow-lg shadow-purple-500/25 hover:shadow-pink-500/25 transition-all duration-300"
+                    className="ml-4 relative overflow-hidden bg-gradient-to-r from-black via-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-black border border-zinc-700 rounded-full px-6 font-semibold shadow-lg shadow-zinc-800/25 hover:shadow-zinc-700/25 transition-all duration-300"
                   >
-                    <span className="relative z-10">Resume</span>
+                    <span className="relative z-10 text-white">Resume</span>
                   </Button>
                 </div>
               )}
@@ -123,7 +115,7 @@ export function FloatingNav() {
               >
                 <Link
                   href={item.href}
-                  className="block px-8 py-4 text-2xl font-medium text-white hover:text-purple-400 transition-colors"
+                  className="block px-8 py-4 text-2xl font-medium text-white hover:text-zinc-300 transition-colors"
                   onClick={handleNavClick}
                 >
                   {item.name}
@@ -135,7 +127,7 @@ export function FloatingNav() {
               animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
               transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
             >
-              <Button className="mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 border-0 rounded-full px-8 py-6 text-lg font-semibold">
+              <Button className="mt-6 bg-gradient-to-r from-black via-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-black border border-zinc-700 rounded-full px-8 py-6 text-lg font-semibold">
                 Resume
               </Button>
             </motion.div>

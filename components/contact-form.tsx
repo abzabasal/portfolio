@@ -73,7 +73,7 @@ export function ContactForm() {
             <p className="text-zinc-400 mb-6 flex items-center gap-2 flex-wrap">
               Or reach me directly at{" "}
               <a
-                href="mailto:hello@shinekka.dev"
+                href="mailto:abzaeko@gmail.com"
                 className="inline-flex items-center gap-1.5 text-white hover:text-zinc-300 transition-colors font-medium group/email"
               >
                 <Mail className="w-4 h-4" />
