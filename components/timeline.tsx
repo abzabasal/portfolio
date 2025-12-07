@@ -78,16 +78,20 @@ export function Timeline() {
           >
             <motion.div
               className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"}`}
-              initial={{ opacity: 0, x: index % 2 === 0 ? 80 : -80 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? 150 : -150 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-100px" }}
+              transition={{
+                duration: 0.8,
+                delay: index * 0.15,
+                ease: [0.25, 0.46, 0.45, 0.94] // Custom easing for smooth entrance
+              }}
+              viewport={{ once: true, margin: "-50px" }}
             >
               {/* Card with rotating gradient border */}
               <div className="relative group">
                 <div className="absolute -inset-[2px] rounded-2xl overflow-hidden">
                   <div
-                    className="absolute inset-0 bg-[conic-gradient(from_0deg,#ffffff,#a1a1aa,#ffffff,#a1a1aa,#ffffff)] animate-spin-slow"
+                    className="absolute inset-0 bg-[conic-gradient(from_0deg,#ffffff,#a1a1aa,#ffffff,#a1a1aa,#ffffff)]"
                     style={{ animationDuration: "8s" }}
                   />
                 </div>

@@ -57,7 +57,7 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
       rotateX: 0,
       scale: 1,
       filter: "blur(0px)",
-      transition: { type: "spring", damping: 22, stiffness: 320, mass: 0.8 },
+      transition: { type: "spring" as const, damping: 22, stiffness: 320, mass: 0.8 },
     },
     exit: (direction: "next" | "prev") => ({
       opacity: 0,
@@ -65,7 +65,7 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
       rotateX: direction === "next" ? -6 : 6,
       scale: 0.93,
       filter: "blur(10px)",
-      transition: { duration: 0.28, ease: "easeInOut" },
+      transition: { duration: 0.28, ease: "easeInOut" as const },
     }),
   }
 
