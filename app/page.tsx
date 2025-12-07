@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { FloatingNav } from "@/components/floating-nav"
 import { CreativeHero } from "@/components/creative-hero"
 import { SectionHeading } from "@/components/section-heading"
@@ -41,13 +42,19 @@ export default function Home() {
         <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute top-2/3 right-1/3 w-[300px] h-[300px] bg-purple-500/8 rounded-full blur-[80px] pointer-events-none" />
 
-        <div className="container relative z-10">
+        <motion.div
+          className="container relative z-10"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <SectionHeading title="Experience" subtitle="Career Journey" />
 
           <div className="mt-20">
             <Timeline />
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section
@@ -66,13 +73,19 @@ export default function Home() {
         <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-1/3 left-1/4 w-[300px] h-[300px] bg-zinc-400/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="container relative z-10">
+        <motion.div
+          className="container relative z-10"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <SectionHeading title="Get In Touch" subtitle="Let's Connect" />
 
           <div className="mt-20 max-w-2xl mx-auto">
             <ContactForm />
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <Footer />

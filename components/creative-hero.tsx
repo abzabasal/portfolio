@@ -268,7 +268,6 @@ export function CreativeHero() {
                   {/* Shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
 
-                  <Sparkles className="w-5 h-5 animate-pulse" />
                   View My Work
                   <ExternalLink className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
                 </a>

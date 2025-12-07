@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 
 interface CursorSpotlightProps {
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement | null>
 }
 
 export function CursorSpotlight({ containerRef }: CursorSpotlightProps) {

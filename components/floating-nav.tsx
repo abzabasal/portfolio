@@ -19,9 +19,28 @@ export function FloatingNav() {
     { name: "Contact", href: "#contact" },
   ]
 
-  const handleNavClick = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+
+    // Close mobile menu if open
     if (isMobile) {
       setIsOpen(false)
+    }
+
+    // Get the target section
+    const targetId = href.replace("#", "")
+    const targetSection = document.getElementById(targetId)
+
+    if (targetSection) {
+      // Calculate offset for fixed nav (64px = h-16)
+      const navHeight = 64
+      const targetPosition = targetSection.offsetTop - navHeight
+
+      // Smooth scroll to section
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      })
     }
   }
 
@@ -63,7 +82,7 @@ export function FloatingNav() {
                       key={item.name}
                       href={item.href}
                       className="relative px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors group"
-                      onClick={handleNavClick}
+                      onClick={(e) => handleNavClick(e, item.href)}
                     >
                       {item.name}
                       {/* Hover underline effect */}
@@ -115,7 +134,7 @@ export function FloatingNav() {
                 <Link
                   href={item.href}
                   className="block px-8 py-4 text-2xl font-medium text-white hover:text-zinc-300 transition-colors"
-                  onClick={handleNavClick}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   {item.name}
                 </Link>

@@ -10,17 +10,17 @@ interface Skill {
   name: string
   description: string
   color:
-    | "violet"
-    | "cyan"
-    | "magenta"
-    | "purple-blue"
-    | "aqua"
-    | "lavender"
-    | "green"
-    | "orange"
-    | "blue"
-    | "red"
-    | "yellow"
+  | "violet"
+  | "cyan"
+  | "magenta"
+  | "purple-blue"
+  | "aqua"
+  | "lavender"
+  | "green"
+  | "orange"
+  | "blue"
+  | "red"
+  | "yellow"
   size?: "small" | "medium" | "large"
   icon: string
 }
@@ -148,12 +148,19 @@ const skillsData: Record<SkillCategory, Skill[]> = {
   ],
 }
 
+
 export function SkillsSection() {
   const [activeCategory, setActiveCategory] = useState<SkillCategory>("frontend")
 
   return (
     <section id="skills" className="py-32 bg-gradient-to-b from-black to-zinc-900 relative overflow-hidden">
-      <div className="container">
+      <motion.div
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <SectionHeading title="Skills & Expertise" subtitle="Technical Proficiency" />
 
         <SkillsTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
@@ -188,7 +195,7 @@ export function SkillsSection() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
 
       {/* Noise texture background */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">

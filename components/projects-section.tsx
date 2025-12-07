@@ -184,6 +184,7 @@ export function ProjectsSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
           >
@@ -192,6 +193,7 @@ export function ProjectsSection() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-lg text-zinc-400"
           >
