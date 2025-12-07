@@ -1,169 +1,37 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { motion } from "framer-motion"
 import { Github, Linkedin, FileText, ExternalLink } from "lucide-react"
 
 export function CreativeHero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-
-  const { scrollY } = useScroll()
-  const parallaxY = useTransform(scrollY, [0, 500], [0, 100])
-  const parallaxOpacity = useTransform(scrollY, [0, 300], [1, 0.5])
+  const backgroundImageRef = useRef<HTMLDivElement>(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let devicePixelRatio: number
-    let animationId: number
-
-    const setCanvasDimensions = () => {
-      devicePixelRatio = window.devicePixelRatio || 1
-      const rect = canvas.getBoundingClientRect()
-
-      canvas.width = rect.width * devicePixelRatio
-      canvas.height = rect.height * devicePixelRatio
-
-      ctx.scale(devicePixelRatio, devicePixelRatio)
-    }
-
-    setCanvasDimensions()
-    window.addEventListener("resize", setCanvasDimensions)
-
-    let mouseX = 0
-    let mouseY = 0
-    let targetX = 0
-    let targetY = 0
-
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect()
-      targetX = e.clientX - rect.left
-      targetY = e.clientY - rect.top
+      if (!containerRef.current) return
+
+      const rect = containerRef.current.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
+      const centerX = rect.width / 2
+      const centerY = rect.height / 2
+      const offsetX = (x - centerX) * 0.03
+      const offsetY = (y - centerY) * 0.03
+
+      setMousePosition({ x: offsetX, y: offsetY })
+
+      // Update background image parallax
+      if (backgroundImageRef.current) {
+        backgroundImageRef.current.style.transform = `translate(${offsetX}px, ${offsetY}px)`
+      }
     }
 
     window.addEventListener("mousemove", handleMouseMove)
-
-    class Particle {
-      x: number
-      y: number
-      size: number
-      baseX: number
-      baseY: number
-      density: number
-      color: string
-
-      constructor(x: number, y: number) {
-        this.x = x
-        this.y = y
-        this.baseX = x
-        this.baseY = y
-        this.size = Math.random() * 2 + 1
-        this.density = Math.random() * 30 + 1
-        const hue = Math.random() * 60 + 270
-        this.color = `hsla(${hue}, 70%, 60%, ${Math.random() * 0.05 + 0.08})`
-      }
-
-      update() {
-        const dx = mouseX - this.x
-        const dy = mouseY - this.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-
-        const forceDirectionX = dx / distance
-        const forceDirectionY = dy / distance
-
-        const maxDistance = 80
-        const force = (maxDistance - distance) / maxDistance
-
-        if (distance < maxDistance) {
-          this.x -= forceDirectionX * force * this.density * 0.3
-          this.y -= forceDirectionY * force * this.density * 0.3
-        } else {
-          if (this.x !== this.baseX) {
-            this.x -= (this.x - this.baseX) / 20
-          }
-          if (this.y !== this.baseY) {
-            this.y -= (this.y - this.baseY) / 20
-          }
-        }
-      }
-
-      draw() {
-        ctx.fillStyle = this.color
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.closePath()
-        ctx.fill()
-      }
-    }
-
-    const particlesArray: Particle[] = []
-    const gridSize = 28
-
-    function init() {
-      particlesArray.length = 0
-
-      const canvasWidth = canvas.width / devicePixelRatio
-      const canvasHeight = canvas.height / devicePixelRatio
-
-      const startX = canvasWidth * 0.6
-      const numX = Math.floor((canvasWidth - startX) / gridSize)
-      const numY = Math.floor(canvasHeight / gridSize)
-
-      for (let y = 0; y < numY; y++) {
-        for (let x = 0; x < numX; x++) {
-          const posX = startX + x * gridSize + gridSize / 2
-          const posY = y * gridSize + gridSize / 2
-          particlesArray.push(new Particle(posX, posY))
-        }
-      }
-    }
-
-    init()
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      mouseX += (targetX - mouseX) * 0.05
-      mouseY += (targetY - mouseY) * 0.05
-
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update()
-        particlesArray[i].draw()
-
-        for (let j = i; j < particlesArray.length; j++) {
-          const dx = particlesArray[i].x - particlesArray[j].x
-          const dy = particlesArray[i].y - particlesArray[j].y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 40) {
-            ctx.beginPath()
-            ctx.strokeStyle = `rgba(180, 120, 255, ${0.06 - distance / 800})`
-            ctx.lineWidth = 0.3
-            ctx.moveTo(particlesArray[i].x, particlesArray[i].y)
-            ctx.lineTo(particlesArray[j].x, particlesArray[j].y)
-            ctx.stroke()
-          }
-        }
-      }
-
-      animationId = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    window.addEventListener("resize", init)
-
-    return () => {
-      window.removeEventListener("resize", setCanvasDimensions)
-      window.removeEventListener("resize", init)
-      window.removeEventListener("mousemove", handleMouseMove)
-      cancelAnimationFrame(animationId)
-    }
+    return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
   const socialLinks = [
@@ -191,29 +59,41 @@ export function CreativeHero() {
   ]
 
   return (
-    <div ref={containerRef} className="w-full h-full relative">
-      <div className="absolute inset-0 bg-black" />
+    <div ref={containerRef} className="w-full h-full relative overflow-hidden bg-black">
+      <div className="absolute inset-0">
+        {/* Pure black left 60% overlay */}
+        <div className="absolute inset-0 left-0 right-[40%] bg-black z-5" />
 
-      <motion.div
-        className="absolute top-0 right-0 w-[40%] h-full pointer-events-none"
-        style={{ y: parallaxY, opacity: parallaxOpacity }}
-      >
-        <canvas ref={canvasRef} className="w-full h-full" style={{ display: "block" }} />
-      </motion.div>
+        <div
+          ref={backgroundImageRef}
+          className="absolute top-0 right-0 w-[40%] h-full bg-cover bg-center transition-transform duration-100 ease-out"
+          style={{
+            backgroundImage: "url(/hero-atmospheric-bg.jpg)",
+            opacity: 0.7,
+          }}
+        />
 
-      {/* Main content */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="container mx-auto px-6">
+        {/* Gradient overlay for center area black fade */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent" />
+      </div>
+
+      <motion.div className="relative z-10 h-full flex items-center">
+        <div className="container mx-auto px-6 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center min-h-[80vh] pt-16">
-            {/* Left 60% - Single headline only */}
+            {/* Left 60% - Single headline with staggered text animation */}
             <motion.div
               className="lg:col-span-3 space-y-8"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
-                <span className="block relative">
+              <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
+                <motion.span
+                  className="block relative"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                >
                   <span
                     className="text-transparent bg-clip-text animate-holographic"
                     style={{
@@ -223,9 +103,16 @@ export function CreativeHero() {
                   >
                     Creative
                   </span>
-                </span>
-                <span className="block text-white mt-2">Developer</span>
-              </h1>
+                </motion.span>
+                <motion.span
+                  className="block text-white mt-2"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                >
+                  Developer
+                </motion.span>
+              </div>
 
               <motion.p
                 className="text-lg md:text-xl lg:text-2xl text-zinc-400 max-w-xl leading-relaxed"
@@ -280,7 +167,13 @@ export function CreativeHero() {
                     className="relative group"
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.7 + index * 0.1,
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 15,
+                    }}
                     whileHover={{ scale: 1.15, y: -4 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -307,7 +200,7 @@ export function CreativeHero() {
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }
