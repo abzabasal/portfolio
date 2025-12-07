@@ -27,6 +27,8 @@ export function HeroAnimation() {
     setCanvasDimensions()
     window.addEventListener("resize", setCanvasDimensions)
 
+    const devicePixelRatio = window.devicePixelRatio || 1
+
     // Particle class
     class Particle {
       x: number
@@ -36,33 +38,33 @@ export function HeroAnimation() {
       speedY: number
       color: string
 
-      constructor() {
-        this.x = (Math.random() * canvas.width) / devicePixelRatio
-        this.y = (Math.random() * canvas.height) / devicePixelRatio
+      constructor(canvasWidth: number, canvasHeight: number) {
+        this.x = (Math.random() * canvasWidth) / devicePixelRatio
+        this.y = (Math.random() * canvasHeight) / devicePixelRatio
         this.size = Math.random() * 5 + 1
         this.speedX = Math.random() * 2 - 1
         this.speedY = Math.random() * 2 - 1
         this.color = `hsl(${Math.random() * 60 + 200}, 70%, 60%)`
       }
 
-      update() {
+      update(canvasWidth: number, canvasHeight: number) {
         this.x += this.speedX
         this.y += this.speedY
 
-        if (this.x > canvas.width / devicePixelRatio || this.x < 0) {
+        if (this.x > canvasWidth / devicePixelRatio || this.x < 0) {
           this.speedX = -this.speedX
         }
 
-        if (this.y > canvas.height / devicePixelRatio || this.y < 0) {
+        if (this.y > canvasHeight / devicePixelRatio || this.y < 0) {
           this.speedY = -this.speedY
         }
       }
 
-      draw() {
-        ctx.fillStyle = this.color
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
+      draw(context: CanvasRenderingContext2D) {
+        context.fillStyle = this.color
+        context.beginPath()
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        context.fill()
       }
     }
 
@@ -71,7 +73,7 @@ export function HeroAnimation() {
     const particleCount = 50
 
     for (let i = 0; i < particleCount; i++) {
-      particlesArray.push(new Particle())
+      particlesArray.push(new Particle(canvas.width, canvas.height))
     }
 
     // Animation loop
@@ -99,8 +101,8 @@ export function HeroAnimation() {
 
       // Update and draw particles
       for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update()
-        particlesArray[i].draw()
+        particlesArray[i].update(canvas.width, canvas.height)
+        particlesArray[i].draw(ctx)
       }
 
       requestAnimationFrame(animate)

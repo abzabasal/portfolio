@@ -15,9 +15,8 @@ export default function Home() {
       <FloatingNav />
 
       {/* Hero Section */}
-      <section id="about" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <CreativeHero />
-      </section>
+      <CreativeHero />
+
 
       {/* Skills Section */}
       <SkillsSection />
