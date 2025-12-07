@@ -13,7 +13,6 @@ export function FloatingNav() {
   const isMobile = useMobile()
 
   const navItems = [
-    { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
