@@ -59,7 +59,7 @@ function TabButton({
           transition={{ duration: 0.3 }}
         >
           <div
-            className="absolute inset-0 rounded-full animate-spin-slow"
+            className="absolute inset-0 rounded-full"
             style={{
               background: "conic-gradient(from 0deg, #71717a, #d4d4d8, #a1a1aa, #e4e4e7, #71717a)",
               padding: "2px",
