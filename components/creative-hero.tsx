@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Github, Linkedin, FileText, ExternalLink, Sparkles } from "lucide-react"
-
+import { SentientSphere } from "./3d-sphere"
 // Particle interface
 interface Particle {
   id: number
@@ -127,21 +127,6 @@ export function CreativeHero() {
 
   return (
     <div ref={containerRef} className="w-full h-full relative overflow-hidden bg-black">
-      {/* Animated Gradient Mesh Background */}
-      <div className="absolute inset-0 opacity-30">
-        <div
-          className="absolute inset-0 animate-gradient-mesh"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 50%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 90% 10%, rgba(251, 146, 60, 0.3) 0%, transparent 50%)
-            `,
-            backgroundSize: "200% 200%",
-          }}
-        />
-      </div>
 
       {/* Particle System */}
       <div className="absolute inset-0 overflow-hidden">
@@ -189,7 +174,9 @@ export function CreativeHero() {
         style={{ x: parallaxX, y: parallaxYSlow }}
 
       />
-
+      <div className="absolute inset-0">
+        <SentientSphere />
+      </div>
       <motion.div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-6 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center min-h-[80vh] pt-16">
@@ -379,22 +366,18 @@ export function CreativeHero() {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 2 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
-        <span className="text-zinc-500 text-sm">Scroll to explore</span>
         <motion.div
-          className="w-6 h-10 border-2 border-zinc-500 rounded-full flex justify-center pt-2"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2"
         >
-          <motion.div
-            className="w-1.5 h-1.5 bg-zinc-500 rounded-full"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
+          <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-white/50 to-transparent" />
         </motion.div>
       </motion.div>
     </div>
