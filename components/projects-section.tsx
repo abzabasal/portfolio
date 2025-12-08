@@ -28,124 +28,6 @@ export interface ProjectData {
 const projects: ProjectData[] = [
   {
     id: "1",
-    title: "E-commerce Platform",
-    description: "A full-stack e-commerce platform built with Next.js, Stripe, and Prisma.",
-    tags: ["Next.js", "TypeScript", "Stripe", "Prisma"],
-    thumbnail: "/ecommerce-dashboard.png",
-    caseStudy: {
-      title: "E-commerce Platform",
-      description:
-        "A full-stack e-commerce platform with real-time inventory management, payment processing, and analytics dashboard.",
-      markdownContent: `
-# Project Overview
-
-This e-commerce platform was built to provide a seamless shopping experience with high performance and scalability. We utilized **Next.js** for server-side rendering and **Stripe** for secure payments.
-
-## Key Features
-
-- **Real-time Inventory:** Updates instantly as purchases are made.
-- **Secure Payments:** Integrated with Stripe for safe transactions.
-- **Analytics Dashboard:** Comprehensive insights into sales and user behavior.
-
-## Technical Challenges
-
-One of the main challenges was ensuring data consistency across the distributed system. We implemented a robust event-driven architecture to handle inventory updates and order processing.
-
-## Contribution
-
-I was responsible for the backend architecture and the integration of the payment gateway. I also worked on the frontend performance optimization.
-      `,
-      images: [
-        { src: "/ecommerce-dashboard.png", size: "hero" },
-        { src: "/product-catalog-view.jpg", size: "vertical" },
-        { src: "/modern-checkout-page.png", size: "square" },
-        { src: "/ecommerce-dashboard.png", size: "hero" },
-        { src: "/product-catalog-view.jpg", size: "vertical" },
-      ],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
-    },
-  },
-  {
-    id: "2",
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates.",
-    tags: ["React", "Firebase", "Tailwind", "Redux"],
-    thumbnail: "/task-management-dashboard.png",
-    caseStudy: {
-      title: "Task Management App",
-      description:
-        "Real-time collaborative task management with team workspaces, granular permissions, and advanced analytics.",
-      markdownContent: `
-# Project Overview
-
-A collaborative tool designed to help teams stay organized and efficient. Built with **React** and **Firebase**, it offers real-time updates and seamless collaboration.
-
-## Key Features
-
-- **Real-time Collaboration:** See changes as they happen.
-- **Team Workspaces:** Organize tasks by team or project.
-- **Granular Permissions:** Control who can see and edit what.
-
-## Technical Challenges
-
-Implementing real-time synchronization was a complex task. We used Firebase's real-time database to ensure that all users see the same data at the same time.
-
-## Contribution
-
-I led the frontend development team and designed the user interface. I also implemented the real-time collaboration features.
-      `,
-      images: [
-        { src: "/task-management-dashboard.png", size: "hero" },
-        { src: "/team-collaboration-board.jpg", size: "vertical" },
-        { src: "/task-details-view.jpg", size: "square" },
-        { src: "/task-management-dashboard.png", size: "hero" },
-      ],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
-    },
-  },
-  {
-    id: "3",
-    title: "AI Content Generator",
-    description: "An AI-powered content generation tool using OpenAI GPT models.",
-    tags: ["Next.js", "OpenAI", "Node.js", "MongoDB"],
-    thumbnail: "/ai-content-generator-interface.png",
-    caseStudy: {
-      title: "AI Content Generator",
-      description:
-        "Intelligent content generation powered by GPT-4 with custom templates, batch processing, and content analytics.",
-      markdownContent: `
-# Project Overview
-
-This tool leverages the power of **OpenAI's GPT-4** to generate high-quality content for various purposes. It includes custom templates and batch processing capabilities.
-
-## Key Features
-
-- **AI-Powered Generation:** High-quality content in seconds.
-- **Custom Templates:** Tailor the output to your specific needs.
-- **Batch Processing:** Generate multiple pieces of content at once.
-
-## Technical Challenges
-
-Integrating with the OpenAI API and handling rate limits were significant challenges. We implemented a queueing system to manage requests efficiently.
-
-## Contribution
-
-I developed the backend API and the integration with OpenAI. I also worked on the frontend interface for the content editor.
-      `,
-      images: [
-        { src: "/ai-content-generator-interface.png", size: "hero" },
-        { src: "/content-creation-editor.jpg", size: "vertical" },
-        { src: "/generated-content-preview.jpg", size: "square" },
-        { src: "/ai-content-generator-interface.png", size: "hero" },
-      ],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com",
-    },
-  },
-  {
-    id: "4",
     title: "Reisearch",
     description: "A comprehensive real estate market research and analysis platform.",
     tags: ["Real Estate", "Data Visualization", "React", "SaaS"],
@@ -196,7 +78,7 @@ Built with modern web technologies, the platform features interactive charts, ma
     },
   },
   {
-    id: "5",
+    id: "2",
     title: "Amigos Gym",
     description: "An all-in-one management solution for modern fitness centers.",
     tags: ["Gym Management", "SaaS", "Dashboard", "Fintech"],
