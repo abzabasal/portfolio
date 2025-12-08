@@ -122,8 +122,8 @@ export function CreativeHero() {
   ]
 
   // Split text into characters for animation
-  const creativeText = "Creative"
-  const developerText = "Developer"
+  const creativeText = "Optimization"
+  const developerText = "Addict"
 
   return (
     <div ref={containerRef} className="w-full h-full relative overflow-hidden bg-black">
@@ -300,7 +300,7 @@ export function CreativeHero() {
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <img
-                    src="/professional-developer-portrait-dark-background.png"
+                    src="/headshot.JPG"
                     alt="Developer portrait"
                     className="w-full h-full object-cover"
                   />

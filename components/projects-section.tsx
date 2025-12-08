@@ -144,6 +144,96 @@ I developed the backend API and the integration with OpenAI. I also worked on th
       githubUrl: "https://github.com",
     },
   },
+  {
+    id: "4",
+    title: "Reisearch",
+    description: "A comprehensive real estate market research and analysis platform.",
+    tags: ["Real Estate", "Data Visualization", "React", "SaaS"],
+    thumbnail: "/projects/reisearch/dashboard.png",
+    caseStudy: {
+      title: "Reisearch Platform",
+      description:
+        "An advanced real estate analytics platform helping investors make data-driven decisions with market insights, comparables, and demographic data.",
+      markdownContent: `
+# Project Overview
+
+Reisearch is a powerful tool designed for real estate professionals and investors. It aggregates data from multiple sources to provide comprehensive market analysis, property valuations, and investment insights.
+
+## Key Features
+
+- **Market Dashboard:** Real-time overview of market trends and key metrics.
+- **Comparable Analysis:** Advanced tools to find and analyze property comparables.
+- **Demographic Insights:** Detailed population, income, and lifestyle data for any location.
+- **Investment Calculators:** ROI and cash flow projections for potential investments.
+
+## Technical Implementation
+
+Built with modern web technologies, the platform features interactive charts, map-based search, and complex data visualization components. The backend processes large datasets to deliver instant insights.
+      `,
+      images: [
+        { src: "/projects/reisearch/dashboard.png", size: "hero" },
+        { src: "/projects/reisearch/comparables.png", size: "hero" },
+        { src: "/projects/reisearch/marketplace.png", size: "hero" },
+        { src: "/projects/reisearch/demographics.png", size: "square" },
+        { src: "/projects/reisearch/folders.png", size: "square" },
+        { src: "/projects/reisearch/messaging-fullscreen.png", size: "vertical" },
+        { src: "/projects/reisearch/create-post.png", size: "hero" },
+        { src: "/projects/reisearch/properties.png", size: "vertical" },
+        { src: "/projects/reisearch/settings.png", size: "vertical" },
+        { src: "/projects/reisearch/publish-property.png", size: "hero" },
+        { src: "/projects/reisearch/notifications.png", size: "square" },
+        { src: "/projects/reisearch/integration.png", size: "square" },
+        { src: "/projects/reisearch/comparables-darkmode.png", size: "hero" },
+        { src: "/projects/reisearch/presentation1.png", size: "vertical" },
+        { src: "/projects/reisearch/presentation2.png", size: "vertical" },
+        { src: "/projects/reisearch/presentation-templates.png", size: "hero" },
+        { src: "/projects/reisearch/porfile.png", size: "vertical" },
+        { src: "/projects/reisearch/subscription-plans.png", size: "square" },
+        { src: "/projects/reisearch/messaging.png", size: "square" },
+      ],
+      liveUrl: "https://reisearch.app",
+      githubUrl: "https://github.com/reisearch",
+    },
+  },
+  {
+    id: "5",
+    title: "Amigos Gym",
+    description: "An all-in-one management solution for modern fitness centers.",
+    tags: ["Gym Management", "SaaS", "Dashboard", "Fintech"],
+    thumbnail: "/projects/amigos-gym/dashboard.png",
+    caseStudy: {
+      title: "Amigos Gym Management",
+      description:
+        "Streamlining gym operations with a comprehensive platform for member management, inventory tracking, and automated communications.",
+      markdownContent: `
+# Project Overview
+
+Amigos Gym Management is a complete digital solution tailored for fitness centers. It simplifies day-to-day operations by integrating member management, financial tracking, and communication tools into a single, intuitive interface.
+
+## Key Features
+
+- **Centralized Dashboard:** Real-time insights into active members, revenue, and daily check-ins.
+- **Member Management:** Detailed profiles, plan management, and attendance tracking.
+- **Inventory Control:** Track equipment, supplements, and merchandise effortlessly.
+- **Financial Suite:** Automated payment processing, invoicing, and revenue reporting.
+- **Communication Hub:** Built-in bulk SMS and email notifications for announcements and reminders.
+
+## Technical Implementation
+
+The platform ensures data security and high availability. It features a responsive design for access on any device and integrates with payment gateways for seamless transactions.
+      `,
+      images: [
+        { src: "/projects/amigos-gym/dashboard.png", size: "hero" },
+        { src: "/projects/amigos-gym/membership-pans.png", size: "vertical" },
+        { src: "/projects/amigos-gym/coaches-management.png", size: "square" },
+        { src: "/projects/amigos-gym/payments.png", size: "hero" },
+        { src: "/projects/amigos-gym/inventory.png", size: "square" },
+        { src: "/projects/amigos-gym/bulk-sms.png", size: "vertical" },
+      ],
+      liveUrl: "https://amigosgym.com",
+      githubUrl: "https://github.com/amigos-gym",
+    },
+  },
 ]
 
 export function ProjectsSection() {
