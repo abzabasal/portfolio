@@ -5,10 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "@/components/section-heading";
 import { SkillsTabs, type SkillCategory } from "@/components/skills-tabs";
 import { SkillCard } from "@/components/skill-card";
-import lambdaIcon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_AWS-Lambda_64.svg";
-import dynamoDbIcon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-DynamoDB_64.svg";
-import sqsIcon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-Simple-Queue-Service_64.svg";
-import s3Icon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-S3-on-Outposts_Storage_64.svg";
 interface Skill {
   name: string;
   description: string;
@@ -74,13 +70,13 @@ const skillsData: Record<SkillCategory, Skill[]> = {
         "Event-driven TypeScript/Python services with Cognito JWT auth",
       color: "orange",
       size: "large",
-      icon: lambdaIcon,
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
     },
     {
       name: "DynamoDB Single-Table",
       description: "GSI patterns, conditional writes, and high-volume queries",
       color: "blue",
-      icon: dynamoDbIcon,
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
     },
     {
       name: "S3 & Pre-signed URLs",
@@ -88,13 +84,13 @@ const skillsData: Record<SkillCategory, Skill[]> = {
         "Secure asset pipelines with MIME validation and versioned storage",
       color: "aqua",
       size: "large",
-      icon: s3Icon,
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
     },
     {
       name: "SQS Pipelines",
       description: "Fan-out/fan-in queues for training jobs and messaging",
       color: "magenta",
-      icon: sqsIcon,
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
     },
     {
       name: "Go",

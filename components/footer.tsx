@@ -1,15 +1,16 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Github, Linkedin, Twitter, Mail, ArrowUp } from "lucide-react"
+import { motion } from "framer-motion";
+import { Github, Linkedin, Twitter, Mail, ArrowUp } from "lucide-react";
+import { SiLeetcode } from "react-icons/si";
 
 export function Footer() {
   const handleScrollToContact = () => {
-    const contactSection = document.getElementById("contact")
+    const contactSection = document.getElementById("contact");
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" })
+      contactSection.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   const socialLinks = [
     {
@@ -24,15 +25,20 @@ export function Footer() {
     },
     {
       icon: Twitter,
-      href: "https://twitter.com",
+      href: "https://twitter.com/abzaek",
       label: "Twitter",
     },
     {
+      icon: SiLeetcode,
+      href: "https://leetcode.com/abzaek",
+      label: "LeetCode",
+    },
+    {
       icon: Mail,
-      href: "mailto:abzaeko@gmail.com",
+      href: "mailto:abzaek@ogmail.com",
       label: "Email",
     },
-  ]
+  ];
 
   return (
     <footer className="relative py-16 bg-gradient-to-t from-black via-zinc-950 to-zinc-900 overflow-hidden">
@@ -64,13 +70,15 @@ export function Footer() {
               <h3
                 className="text-2xl font-bold tracking-wider"
                 style={{
-                  textShadow: "0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1)",
+                  textShadow:
+                    "0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1)",
                 }}
               >
                 Abdulazez Zeinu
               </h3>
               <p className="text-zinc-400 text-lg">
-                Developed with <span className="text-red-400">❤️</span> by Abdulazez Zeinu.
+                Developed with <span className="text-red-400">❤️</span> by
+                Abdulazez Zeinu.
               </p>
             </div>
 
@@ -103,7 +111,9 @@ export function Footer() {
             </div>
 
             {/* Copyright */}
-            <p className="text-zinc-500 text-sm">© {new Date().getFullYear()} All rights reserved.</p>
+            <p className="text-zinc-500 text-sm">
+              © {new Date().getFullYear()} All rights reserved.
+            </p>
           </motion.div>
 
           {/* Right Column - Let's Talk CTA (spans 2 cols) */}
@@ -160,5 +170,5 @@ export function Footer() {
         />
       </div>
     </footer>
-  )
+  );
 }
