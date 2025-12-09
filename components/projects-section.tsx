@@ -116,6 +116,47 @@ The platform ensures data security and high availability. It features a responsi
       githubUrl: "https://github.com/amigos-gym",
     },
   },
+  {
+    id: "3",
+    title: "NeoCare",
+    description: "A modern hospital management system for efficient patient care and administration.",
+    tags: ["Healthcare", "Management System", "React", "Dashboard"],
+    thumbnail: "/projects/neocare/delivery-summary.jpeg",
+    caseStudy: {
+      title: "NeoCare Hospital System",
+      description:
+        "A comprehensive digital solution for healthcare facilities, streamlining patient management, medical records, and administrative workflows.",
+      markdownContent: `
+# Project Overview
+
+NeoCare is a robust hospital management system designed to modernize healthcare administration. It provides a seamless experience for physicians, nurses, and administrators to manage patient care, from admission to discharge.
+
+## Key Features
+
+- **Patient Records:** Centralized database for patient history, vitals, and treatment plans.
+- **Physician Portal:** Dedicated interface for doctors to manage appointments, view lab results, and prescribe medications.
+- **Lab & Investigation:** Integrated module for ordering and viewing laboratory investigations and results.
+- **Resource Management:** efficient tracking of hospital resources, including beds and medical supplies.
+- **Secure Access:** Role-based access control ensuring data privacy and compliance.
+
+## Technical Implementation
+
+The system is built with a focus on security and reliability. It features a responsive user interface for access on tablets and desktops, enabling healthcare providers to access critical information at the point of care.
+      `,
+      images: [
+        { src: "/projects/neocare/delivery-summary.jpeg", size: "hero" },
+        { src: "/projects/neocare/login-page.jpeg", size: "small" },
+        { src: "/projects/neocare/prescription.jpeg", size: "vertical" },
+        { src: "/projects/neocare/vital-sign.jpeg", size: "square" },
+        { src: "/projects/neocare/investigation-results.jpeg", size: "hero" },
+        { src: "/projects/neocare/lab-investigation.jpeg", size: "hero" },
+        { src: "/projects/neocare/physician-details.jpeg", size: "vertical" },
+        { src: "/projects/neocare/future-pan.jpeg", size: "hero" },
+      ],
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+  },
 ]
 
 export function ProjectsSection() {
