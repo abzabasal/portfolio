@@ -1,44 +1,45 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { SectionHeading } from "@/components/section-heading"
-import { SkillsTabs, type SkillCategory } from "@/components/skills-tabs"
-import { SkillCard } from "@/components/skill-card"
-
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeading } from "@/components/section-heading";
+import { SkillsTabs, type SkillCategory } from "@/components/skills-tabs";
+import { SkillCard } from "@/components/skill-card";
+import lambdaIcon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_Compute/64/Arch_AWS-Lambda_64.svg";
+import dynamoDbIcon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_Database/64/Arch_Amazon-DynamoDB_64.svg";
+import sqsIcon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_App-Integration/Arch_64/Arch_Amazon-Simple-Queue-Service_64.svg";
+import s3Icon from "aws-svg-icons/lib/Architecture-Service-Icons_07302021/Arch_Storage/64/Arch_Amazon-S3-on-Outposts_Storage_64.svg";
 interface Skill {
-  name: string
-  description: string
+  name: string;
+  description: string;
   color:
-  | "violet"
-  | "cyan"
-  | "magenta"
-  | "purple-blue"
-  | "aqua"
-  | "lavender"
-  | "green"
-  | "orange"
-  | "blue"
-  | "red"
-  | "yellow"
-  size?: "small" | "medium" | "large"
-  icon: string
+    | "violet"
+    | "cyan"
+    | "magenta"
+    | "purple-blue"
+    | "aqua"
+    | "lavender"
+    | "green"
+    | "orange"
+    | "blue"
+    | "red"
+    | "yellow";
+  size?: "small" | "medium" | "large";
+  icon: string;
 }
 
 const skillsData: Record<SkillCategory, Skill[]> = {
   frontend: [
     {
       name: "React",
-      description: "Core framework for interactive UIs and real-time applications",
+      description: "Core framework for interactive dashboards",
       color: "cyan",
-      size: "large",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
     },
     {
       name: "Next.js",
-      description: "Full-stack framework for production-grade applications",
+      description: "Full-stack framework for SEO-friendly experiences",
       color: "violet",
-      size: "large",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
     },
     {
@@ -68,42 +69,51 @@ const skillsData: Record<SkillCategory, Skill[]> = {
   ],
   backend: [
     {
-      name: "Node.js",
-      description: "Backend development and API server creation",
-      color: "green",
+      name: "Serverless (Lambda + API Gateway)",
+      description:
+        "Event-driven TypeScript/Python services with Cognito JWT auth",
+      color: "orange",
       size: "large",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      icon: lambdaIcon,
     },
     {
-      name: "Python",
-      description: "Data processing, scripting, and ML applications",
-      color: "yellow",
+      name: "DynamoDB Single-Table",
+      description: "GSI patterns, conditional writes, and high-volume queries",
+      color: "blue",
+      icon: dynamoDbIcon,
+    },
+    {
+      name: "S3 & Pre-signed URLs",
+      description:
+        "Secure asset pipelines with MIME validation and versioned storage",
+      color: "aqua",
       size: "large",
+      icon: s3Icon,
+    },
+    {
+      name: "SQS Pipelines",
+      description: "Fan-out/fan-in queues for training jobs and messaging",
+      color: "magenta",
+      icon: sqsIcon,
+    },
+    {
+      name: "Go",
+      description: "High-performance backend services with concurrency",
+      color: "cyan",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
+    },
+    {
+      name: "Python + LightFM",
+      description: "Hybrid recommender systems with geospatial scoring",
+      color: "yellow",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
     },
     {
-      name: "GraphQL",
-      description: "Efficient data querying and API design",
-      color: "magenta",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
-    },
-    {
-      name: "PostgreSQL",
-      description: "Relational database for complex data models",
-      color: "blue",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-    },
-    {
-      name: "MongoDB",
-      description: "NoSQL database for flexible schemas",
+      name: "Node.js",
+      description:
+        "TypeScript services bundled with ESBuild and serverless workflows",
       color: "green",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    },
-    {
-      name: "Redis",
-      description: "In-memory caching and real-time data",
-      color: "red",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
     },
   ],
   devops: [
@@ -111,15 +121,7 @@ const skillsData: Record<SkillCategory, Skill[]> = {
       name: "Docker",
       description: "Containerization for consistent deployments",
       color: "blue",
-      size: "large",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-    },
-    {
-      name: "AWS",
-      description: "Cloud infrastructure and serverless architecture",
-      color: "orange",
-      size: "large",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
     },
     {
       name: "Git",
@@ -134,6 +136,14 @@ const skillsData: Record<SkillCategory, Skill[]> = {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
     },
     {
+      name: "AWS",
+      description:
+        "Cloud infrastructure with CloudFormation, Observability, and IAM",
+      color: "orange",
+      size: "large",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+    },
+    {
       name: "Vercel",
       description: "Edge deployment and serverless functions",
       color: "cyan",
@@ -146,14 +156,17 @@ const skillsData: Record<SkillCategory, Skill[]> = {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
     },
   ],
-}
-
+};
 
 export function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState<SkillCategory>("frontend")
+  const [activeCategory, setActiveCategory] =
+    useState<SkillCategory>("frontend");
 
   return (
-    <section id="skills" className="py-32 bg-gradient-to-b from-black to-zinc-900 relative overflow-hidden">
+    <section
+      id="skills"
+      className="py-32 bg-gradient-to-b from-black to-zinc-900 relative overflow-hidden"
+    >
       <motion.div
         className="container"
         initial={{ opacity: 0, y: 50 }}
@@ -161,9 +174,15 @@ export function SkillsSection() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <SectionHeading title="Skills & Expertise" subtitle="Technical Proficiency" />
+        <SectionHeading
+          title="Skills & Expertise"
+          subtitle="Technical Proficiency"
+        />
 
-        <SkillsTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+        <SkillsTabs
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
 
         <div className="mt-12 min-h-[400px]">
           <AnimatePresence mode="wait">
@@ -173,7 +192,7 @@ export function SkillsSection() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.98 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-fr"
+              className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 auto-rows-fr"
             >
               {skillsData[activeCategory].map((skill, index) => (
                 <motion.div
@@ -181,7 +200,11 @@ export function SkillsSection() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className={skill.size === "large" ? "col-span-1 md:col-span-2" : "col-span-1"}
+                  className={
+                    skill.size === "large"
+                      ? "col-span-1 md:col-span-2"
+                      : "col-span-1"
+                  }
                 >
                   <SkillCard
                     name={skill.name}
@@ -207,5 +230,5 @@ export function SkillsSection() {
         />
       </div>
     </section>
-  )
+  );
 }

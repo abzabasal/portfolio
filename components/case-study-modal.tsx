@@ -1,47 +1,60 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, Github, ExternalLink } from "lucide-react"
-import type { ProjectData } from "./projects-section"
-import ReactMarkdown from "react-markdown"
-import Image from "next/image"
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Github,
+  ExternalLink,
+} from "lucide-react";
+import type { ProjectData } from "./projects-section";
+// react-markdown ships non-ESModule typings; silence the import error
+// @ts-ignore: react-markdown's type declaration is not a module
+import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
-import { ProjectGallery } from "./project-gallery"
+import { ProjectGallery } from "./project-gallery";
 
 interface CaseStudyModalProps {
-  project: ProjectData
-  onClose: () => void
-  onNext: () => void
-  onPrev: () => void
+  project: ProjectData;
+  onClose: () => void;
+  onNext: () => void;
+  onPrev: () => void;
 }
 
-export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyModalProps) {
-  const [navDirection, setNavDirection] = useState<"next" | "prev">("next")
+export function CaseStudyModal({
+  project,
+  onClose,
+  onNext,
+  onPrev,
+}: CaseStudyModalProps) {
+  const [navDirection, setNavDirection] = useState<"next" | "prev">("next");
 
   useEffect(() => {
-    document.body.style.overflow = "hidden"
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [])
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
+      if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") {
-        setNavDirection("next")
-        onNext()
+        setNavDirection("next");
+        onNext();
       }
       if (e.key === "ArrowLeft") {
-        setNavDirection("prev")
-        onPrev()
+        setNavDirection("prev");
+        onPrev();
       }
-    }
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [onClose, onNext, onPrev])
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, onNext, onPrev]);
 
   const slideVariants = {
     initial: (direction: "next" | "prev") => ({
@@ -57,7 +70,12 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
       rotateX: 0,
       scale: 1,
       filter: "blur(0px)",
-      transition: { type: "spring" as const, damping: 22, stiffness: 320, mass: 0.8 },
+      transition: {
+        type: "spring" as const,
+        damping: 22,
+        stiffness: 320,
+        mass: 0.8,
+      },
     },
     exit: (direction: "next" | "prev") => ({
       opacity: 0,
@@ -67,17 +85,17 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
       filter: "blur(10px)",
       transition: { duration: 0.28, ease: "easeInOut" as const },
     }),
-  }
+  };
 
   const handleNext = () => {
-    setNavDirection("next")
-    onNext()
-  }
+    setNavDirection("next");
+    onNext();
+  };
 
   const handlePrev = () => {
-    setNavDirection("prev")
-    onPrev()
-  }
+    setNavDirection("prev");
+    onPrev();
+  };
 
   return (
     <motion.div
@@ -90,8 +108,8 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
       {/* Navigation Buttons - Outside Modal */}
       <button
         onClick={(e) => {
-          e.stopPropagation()
-          handlePrev()
+          e.stopPropagation();
+          handlePrev();
         }}
         className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all z-50 hidden md:flex border border-white/5 hover:border-white/20 backdrop-blur-sm"
         aria-label="Previous project"
@@ -101,8 +119,8 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
 
       <button
         onClick={(e) => {
-          e.stopPropagation()
-          handleNext()
+          e.stopPropagation();
+          handleNext();
         }}
         className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all z-50 hidden md:flex border border-white/5 hover:border-white/20 backdrop-blur-sm"
         aria-label="Next project"
@@ -154,11 +172,15 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
                   {project.title}
                 </motion.h2>
                 <p className="mt-3 text-sm text-zinc-400 max-w-2xl">
-                  Crafting a high-touch experience with thoughtful flows, resilient architecture, and a cinematic presentation layer.
+                  Crafting a high-touch experience with thoughtful flows,
+                  resilient architecture, and a cinematic presentation layer.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="text-xs px-3 py-1 rounded-full bg-white/10 text-zinc-100 border border-white/15 shadow-[0_6px_24px_rgba(0,0,0,0.2)]">
+                    <span
+                      key={tag}
+                      className="text-xs px-3 py-1 rounded-full bg-white/10 text-zinc-100 border border-white/15 shadow-[0_6px_24px_rgba(0,0,0,0.2)]"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -173,9 +195,9 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white text-black text-sm font-semibold shadow-[0_10px_35px_rgba(255,255,255,0.15)] transition-transform transition-colors duration-200 hover:-translate-y-[1px] hover:bg-zinc-50"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Launch Experience
+                  Open
                 </a>
-                <a
+                {/* <a
                   href={project.caseStudy.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -183,7 +205,7 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
                 >
                   <Github className="w-4 h-4" />
                   Source
-                </a>
+                </a> */}
               </div>
             </div>
 
@@ -192,7 +214,10 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
               {/* Left Column: Markdown Content (40%) */}
               <div className="w-full md:w-[40%] h-full overflow-y-auto p-8 md:p-12 bg-zinc-950 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent border-r border-white/5">
                 <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-zinc-400 prose-strong:text-white prose-li:text-zinc-400">
-                  <ReactMarkdown>{project.caseStudy.markdownContent || project.caseStudy.description}</ReactMarkdown>
+                  <ReactMarkdown>
+                    {project.caseStudy.markdownContent ||
+                      project.caseStudy.description}
+                  </ReactMarkdown>
                 </div>
 
                 {/* Mobile Links */}
@@ -204,9 +229,9 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
                     className="flex-1 flex justify-center items-center gap-2 px-4 py-3 bg-white text-black text-sm font-semibold rounded-lg shadow-lg"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Launch Experience
+                    Open
                   </a>
-                  <a
+                  {/* <a
                     href={project.caseStudy.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -214,7 +239,7 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
                   >
                     <Github className="w-4 h-4" />
                     Source
-                  </a>
+                  </a> */}
                 </div>
               </div>
 
@@ -227,5 +252,5 @@ export function CaseStudyModal({ project, onClose, onNext, onPrev }: CaseStudyMo
         </AnimatePresence>
       </motion.div>
     </motion.div>
-  )
+  );
 }

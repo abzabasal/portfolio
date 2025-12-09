@@ -1,56 +1,75 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { AwwwardsCard } from "./awwwards-card"
-import { CaseStudyModal } from "./case-study-modal"
-import { CursorSpotlight } from "./cursor-spotlight"
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AwwwardsCard } from "./awwwards-card";
+import { CaseStudyModal } from "./case-study-modal";
+import { CursorSpotlight } from "./cursor-spotlight";
 
 export interface ProjectData {
-  id: string
-  title: string
-  description: string
-  tags: string[]
-  thumbnail: string
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  thumbnail: string;
   caseStudy: {
-    title: string
-    description: string
-    markdownContent: string
+    title: string;
+    description: string;
+    markdownContent: string;
     images: {
-      src: string
-      size: "hero" | "vertical" | "square" | "small"
-    }[]
-    liveUrl: string
-    githubUrl: string
-  }
+      src: string;
+      size: "hero" | "vertical" | "square" | "small";
+    }[];
+    liveUrl: string;
+    githubUrl: string;
+  };
 }
 
 const projects: ProjectData[] = [
   {
     id: "1",
     title: "Reisearch",
-    description: "A comprehensive real estate market research and analysis platform.",
-    tags: ["Real Estate", "Data Visualization", "React", "SaaS"],
+    description:
+      "A powerful real estate intelligence platform used by 50k+ professionals for comps, research, and investor-ready storytelling.",
+    tags: [
+      "Real Estate",
+      "Data Visualization",
+      "Serverless",
+      "SaaS",
+      "Python",
+      "AWS",
+      "React",
+      "LightFM",
+      "Golang",
+    ],
     thumbnail: "/projects/reisearch/dashboard.png",
     caseStudy: {
       title: "Reisearch Platform",
       description:
-        "An advanced real estate analytics platform helping investors make data-driven decisions with market insights, comparables, and demographic data.",
+        "A powerful, serverless real estate analytics platform trusted by 50k+ professionals to make data-driven decisions with market insights, comparables, and demographic data.",
       markdownContent: `
 # Project Overview
 
-Reisearch is a powerful tool designed for real estate professionals and investors. It aggregates data from multiple sources to provide comprehensive market analysis, property valuations, and investment insights.
+Reisearch is a powerful real estate intelligence platform used by 50k+ professionals. It aggregates MLS, demographic, and social graph signals to deliver reliable comps, market analysis, and investor-ready presentations.
 
 ## Key Features
 
-- **Market Dashboard:** Real-time overview of market trends and key metrics.
-- **Comparable Analysis:** Advanced tools to find and analyze property comparables.
-- **Demographic Insights:** Detailed population, income, and lifestyle data for any location.
-- **Investment Calculators:** ROI and cash flow projections for potential investments.
+- **Market Dashboard:** Real-time KPIs, trend tracking, and presentation-ready views.
+- **Comparable Analysis:** Hybrid recommendation engine (ML) with geospatial scoring for precise comps.
+- **Demographic Insights:** Population, income, and lifestyle overlays for any location.
+- **Investment Calculators:** ROI and cash flow projections tailored to deal types.
+- **Collaboration:** Secure workspaces, messaging, and presentation templates for teams.
 
 ## Technical Implementation
 
-Built with modern web technologies, the platform features interactive charts, map-based search, and complex data visualization components. The backend processes large datasets to deliver instant insights.
+- **Serverless Core:** AWS Lambda + API Gateway with DynamoDB single-table design, S3 pre-signed assets, SQS pipelines, and Cognito-authenticated JWT flows.
+- **Data & ML:** LightFM hybrid recommender, geospatial proximity weighting, and social graph analysis for ranked results.
+- **Frontend Experience:** React/Next.js with advanced data visualizations, map search, and responsive layouts.
+- **Reliability:** Containerized workers, background training jobs, and structured logging/metrics.
+
+## Impact
+
+Reisearch powers 50k+ real estate professionals who need fast, accurate comps and market intelligence to close deals with confidence.
       `,
       images: [
         { src: "/projects/reisearch/dashboard.png", size: "hero" },
@@ -58,7 +77,10 @@ Built with modern web technologies, the platform features interactive charts, ma
         { src: "/projects/reisearch/marketplace.png", size: "hero" },
         { src: "/projects/reisearch/demographics.png", size: "square" },
         { src: "/projects/reisearch/folders.png", size: "square" },
-        { src: "/projects/reisearch/messaging-fullscreen.png", size: "vertical" },
+        {
+          src: "/projects/reisearch/messaging-fullscreen.png",
+          size: "vertical",
+        },
         { src: "/projects/reisearch/create-post.png", size: "hero" },
         { src: "/projects/reisearch/properties.png", size: "vertical" },
         { src: "/projects/reisearch/settings.png", size: "vertical" },
@@ -73,15 +95,25 @@ Built with modern web technologies, the platform features interactive charts, ma
         { src: "/projects/reisearch/subscription-plans.png", size: "square" },
         { src: "/projects/reisearch/messaging.png", size: "square" },
       ],
-      liveUrl: "https://reisearch.app",
+      liveUrl: "https://reisearch.com",
       githubUrl: "https://github.com/reisearch",
     },
   },
   {
     id: "2",
     title: "Amigos Gym",
-    description: "An all-in-one management solution for modern fitness centers.",
-    tags: ["Gym Management", "SaaS", "Dashboard", "Fintech"],
+    description:
+      "An all-in-one management solution for modern fitness centers.",
+    tags: [
+      "Gym Management",
+      "SaaS",
+      "Dashboard",
+      "Fintech",
+      "Flask",
+      "JavaScript",
+      "CSS",
+      "HTML",
+    ],
     thumbnail: "/projects/amigos-gym/dashboard.png",
     caseStudy: {
       title: "Amigos Gym Management",
@@ -102,7 +134,7 @@ Amigos Gym Management is a complete digital solution tailored for fitness center
 
 ## Technical Implementation
 
-The platform ensures data security and high availability. It features a responsive design for access on any device and integrates with payment gateways for seamless transactions.
+Built with Flask for the backend, JavaScript for interactivity, and styled with CSS and HTML for responsive design. The platform ensures data security and high availability, integrating with payment gateways for seamless transactions.
       `,
       images: [
         { src: "/projects/amigos-gym/dashboard.png", size: "hero" },
@@ -119,8 +151,9 @@ The platform ensures data security and high availability. It features a responsi
   {
     id: "3",
     title: "NeoCare",
-    description: "A modern hospital management system for efficient patient care and administration.",
-    tags: ["Healthcare", "Management System", "React", "Dashboard"],
+    description:
+      "A modern hospital management system for efficient patient care and administration.",
+    tags: ["Healthcare", "Management System", "SaaS", "Next.js"],
     thumbnail: "/projects/neocare/delivery-summary.jpeg",
     caseStudy: {
       title: "NeoCare Hospital System",
@@ -153,29 +186,31 @@ The system is built with a focus on security and reliability. It features a resp
         { src: "/projects/neocare/physician-details.jpeg", size: "vertical" },
         { src: "/projects/neocare/future-pan.jpeg", size: "hero" },
       ],
-      liveUrl: "#",
+      liveUrl: "https://neocare.cloud.com.et",
       githubUrl: "#",
     },
   },
-]
+];
 
 export function ProjectsSection() {
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
+    null
+  );
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
-    if (!selectedProject) return
-    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id)
-    const nextIndex = (currentIndex + 1) % projects.length
-    setSelectedProject(projects[nextIndex])
-  }
+    if (!selectedProject) return;
+    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
+    const nextIndex = (currentIndex + 1) % projects.length;
+    setSelectedProject(projects[nextIndex]);
+  };
 
   const handlePrev = () => {
-    if (!selectedProject) return
-    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id)
-    const prevIndex = (currentIndex - 1 + projects.length) % projects.length
-    setSelectedProject(projects[prevIndex])
-  }
+    if (!selectedProject) return;
+    const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
+    const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
+    setSelectedProject(projects[prevIndex]);
+  };
 
   return (
     <section id="projects" className="py-32 relative overflow-hidden">
@@ -239,5 +274,5 @@ export function ProjectsSection() {
         )}
       </AnimatePresence>
     </section>
-  )
+  );
 }

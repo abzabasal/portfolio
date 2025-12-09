@@ -113,6 +113,12 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.22(postcss@8.5.6)
+      aws-icons:
+        specifier: ^3.2.0
+        version: 3.2.0
+      aws-svg-icons:
+        specifier: 3.0.0-2021-07-30
+        version: 3.0.0-2021-07-30
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1282,6 +1288,12 @@ packages:
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
+
+  aws-icons@3.2.0:
+    resolution: {integrity: sha512-G7QLGzxab+spAXvoQcS9ZogCQXy9EQQAvMxTtdHAg539PrwPYi4YUXWiu11nnenEwriXF8OjKOsVCSKofRIFsg==}
+
+  aws-svg-icons@3.0.0-2021-07-30:
+    resolution: {integrity: sha512-XB74sAnPul1SLdj1ZGiebzSZG2LDjQiTe0XRNGXUWh24eOd2E0661e/aYut+uic+QFZj2lOpUpw3UKQ3KPiyxg==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -3298,6 +3310,10 @@ snapshots:
       picocolors: 1.1.1
       postcss: 8.5.6
       postcss-value-parser: 4.2.0
+
+  aws-icons@3.2.0: {}
+
+  aws-svg-icons@3.0.0-2021-07-30: {}
 
   bail@2.0.2: {}
 

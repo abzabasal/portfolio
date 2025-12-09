@@ -1,38 +1,38 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef, useMemo } from "react"
-import { motion } from "framer-motion"
-import { ArrowUpRight, Expand } from "lucide-react"
-import type { ProjectData } from "./projects-section"
+import { useState, useRef, useMemo } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Expand } from "lucide-react";
+import type { ProjectData } from "./projects-section";
 
 interface AwwwardsCardProps {
-  project: ProjectData
-  index: number
-  onSelect: () => void
+  project: ProjectData;
+  index: number;
+  onSelect: () => void;
 }
 
 export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [cursor, setCursor] = useState({ x: 0.5, y: 0.5 })
-  const cardRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState(false);
+  const [cursor, setCursor] = useState({ x: 0.5, y: 0.5 });
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const gradientId = useMemo(() => `gradient-${project.id}`, [project.id])
+  const gradientId = useMemo(() => `gradient-${project.id}`, [project.id]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return
+    if (!cardRef.current) return;
 
-    const rect = cardRef.current.getBoundingClientRect()
+    const rect = cardRef.current.getBoundingClientRect();
     setCursor({
       x: (e.clientX - rect.left) / rect.width,
       y: (e.clientY - rect.top) / rect.height,
-    })
-  }
+    });
+  };
 
   const handleMouseLeave = () => {
-    setIsHovered(false)
-  }
+    setIsHovered(false);
+  };
 
   return (
     <motion.div
@@ -51,7 +51,11 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
     >
       {/* Animated rotating border */}
       <div className="absolute inset-0 z-10 pointer-events-none">
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
           <defs>
             <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="rgba(236, 72, 153, 0.6)" />
@@ -74,13 +78,20 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
       </div>
 
       {/* Card container */}
-      <motion.div className="relative w-full h-full" transition={{ type: "spring", stiffness: 260, damping: 26 }}>
+      <motion.div
+        className="relative w-full h-full"
+        transition={{ type: "spring", stiffness: 260, damping: 26 }}
+      >
         {/* Glass background with thumbnail */}
         <div className="absolute inset-0 rounded-xl overflow-hidden">
           <motion.img
             src={project.thumbnail || "/placeholder.svg"}
             alt={project.title}
-            className={`w-full h-full object-cover transition-all duration-500 ease-out ${isHovered ? "grayscale-0 blur-0 scale-106" : "grayscale blur-[2px] scale-100"}`}
+            className={`w-full h-full object-cover transition-all duration-500 ease-out ${
+              isHovered
+                ? "grayscale-0 blur-0 scale-106"
+                : "grayscale blur-[2px] scale-100"
+            }`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent" />
           <motion.div
@@ -95,7 +106,9 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
             animate={{ opacity: isHovered ? 0.35 : 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             style={{
-              background: `radial-gradient(360px at ${cursor.x * 100}% ${cursor.y * 100}%, rgba(255,255,255,0.28), transparent 55%)`,
+              background: `radial-gradient(360px at ${cursor.x * 100}% ${
+                cursor.y * 100
+              }%, rgba(255,255,255,0.28), transparent 55%)`,
             }}
             className="absolute inset-0 mix-blend-screen"
           />
@@ -109,7 +122,9 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
           animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.98 }}
           transition={{ duration: 0.4 }}
           style={{
-            background: `radial-gradient(260px at ${cursor.x * 100}% ${cursor.y * 100}%, rgba(255,255,255,0.18), transparent 60%), linear-gradient(135deg, rgba(236,72,153,0.18), rgba(59,130,246,0.18))`,
+            background: `radial-gradient(260px at ${cursor.x * 100}% ${
+              cursor.y * 100
+            }%, rgba(255,255,255,0.18), transparent 60%), linear-gradient(135deg, rgba(236,72,153,0.18), rgba(59,130,246,0.18))`,
           }}
           className="pointer-events-none absolute inset-0 rounded-xl border border-white/10 mix-blend-screen"
         />
@@ -119,7 +134,9 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
           {/* Header */}
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/80">
-              <span className="px-3 py-1 rounded-full bg-white/10 border border-white/15">Deep Dive</span>
+              <span className="px-3 py-1 rounded-full bg-white/10 border border-white/15">
+                Deep Dive
+              </span>
               <span className="h-px flex-1 bg-white/10" />
               <motion.span
                 initial={{ opacity: 0, x: 6 }}
@@ -131,14 +148,20 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
                   <motion.span
                     initial={{ x: "-100%" }}
                     animate={{ x: isHovered ? "0%" : "-100%" }}
-                    transition={{ duration: 0.8, repeat: isHovered ? Infinity : 0, ease: "easeInOut" }}
+                    transition={{
+                      duration: 0.8,
+                      repeat: isHovered ? Infinity : 0,
+                      ease: "easeInOut",
+                    }}
                     className="block h-full w-full bg-white/50"
                   />
                 </span>
                 Ready to expand
               </motion.span>
             </div>
-            <h3 className="text-2xl font-bold text-white drop-shadow-lg">{project.title}</h3>
+            <h3 className="text-2xl font-bold text-white drop-shadow-lg">
+              {project.title}
+            </h3>
             <p className="text-sm text-zinc-200/90 line-clamp-2">
               {project.description}
             </p>
@@ -147,7 +170,10 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
           {/* Tech tags */}
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.slice(0, 3).map((tag, i) => (
-              <span key={i} className="text-xs px-2.5 py-1 rounded-full bg-white/10 text-white/80 border border-white/15">
+              <span
+                key={i}
+                className="text-xs px-2.5 py-1 rounded-full bg-white/10 text-white/80 border border-white/15"
+              >
                 {tag}
               </span>
             ))}
@@ -158,7 +184,9 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
             animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 14 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
             style={{
-              backgroundImage: `radial-gradient(240px at ${cursor.x * 100}% ${cursor.y * 100}%, rgba(255,255,255,0.3), transparent 65%), linear-gradient(115deg, rgba(236,72,153,0.22), rgba(59,130,246,0.22))`,
+              backgroundImage: `radial-gradient(240px at ${cursor.x * 100}% ${
+                cursor.y * 100
+              }%, rgba(255,255,255,0.3), transparent 65%), linear-gradient(115deg, rgba(236,72,153,0.22), rgba(59,130,246,0.22))`,
             }}
             className="pointer-events-none absolute left-5 right-5 bottom-5 rounded-2xl border border-white/25 backdrop-blur-2xl px-5 py-4 text-white shadow-2xl flex items-center justify-between gap-3 bg-white/12"
           >
@@ -166,21 +194,35 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/18 border border-white/30 overflow-hidden">
                 <motion.span
                   initial={{ scale: 0.9, rotate: -6, opacity: 0.8 }}
-                  animate={{ scale: isHovered ? 1.05 : 0.95, rotate: isHovered ? 0 : -6, opacity: 1 }}
-                  transition={{ duration: 0.45, ease: "easeOut", repeat: isHovered ? Infinity : 0, repeatType: "reverse", repeatDelay: 0.9 }}
+                  animate={{
+                    scale: isHovered ? 1.05 : 0.95,
+                    rotate: isHovered ? 0 : -6,
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 0.45,
+                    ease: "easeOut",
+                    repeat: isHovered ? Infinity : 0,
+                    repeatType: "reverse",
+                    repeatDelay: 0.9,
+                  }}
                   className="inline-flex"
                 >
                   <Expand className="h-4.5 w-4.5" />
                 </motion.span>
               </span>
-              Expand this case
+              Expand project
             </div>
             <div className="flex items-center gap-2 text-xs text-white/75">
               <span className="h-1 w-10 rounded-full bg-white/25 overflow-hidden">
                 <motion.span
                   initial={{ x: "-100%" }}
                   animate={{ x: isHovered ? "0%" : "-100%" }}
-                  transition={{ duration: 0.8, repeat: isHovered ? Infinity : 0, ease: "easeInOut" }}
+                  transition={{
+                    duration: 0.8,
+                    repeat: isHovered ? Infinity : 0,
+                    ease: "easeInOut",
+                  }}
                   className="block h-full w-full bg-white/60"
                 />
               </span>
@@ -190,5 +232,5 @@ export function AwwwardsCard({ project, index, onSelect }: AwwwardsCardProps) {
         </div>
       </motion.div>
     </motion.div>
-  )
+  );
 }
