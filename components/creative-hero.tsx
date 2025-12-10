@@ -1,40 +1,41 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
-import { Github, Linkedin, FileText, ExternalLink, Sparkles } from "lucide-react"
-import { SentientSphere } from "./3d-sphere"
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { Github, Linkedin } from "lucide-react";
+import { SentientSphere } from "./3d-sphere";
+import { SiLeetcode } from "react-icons/si";
 // Particle interface
 interface Particle {
-  id: number
-  x: number
-  y: number
-  size: number
-  duration: number
-  delay: number
-  color: string
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  duration: number;
+  delay: number;
+  color: string;
 }
 
 export function CreativeHero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const buttonRef = useRef<HTMLAnchorElement>(null)
-  const [particles, setParticles] = useState<Particle[]>([])
-  const [isHoveringText, setIsHoveringText] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [isHoveringText, setIsHoveringText] = useState(false);
 
   // Mouse position for parallax and magnetic effects
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   // Smooth spring animations for mouse movement
-  const springConfig = { damping: 25, stiffness: 150 }
-  const smoothMouseX = useSpring(mouseX, springConfig)
-  const smoothMouseY = useSpring(mouseY, springConfig)
+  const springConfig = { damping: 25, stiffness: 150 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
 
   // Parallax transforms
-  const parallaxX = useTransform(smoothMouseX, [-500, 500], [-20, 20])
-  const parallaxY = useTransform(smoothMouseY, [-500, 500], [-20, 20])
-  const parallaxXSlow = useTransform(smoothMouseX, [-500, 500], [-10, 10])
-  const parallaxYSlow = useTransform(smoothMouseY, [-500, 500], [-10, 10])
+  const parallaxX = useTransform(smoothMouseX, [-500, 500], [-20, 20]);
+  const parallaxY = useTransform(smoothMouseY, [-500, 500], [-20, 20]);
+  const parallaxXSlow = useTransform(smoothMouseX, [-500, 500], [-10, 10]);
+  const parallaxYSlow = useTransform(smoothMouseY, [-500, 500], [-10, 10]);
 
   // Generate particles on mount
   useEffect(() => {
@@ -43,8 +44,8 @@ export function CreativeHero() {
       "rgba(212, 212, 216, 0.2)", // light gray
       "rgba(113, 113, 122, 0.3)", // medium gray
       "rgba(228, 228, 231, 0.2)", // very light gray
-      "rgba(82, 82, 91, 0.3)",    // dark gray
-    ]
+      "rgba(82, 82, 91, 0.3)", // dark gray
+    ];
 
     const newParticles: Particle[] = Array.from({ length: 50 }, (_, i) => ({
       id: i,
@@ -54,80 +55,86 @@ export function CreativeHero() {
       duration: Math.random() * 10 + 8,
       delay: Math.random() * 5,
       color: colors[Math.floor(Math.random() * colors.length)],
-    }))
+    }));
 
-    setParticles(newParticles)
-  }, [])
+    setParticles(newParticles);
+  }, []);
 
   // Mouse move handler
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return
+      if (!containerRef.current) return;
 
-      const rect = containerRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left - rect.width / 2
-      const y = e.clientY - rect.top - rect.height / 2
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
 
-      mouseX.set(x)
-      mouseY.set(y)
+      mouseX.set(x);
+      mouseY.set(y);
 
       // Magnetic button effect
       if (buttonRef.current) {
-        const buttonRect = buttonRef.current.getBoundingClientRect()
-        const buttonCenterX = buttonRect.left + buttonRect.width / 2
-        const buttonCenterY = buttonRect.top + buttonRect.height / 2
+        const buttonRect = buttonRef.current.getBoundingClientRect();
+        const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+        const buttonCenterY = buttonRect.top + buttonRect.height / 2;
         const distance = Math.sqrt(
-          Math.pow(e.clientX - buttonCenterX, 2) + Math.pow(e.clientY - buttonCenterY, 2)
-        )
+          Math.pow(e.clientX - buttonCenterX, 2) +
+            Math.pow(e.clientY - buttonCenterY, 2)
+        );
 
         if (distance < 150) {
-          const angle = Math.atan2(e.clientY - buttonCenterY, e.clientX - buttonCenterX)
-          const pullStrength = Math.max(0, 1 - distance / 150) * 20
-          const offsetX = Math.cos(angle) * pullStrength
-          const offsetY = Math.sin(angle) * pullStrength
+          const angle = Math.atan2(
+            e.clientY - buttonCenterY,
+            e.clientX - buttonCenterX
+          );
+          const pullStrength = Math.max(0, 1 - distance / 150) * 20;
+          const offsetX = Math.cos(angle) * pullStrength;
+          const offsetY = Math.sin(angle) * pullStrength;
 
-          buttonRef.current.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(1.05)`
+          buttonRef.current.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(1.05)`;
         } else {
-          buttonRef.current.style.transform = "translate(0, 0) scale(1)"
+          buttonRef.current.style.transform = "translate(0, 0) scale(1)";
         }
       }
-    }
+    };
 
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [mouseX, mouseY])
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   const socialLinks = [
     {
       icon: Github,
-      href: "https://github.com",
+      href: "https://github.com/abzaek",
       label: "GitHub",
       color: "from-zinc-800 to-zinc-900",
       glow: "rgba(82, 82, 91, 0.4)",
     },
     {
       icon: Linkedin,
-      href: "https://linkedin.com",
+      href: "https://linkedin.com/in/abzaek",
       label: "LinkedIn",
       color: "from-zinc-800 to-zinc-900",
       glow: "rgba(82, 82, 91, 0.4)",
     },
     {
-      icon: FileText,
-      href: "/resume.pdf",
-      label: "Resume",
+      icon: SiLeetcode,
+      href: "https://leetcode.com/abzaek",
+      label: "LeetCode",
       color: "from-zinc-800 to-zinc-900",
       glow: "rgba(82, 82, 91, 0.4)",
     },
-  ]
+  ];
 
   // Split text into characters for animation
-  const creativeText = "Optimization"
-  const developerText = "Addict"
+  const creativeText = "Optimization";
+  const developerText = "Addict";
 
   return (
-    <div ref={containerRef} className="w-full h-full relative overflow-hidden bg-black">
-
+    <div
+      ref={containerRef}
+      className="w-full h-full relative overflow-hidden bg-black"
+    >
       {/* Particle System */}
       <div className="absolute inset-0 overflow-hidden">
         {particles.map((particle) => (
@@ -172,7 +179,6 @@ export function CreativeHero() {
       <motion.div
         className="absolute animate-float-slow top-40 right-32 w-20 h-20 bg-zinc-700/10 rounded-full blur-md"
         style={{ x: parallaxX, y: parallaxYSlow }}
-
       />
       <div className="absolute inset-0">
         <SentientSphere />
@@ -198,12 +204,15 @@ export function CreativeHero() {
                     {creativeText.split("").map((char, index) => (
                       <motion.span
                         key={`creative-${index}`}
-                        className={`inline-block text-transparent bg-clip-text ${isHoveringText ? "animate-glitch" : ""
-                          }`}
+                        className={`inline-block text-transparent bg-clip-text ${
+                          isHoveringText ? "animate-glitch" : ""
+                        }`}
                         style={{
-                          backgroundImage: "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7, #ffffff)",
+                          backgroundImage:
+                            "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7, #ffffff)",
                           backgroundSize: "300% 300%",
-                          textShadow: "0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(228, 228, 231, 0.2)",
+                          textShadow:
+                            "0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(228, 228, 231, 0.2)",
                         }}
                         initial={{ opacity: 0, y: 50, rotateX: -90 }}
                         animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -212,7 +221,6 @@ export function CreativeHero() {
                           delay: 0.3 + index * 0.05,
                           ease: [0.215, 0.61, 0.355, 1],
                         }}
-
                       >
                         {char}
                       </motion.span>
@@ -251,7 +259,8 @@ export function CreativeHero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
               >
-                Building immersive web experiences with cutting-edge technologies and pixel-perfect precision.
+                Building immersive web experiences with cutting-edge
+                technologies and pixel-perfect precision.
               </motion.p>
 
               <motion.div
@@ -267,9 +276,10 @@ export function CreativeHero() {
                 >
                   {/* Shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
-
                   View My Work
+                  {/* Resume icon removed per request
                   <ExternalLink className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
+                  */}
                 </a>
               </motion.div>
             </motion.div>
@@ -372,13 +382,19 @@ export function CreativeHero() {
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          transition={{
+            duration: 1.5,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">Scroll</span>
+          <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+            Scroll
+          </span>
           <div className="w-px h-8 bg-gradient-to-b from-white/50 to-transparent" />
         </motion.div>
       </motion.div>
     </div>
-  )
+  );
 }
