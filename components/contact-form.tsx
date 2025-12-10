@@ -1,35 +1,78 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Send, Mail } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, Mail } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/hooks/use-toast"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 export function ContactForm() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (!form) return;
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      subject: String(formData.get("subject") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+    };
 
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    })
+    // Basic client-side validation guard
+    if (
+      !payload.name ||
+      !payload.email ||
+      !payload.subject ||
+      !payload.message
+    ) {
+      toast({
+        title: "Please fill in all fields",
+        description: "Name, email, subject, and message are required.",
+      });
+      return;
+    }
 
-    setIsSubmitting(false)
-    e.currentTarget.reset()
-  }
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(
+          data?.error || "Failed to send message. Please try again."
+        );
+      }
+
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+      form.reset();
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.";
+      toast({ title: "Unable to send", description: message });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.div
@@ -43,7 +86,8 @@ export function ContactForm() {
         <div
           className="absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
           style={{
-            background: "conic-gradient(from var(--border-angle, 0deg), #ffffff, #71717a, #ffffff, #a1a1aa, #ffffff)",
+            background:
+              "conic-gradient(from var(--border-angle, 0deg), #ffffff, #71717a, #ffffff, #a1a1aa, #ffffff)",
             animation: "rotateBorder 8s linear infinite",
           }}
         />
@@ -52,7 +96,8 @@ export function ContactForm() {
         <div
           className="absolute inset-0 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"
           style={{
-            background: "conic-gradient(from var(--border-angle, 0deg), #ffffff, #71717a, #ffffff)",
+            background:
+              "conic-gradient(from var(--border-angle, 0deg), #ffffff, #71717a, #ffffff)",
             animation: "rotateBorder 8s linear infinite",
           }}
         />
@@ -68,7 +113,9 @@ export function ContactForm() {
           />
 
           <div className="relative z-10 p-8">
-            <h3 className="text-2xl font-bold mb-2 text-white">Send Me a Message</h3>
+            <h3 className="text-2xl font-bold mb-2 text-white">
+              Send Me a Message
+            </h3>
 
             <p className="text-zinc-400 mb-6 flex items-center gap-2 flex-wrap">
               Or reach me directly at{" "}
@@ -86,6 +133,7 @@ export function ContactForm() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Input
+                  name="name"
                   placeholder="Your Name"
                   required
                   className="bg-zinc-800/50 border-zinc-700/50 text-white placeholder:text-zinc-500 focus:border-zinc-400/60 focus:ring-1 focus:ring-zinc-400/30 focus-visible:ring-zinc-400/30 focus-visible:ring-offset-0 focus-visible:border-zinc-400/60 transition-all duration-300"
@@ -93,6 +141,7 @@ export function ContactForm() {
               </div>
               <div className="space-y-2">
                 <Input
+                  name="email"
                   type="email"
                   placeholder="Your Email"
                   required
@@ -101,6 +150,7 @@ export function ContactForm() {
               </div>
               <div className="space-y-2">
                 <Input
+                  name="subject"
                   placeholder="Subject"
                   required
                   className="bg-zinc-800/50 border-zinc-700/50 text-white placeholder:text-zinc-500 focus:border-zinc-400/60 focus:ring-1 focus:ring-zinc-400/30 focus-visible:ring-zinc-400/30 focus-visible:ring-offset-0 focus-visible:border-zinc-400/60 transition-all duration-300"
@@ -108,6 +158,7 @@ export function ContactForm() {
               </div>
               <div className="space-y-2">
                 <Textarea
+                  name="message"
                   placeholder="Your Message"
                   rows={5}
                   required
@@ -132,5 +183,5 @@ export function ContactForm() {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

@@ -1,61 +1,58 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useMobile } from "@/hooks/use-mobile"
-import ReactMarkdown from "react-markdown"
-import { ExternalLink } from "lucide-react"
+import { motion } from "framer-motion";
+import { useMobile } from "@/hooks/use-mobile";
+import ReactMarkdown from "react-markdown";
+import { ExternalLink } from "lucide-react";
 
 const experiences = [
   {
-    title: "Senior Frontend Engineer",
-    company: "Tech Innovations Inc.",
-    companyUrl: "https://techinnovations.example.com",
-    period: "January 2021 – Present",
+    title: "Software Engineer",
+    company: "Reisearch",
+    companyUrl: "https://reisearch.com",
+    period: "Nov 2025 – Present · Phoenix, AZ",
     contributions: `
-* **Led a team of 5 engineers** to rebuild the core SaaS dashboard, improving load times by 40%
-* Architected a **component library** using React, TypeScript, and Storybook adopted across 3 product teams
-* Implemented **real-time collaboration features** using WebSockets and optimistic UI patterns
-* Mentored junior developers through code reviews and pair programming sessions
+* Rebuilt a **Go-based comps orchestration system** into a high-throughput streaming pipeline with DynamoDB + SQS worker pools, cutting processing time from ~40 minutes to ~3–4 minutes.
+* Designed and maintained **AWS integrations** (DynamoDB, S3, SQS, Cognito) and Clean Architecture services to validate, enrich, score, and persist multi-source real-estate comps data.
+* Authored **architecture/orchestration docs**, introduced dependency-injection patterns, and mentored engineers for new property-service publishing workflows.
     `,
   },
   {
-    title: "Frontend Developer",
-    company: "Digital Solutions Co.",
-    companyUrl: "https://digitalsolutions.example.com",
-    period: "March 2019 – December 2020",
+    title: "Fullstack Developer",
+    company: "Nuclues Institute",
+    companyUrl: "#",
+    period: "Jul 2024 – Nov 2024 · Canada",
     contributions: `
-* Built **responsive web applications** serving 50k+ daily active users using React and TypeScript
-* Collaborated with UX designers to implement **pixel-perfect designs** with a focus on accessibility (WCAG 2.1)
-* Reduced bundle size by **35%** through code splitting and lazy loading strategies
-* Integrated **CI/CD pipelines** with automated testing achieving 85% code coverage
+* Optimized the **frontend component structure**, reducing unnecessary renders and improving asset loading for smoother navigation.
+* Enhanced **backend performance** by refining API logic, improving database query efficiency, and streamlining key request/response workflows.
+* Improved **accessibility and mobile usability** by refining responsive layouts and ensuring components met accessibility guidelines.
     `,
   },
   {
-    title: "Web Developer",
-    company: "Creative Agency",
-    companyUrl: "https://creativeagency.example.com",
-    period: "June 2017 – February 2019",
+    title: "Software Engineer",
+    company: "Eskalate",
+    companyUrl: "#",
+    period: "Jun 2024 – Sep 2024 · Addis Ababa, Ethiopia",
     contributions: `
-* Developed **20+ client websites** ranging from e-commerce to portfolio sites
-* Implemented custom **WordPress themes and plugins** for content management flexibility
-* Optimized site performance achieving **90+ Lighthouse scores** across all projects
+* Led a team to build a **blog starter** with Go (Gin), Redis caching, and MongoDB following clean architecture principles.
+* Integrated **AI automation** to generate and review blog content, boosting user engagement.
+* Drove **performance optimizations** with concurrency and regular code reviews to maintain quality standards.
     `,
   },
   {
-    title: "Software Development Intern",
-    company: "Startup Hub",
-    companyUrl: "https://startuphub.example.com",
-    period: "January 2016 – May 2017",
+    title: "Fullstack Engineer",
+    company: "NEO AI Technologies",
+    companyUrl: "#",
+    period: "Nov 2022 – Sep 2023",
     contributions: `
-* Assisted in developing **internal tools** using JavaScript and Node.js
-* Learned modern web development practices including **Git workflows** and agile methodologies
-* Contributed to **open-source projects** and documentation improvements
+* Built and maintained **hospital and inventory management systems** with React and TypeScript, delivering scalable frontends.
+* Integrated **Firebase/Firestore** for real-time data storage and synchronization.
     `,
   },
-]
+];
 
 export function Timeline() {
-  const isMobile = useMobile()
+  const isMobile = useMobile();
 
   return (
     <div className="relative">
@@ -74,16 +71,20 @@ export function Timeline() {
         {experiences.map((experience, index) => (
           <div
             key={index}
-            className={`relative z-10 flex items-center ${index % 2 === 0 ? "md:flex-row-reverse" : "md:flex-row"}`}
+            className={`relative z-10 flex items-center ${
+              index % 2 === 0 ? "md:flex-row-reverse" : "md:flex-row"
+            }`}
           >
             <motion.div
-              className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"}`}
+              className={`w-full md:w-1/2 ${
+                index % 2 === 0 ? "md:pl-12" : "md:pr-12"
+              }`}
               initial={{ opacity: 0, x: index % 2 === 0 ? 150 : -150 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{
                 duration: 0.8,
                 delay: index * 0.15,
-                ease: [0.25, 0.46, 0.45, 0.94] // Custom easing for smooth entrance
+                ease: [0.25, 0.46, 0.45, 0.94], // Custom easing for smooth entrance
               }}
               viewport={{ once: true, margin: "-50px" }}
             >
@@ -110,10 +111,14 @@ export function Timeline() {
 
                   {/* Card header */}
                   <div className="relative">
-                    <h3 className="text-xl font-bold text-white">{experience.title}</h3>
+                    <h3 className="text-xl font-bold text-white">
+                      {experience.title}
+                    </h3>
 
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-zinc-300 font-medium">{experience.company}</span>
+                      <span className="text-zinc-300 font-medium">
+                        {experience.company}
+                      </span>
                       <a
                         href={experience.companyUrl}
                         target="_blank"
@@ -143,7 +148,11 @@ export function Timeline() {
                   className="relative"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 + 0.2, type: "spring" }}
+                  transition={{
+                    duration: 0.4,
+                    delay: index * 0.1 + 0.2,
+                    type: "spring",
+                  }}
                   viewport={{ once: true }}
                 >
                   <div className="absolute inset-0 w-12 h-12 -translate-x-2.5 -translate-y-2.5 bg-white rounded-full blur-xl opacity-30" />
@@ -157,5 +166,5 @@ export function Timeline() {
         ))}
       </div>
     </div>
-  )
+  );
 }
