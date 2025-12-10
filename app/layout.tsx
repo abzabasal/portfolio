@@ -1,22 +1,28 @@
-import type { Metadata } from 'next'
-import { GoogleAnalytics } from '@next/third-parties/google'
-import { Analytics } from "@vercel/analytics/next"
-import './globals.css'
+import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "@/components/ui/toaster";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Abdulazez Zeinu',
-  description: 'Full Stack Developer | Optimization Addict | AI Enthusiast',
-  generator: 'abzaeko@gmail.com',
-}
+  title: "Abdulazez Zeinu",
+  description: "Full Stack Developer | Optimization Addict | AI Enthusiast",
+  generator: "abzaeko@gmail.com",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         {children}
+        <Toaster />
         <Analytics />
       </body>
       <GoogleAnalytics gaId="G-PRMYJQGP5Z" />
     </html>
-  )
+  );
 }
