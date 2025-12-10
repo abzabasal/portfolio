@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Send, Mail, ArrowUp } from "lucide-react";
 import { SiLeetcode } from "react-icons/si";
 
 export function Footer() {
@@ -24,9 +24,9 @@ export function Footer() {
       label: "LinkedIn",
     },
     {
-      icon: Twitter,
-      href: "https://twitter.com/abzaek",
-      label: "Twitter",
+      icon: Send,
+      href: "https://t.me/abzaek",
+      label: "Telegram",
     },
     {
       icon: SiLeetcode,
@@ -35,7 +35,7 @@ export function Footer() {
     },
     {
       icon: Mail,
-      href: "mailto:abzaek@ogmail.com",
+      href: "mailto:abzaeko@gmail.com",
       label: "Email",
     },
   ];

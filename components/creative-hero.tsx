@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ExternalLink, Github, Linkedin } from "lucide-react";
+import { ExternalLink, Github, Linkedin, Mail, Send } from "lucide-react";
 import { SentientSphere } from "./3d-sphere";
 import { SiLeetcode } from "react-icons/si";
 // Particle interface
@@ -118,17 +118,31 @@ export function CreativeHero() {
       glow: "rgba(82, 82, 91, 0.4)",
     },
     {
+      icon: Send,
+      href: "https://t.me/abzaek",
+      label: "Telegram",
+      color: "from-zinc-800 to-zinc-900",
+      glow: "rgba(82, 82, 91, 0.4)",
+    },
+    {
       icon: SiLeetcode,
       href: "https://leetcode.com/abzaek",
       label: "LeetCode",
       color: "from-zinc-800 to-zinc-900",
       glow: "rgba(82, 82, 91, 0.4)",
     },
+    {
+      icon: Mail,
+      href: "mailto:abzaeko@gmail.com",
+      label: "Email",
+      color: "from-zinc-800 to-zinc-900",
+      glow: "rgba(82, 82, 91, 0.4)",
+    },
   ];
 
   // Split text into characters for animation
-  const creativeText = "Optimization";
-  const developerText = "Addict";
+  const creativeText = "Full-Stack";
+  const developerText = "Engineer";
 
   return (
     <div
@@ -193,6 +207,10 @@ export function CreativeHero() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm uppercase tracking-[0.2em] text-zinc-200">
+                Hi, I'm Abdulazez (Abza)
+              </div>
+
               <div className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance leading-none">
                 {/* "Creative" with character animation */}
                 <motion.div
@@ -254,37 +272,98 @@ export function CreativeHero() {
               </div>
 
               <motion.p
-                className="text-lg md:text-xl lg:text-2xl text-zinc-400 max-w-xl leading-relaxed"
+                className="text-lg md:text-xl lg:text-2xl text-zinc-300 max-w-3xl leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
               >
-                Building immersive web experiences with cutting-edge
-                technologies and pixel-perfect precision.
+                I build fast, scalable products end-to-end — Next.js/React on
+                the front, Go/TypeScript/Python services on the back —
+                delivering measurable wins like 30% faster page loads, 25%
+                leaner API responses, and production-ready AI features.
               </motion.p>
 
               <motion.div
+                className="flex flex-wrap gap-3 text-sm text-zinc-200"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.3 }}
+              >
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                  Performance engineering
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                  Scalability & architecture
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                  AI-integrated applications
+                </span>
+              </motion.div>
+
+              <motion.p
+                className="text-base md:text-lg text-zinc-300 max-w-3xl leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.45 }}
+              >
+                Based in Ethiopia. Obsessed with clean architecture, fast
+                systems, and well-designed products.
+              </motion.p>
+
+              <motion.div
+                className="flex flex-wrap gap-3 text-sm text-zinc-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.4 }}
               >
-                <a
-                  ref={buttonRef}
-                  href="#projects"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-black via-zinc-900 to-zinc-800 text-white font-semibold text-lg hover:shadow-2xl hover:shadow-zinc-800/50 transition-all duration-300 relative overflow-hidden group border border-zinc-700"
-                  style={{ willChange: "transform" }}
-                >
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
-                  View My Work
-                  <ExternalLink className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
-                </a>
+                {[
+                  "Next.js",
+                  "TypeScript",
+                  "Go",
+                  "Python",
+                  "PostgreSQL",
+                  "AWS",
+                  "Docker",
+                ].map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.6 }}
+              >
+                <div className="flex flex-wrap items-center gap-4">
+                  <a
+                    ref={buttonRef}
+                    href="#projects"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-black via-zinc-900 to-zinc-800 text-white font-semibold text-lg hover:shadow-2xl hover:shadow-zinc-800/50 transition-all duration-300 relative overflow-hidden group border border-zinc-700"
+                    style={{ willChange: "transform" }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+                    See how I build fast systems
+                    <ExternalLink className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
+                  </a>
+
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-white font-medium text-base hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+                  >
+                    Get in touch
+                  </a>
+                </div>
               </motion.div>
             </motion.div>
 
             {/* Right 40% - Profile and Social Links */}
             <motion.div
-              className="lg:col-span-2 flex flex-col items-center lg:items-end space-y-10"
+              className="lg:col-span-2 flex flex-col items-center space-y-10"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
