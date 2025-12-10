@@ -306,8 +306,8 @@ export function CreativeHero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.45 }}
               >
-                Based in Ethiopia. Obsessed with clean architecture, fast
-                systems, and well-designed products.
+                Obsessed with clean architecture, fast systems, and
+                well-designed products.
               </motion.p>
 
               <motion.div
