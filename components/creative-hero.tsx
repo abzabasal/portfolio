@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
+import { ExternalLink, Github, Linkedin } from "lucide-react";
 import { SentientSphere } from "./3d-sphere";
 import { SiLeetcode } from "react-icons/si";
 // Particle interface
@@ -277,9 +277,7 @@ export function CreativeHero() {
                   {/* Shimmer effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
                   View My Work
-                  {/* Resume icon removed per request
                   <ExternalLink className="w-5 h-5 group-hover:rotate-45 transition-transform duration-300" />
-                  */}
                 </a>
               </motion.div>
             </motion.div>

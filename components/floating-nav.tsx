@@ -1,48 +1,51 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { useMobile } from "@/hooks/use-mobile"
+import { Button } from "@/components/ui/button";
+import { useMobile } from "@/hooks/use-mobile";
 
 export function FloatingNav() {
-  const [isOpen, setIsOpen] = useState(false)
-  const isMobile = useMobile()
+  const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useMobile();
 
   const navItems = [
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
-  ]
+  ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
 
     // Close mobile menu if open
     if (isMobile) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
 
     // Get the target section
-    const targetId = href.replace("#", "")
-    const targetSection = document.getElementById(targetId)
+    const targetId = href.replace("#", "");
+    const targetSection = document.getElementById(targetId);
 
     if (targetSection) {
       // Calculate offset for fixed nav (64px = h-16)
-      const navHeight = 64
-      const targetPosition = targetSection.offsetTop - navHeight
+      const navHeight = 64;
+      const targetPosition = targetSection.offsetTop - navHeight;
 
       // Smooth scroll to section
       window.scrollTo({
         top: targetPosition,
         behavior: "smooth",
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -63,7 +66,8 @@ export function FloatingNav() {
                   <span
                     className="relative text-transparent bg-clip-text"
                     style={{
-                      backgroundImage: "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7)",
+                      backgroundImage:
+                        "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7)",
                       textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
                     }}
                   >
@@ -90,12 +94,12 @@ export function FloatingNav() {
                     </Link>
                   ))}
 
-                  <Button
+                  {/* <Button
                     size="sm"
                     className="ml-4 relative overflow-hidden bg-gradient-to-r from-black via-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-black border border-zinc-700 rounded-full px-6 font-semibold shadow-lg shadow-zinc-800/25 hover:shadow-zinc-700/25 transition-all duration-300"
                   >
                     <span className="relative z-10 text-white">Resume</span>
-                  </Button>
+                  </Button> */}
                 </div>
               )}
 
@@ -107,7 +111,11 @@ export function FloatingNav() {
                   className="text-zinc-400 hover:text-white hover:bg-white/5"
                   onClick={() => setIsOpen(!isOpen)}
                 >
-                  {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                  {isOpen ? (
+                    <X className="h-5 w-5" />
+                  ) : (
+                    <Menu className="h-5 w-5" />
+                  )}
                 </Button>
               )}
             </div>
@@ -118,7 +126,9 @@ export function FloatingNav() {
       {/* Mobile menu overlay */}
       {isMobile && (
         <motion.div
-          className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-xl ${isOpen ? "block" : "hidden"}`}
+          className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-xl ${
+            isOpen ? "block" : "hidden"
+          }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: isOpen ? 1 : 0 }}
           transition={{ duration: 0.3 }}
@@ -140,7 +150,7 @@ export function FloatingNav() {
                 </Link>
               </motion.div>
             ))}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
               transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
@@ -148,10 +158,10 @@ export function FloatingNav() {
               <Button className="mt-6 bg-gradient-to-r from-black via-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-black border border-zinc-700 rounded-full px-8 py-6 text-lg font-semibold">
                 Resume
               </Button>
-            </motion.div>
+            </motion.div> */}
           </div>
         </motion.div>
       )}
     </>
-  )
+  );
 }
