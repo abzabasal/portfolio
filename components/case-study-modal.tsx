@@ -241,6 +241,23 @@ export function CaseStudyModal({
                     Source
                   </a> */}
                 </div>
+
+                {/* Content Scroll Indicator */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                  className="sticky bottom-0 mx-auto flex justify-end pb-2 pt-12 pointer-events-none bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent"
+                >
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+                    <motion.div
+                      animate={{ y: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="w-1 h-3 rounded-full bg-white/50"
+                    />
+                    <span className="text-[10px] uppercase tracking-wider text-white/50 font-medium">Scroll</span>
+                  </div>
+                </motion.div>
               </div>
 
               {/* Right Column: Interactive Gallery (60%) */}
