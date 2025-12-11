@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ExternalLink, Github, Linkedin, Mail, Send } from "lucide-react";
 import { SentientSphere } from "./3d-sphere";
-import { SiLeetcode } from "react-icons/si";
+import { SiLeetcode, SiWhatsapp } from "react-icons/si";
 // Particle interface
 interface Particle {
   id: number;
@@ -79,7 +79,7 @@ export function CreativeHero() {
         const buttonCenterY = buttonRect.top + buttonRect.height / 2;
         const distance = Math.sqrt(
           Math.pow(e.clientX - buttonCenterX, 2) +
-            Math.pow(e.clientY - buttonCenterY, 2)
+          Math.pow(e.clientY - buttonCenterY, 2)
         );
 
         if (distance < 150) {
@@ -118,9 +118,9 @@ export function CreativeHero() {
       glow: "rgba(82, 82, 91, 0.4)",
     },
     {
-      icon: Send,
-      href: "https://t.me/abzaek",
-      label: "Telegram",
+      icon: SiWhatsapp,
+      href: "https://wa.me/251985045300",
+      label: "WhatsApp",
       color: "from-zinc-800 to-zinc-900",
       glow: "rgba(82, 82, 91, 0.4)",
     },
@@ -222,9 +222,8 @@ export function CreativeHero() {
                     {creativeText.split("").map((char, index) => (
                       <motion.span
                         key={`creative-${index}`}
-                        className={`inline-block text-transparent bg-clip-text ${
-                          isHoveringText ? "animate-glitch" : ""
-                        }`}
+                        className={`inline-block text-transparent bg-clip-text ${isHoveringText ? "animate-glitch" : ""
+                          }`}
                         style={{
                           backgroundImage:
                             "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7, #ffffff)",
