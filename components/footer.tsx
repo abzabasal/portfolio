@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Send, Mail, ArrowUp } from "lucide-react";
-import { SiLeetcode } from "react-icons/si";
+import { SiLeetcode, SiWhatsapp } from "react-icons/si";
 
 export function Footer() {
   const handleScrollToContact = () => {
@@ -24,9 +24,9 @@ export function Footer() {
       label: "LinkedIn",
     },
     {
-      icon: Send,
-      href: "https://t.me/abzaek",
-      label: "Telegram",
+      icon: SiWhatsapp,
+      href: "https://wa.me/251985045300",
+      label: "WhatsApp",
     },
     {
       icon: SiLeetcode,
