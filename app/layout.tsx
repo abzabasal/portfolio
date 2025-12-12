@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
-import { MouseFollower } from "@/components/mouse-follower";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,7 +33,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <MouseFollower />
         {children}
         <Toaster />
         <Analytics />

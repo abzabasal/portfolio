@@ -60,30 +60,24 @@ export function CaseStudyModal({
     initial: (direction: "next" | "prev") => ({
       opacity: 0,
       y: direction === "next" ? 32 : -32,
-      rotateX: direction === "next" ? 8 : -8,
-      scale: 0.94,
-      filter: "blur(10px)",
+      scale: 0.98,
     }),
     animate: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
       scale: 1,
-      filter: "blur(0px)",
       transition: {
         type: "spring" as const,
-        damping: 22,
-        stiffness: 320,
+        damping: 25,
+        stiffness: 300,
         mass: 0.8,
       },
     },
     exit: (direction: "next" | "prev") => ({
       opacity: 0,
       y: direction === "next" ? -28 : 28,
-      rotateX: direction === "next" ? -6 : 6,
-      scale: 0.93,
-      filter: "blur(10px)",
-      transition: { duration: 0.28, ease: "easeInOut" as const },
+      scale: 0.98,
+      transition: { duration: 0.2, ease: "easeInOut" as const },
     }),
   };
 
@@ -102,7 +96,7 @@ export function CaseStudyModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center"
+      className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
       onClick={onClose}
     >
       {/* Navigation Buttons - Outside Modal */}
