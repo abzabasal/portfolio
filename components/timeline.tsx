@@ -10,7 +10,7 @@ const experiences = [
     title: "Software Engineer",
     company: "Reisearch",
     companyUrl: "https://reisearch.com",
-    period: "Nov 2025 – Present · Phoenix, AZ",
+    period: "Nov 2024 – Present · Phoenix, AZ",
     contributions: `
 * Rebuilt a **Go-based comps orchestration system** into a high-throughput streaming pipeline with DynamoDB + SQS worker pools, cutting processing time from ~40 minutes to ~3–4 minutes.
 * Designed and maintained **AWS integrations** (DynamoDB, S3, SQS, Cognito) and Clean Architecture services to validate, enrich, score, and persist multi-source real-estate comps data.
@@ -32,7 +32,7 @@ const experiences = [
     title: "Software Engineer",
     company: "Eskalate",
     companyUrl: "#",
-    period: "Jun 2024 – Sep 2024 · Addis Ababa, Ethiopia",
+    period: "Sep 2023 – Jul 2024 · Addis Ababa, Ethiopia",
     contributions: `
 * Led a team to build a **blog starter** with Go (Gin), Redis caching, and MongoDB following clean architecture principles.
 * Integrated **AI automation** to generate and review blog content, boosting user engagement.

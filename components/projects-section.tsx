@@ -144,7 +144,7 @@ Built with Flask for the backend, JavaScript for interactivity, and styled with 
         { src: "/projects/amigos-gym/inventory.png", size: "square" },
         { src: "/projects/amigos-gym/bulk-sms.png", size: "vertical" },
       ],
-      liveUrl: "https://amigosgym.com",
+      liveUrl: "https://amigosgym.app",
       githubUrl: "https://github.com/amigos-gym",
     },
   },
@@ -232,7 +232,7 @@ export function ProjectsSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
           >
@@ -241,7 +241,7 @@ export function ProjectsSection() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-lg text-zinc-400"
           >
