@@ -64,11 +64,22 @@ export function ContactForm() {
 
     setIsSubmitting(true);
     try {
-      // Long delay to enjoy the 5-second slow flight
-      await new Promise((resolve) => setTimeout(resolve, 4800));
-      const res = { ok: true };
+      // Run the animation timer and the API request in parallel
+      const minAnimationTime = new Promise((resolve) =>
+        setTimeout(resolve, 4800)
+      );
+      const request = fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      if (!res.ok) throw new Error("Failed to send.");
+      const [_, response] = await Promise.all([minAnimationTime, request]);
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || "Failed to send.");
+      }
 
       toast({
         title: "Message sent!",
