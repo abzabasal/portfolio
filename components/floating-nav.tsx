@@ -1,47 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { useMobile } from "@/hooks/use-mobile";
+
+const NAV_ITEMS = [
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
+];
 
 export function FloatingNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
   const isMobile = useMobile();
 
-  const navItems = [
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-  ];
+  // Scroll-spy: highlight nav link for the section currently in view
+  useEffect(() => {
+    const ids = NAV_ITEMS.map((i) => i.href.replace("#", ""));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((s): s is HTMLElement => Boolean(s));
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // pick the entry with the largest intersectionRatio that's intersecting
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault();
+    if (isMobile) setIsOpen(false);
 
-    // Close mobile menu if open
-    if (isMobile) {
-      setIsOpen(false);
-    }
-
-    // Get the target section
     const targetId = href.replace("#", "");
-    const targetSection = document.getElementById(targetId);
-
-    if (targetSection) {
-      // Calculate offset for fixed nav (64px = h-16)
+    const target = document.getElementById(targetId);
+    if (target) {
       const navHeight = 64;
-      const targetPosition = targetSection.offsetTop - navHeight;
-
-      // Smooth scroll to section
       window.scrollTo({
-        top: targetPosition,
+        top: target.offsetTop - navHeight,
         behavior: "smooth",
       });
     }
@@ -50,115 +64,112 @@ export function FloatingNav() {
   return (
     <>
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50"
-        initial={{ y: -100, opacity: 0 }}
+        className="fixed top-0 w-full z-50 bg-noir-bg/80 backdrop-blur-md border-b border-noir-line"
+        initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <div className="relative bg-transparent">
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-700/5 via-transparent to-zinc-600/5 pointer-events-none" />
+        <div className="max-w-container-max mx-auto px-6 h-16 flex justify-between items-center">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="font-mono font-bold text-xl tracking-tighter text-noir-text"
+          >
+            ABZ_<span className="text-noir-accent">CORE</span>
+          </Link>
 
-          <div className="container mx-auto px-6">
-            <div className="relative flex items-center justify-between h-16">
-              <Link href="/" className="relative group">
-                <span className="font-sans font-light text-xl tracking-tight">
-                  <span
-                    className="relative text-transparent bg-clip-text"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(135deg, #d4d4d8, #ffffff, #e4e4e7)",
-                      textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
-                    }}
+          {/* Desktop nav */}
+          {!isMobile && (
+            <div className="flex items-center gap-8 font-display tracking-tight text-sm">
+              {NAV_ITEMS.map((item) => {
+                const id = item.href.replace("#", "");
+                const isActive = activeSection === id;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className={
+                      isActive
+                        ? "text-noir-accent border-b-2 border-noir-accent pb-1 transition-colors"
+                        : "text-noir-text-mute hover:text-noir-text border-b-2 border-transparent pb-1 transition-colors"
+                    }
                   >
-                    Abdulazez
-                  </span>
-                </span>
-                {/* Glow effect on hover */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-zinc-700/10 to-zinc-600/10 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </Link>
-
-              {/* Desktop Navigation */}
-              {!isMobile && (
-                <div className="flex items-center gap-1">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="relative px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors group"
-                      onClick={(e) => handleNavClick(e, item.href)}
-                    >
-                      {item.name}
-                      {/* Hover underline effect */}
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-zinc-400 to-white group-hover:w-3/4 transition-all duration-300" />
-                    </Link>
-                  ))}
-
-                  {/* <Button
-                    size="sm"
-                    className="ml-4 relative overflow-hidden bg-gradient-to-r from-black via-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-black border border-zinc-700 rounded-full px-6 font-semibold shadow-lg shadow-zinc-800/25 hover:shadow-zinc-700/25 transition-all duration-300"
-                  >
-                    <span className="relative z-10 text-white">Resume</span>
-                  </Button> */}
-                </div>
-              )}
-
-              {/* Mobile Menu Button */}
-              {isMobile && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-zinc-400 hover:text-white hover:bg-white/5"
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  {isOpen ? (
-                    <X className="h-5 w-5" />
-                  ) : (
-                    <Menu className="h-5 w-5" />
-                  )}
-                </Button>
-              )}
+                    {item.name}
+                  </a>
+                );
+              })}
             </div>
-          </div>
+          )}
+
+          {/* Right side: Hire Me CTA (desktop) or menu toggle (mobile) */}
+          {!isMobile ? (
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
+              className="bg-noir-accent-soft text-black px-5 py-2 rounded-sm
+                         font-mono font-bold uppercase tracking-[0.1em] text-[12px]
+                         transition-transform duration-200 hover:scale-95"
+            >
+              Hire Me
+            </a>
+          ) : (
+            <button
+              type="button"
+              className="text-noir-text-mute hover:text-noir-text p-2"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          )}
         </div>
       </motion.nav>
 
       {/* Mobile menu overlay */}
       {isMobile && (
         <motion.div
-          className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-xl ${
+          className={`fixed inset-0 z-40 bg-noir-bg/95 backdrop-blur-md ${
             isOpen ? "block" : "hidden"
           }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: isOpen ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
         >
-          <div className="flex flex-col items-center justify-center h-full pt-16">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-              >
-                <Link
-                  href={item.href}
-                  className="block px-8 py-4 text-2xl font-medium text-white hover:text-zinc-300 transition-colors"
-                  onClick={(e) => handleNavClick(e, item.href)}
+          <div className="flex flex-col items-center justify-center h-full pt-16 gap-2">
+            {NAV_ITEMS.map((item, index) => {
+              const id = item.href.replace("#", "");
+              const isActive = activeSection === id;
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 12 }}
+                  transition={{ duration: 0.25, delay: index * 0.04 }}
                 >
-                  {item.name}
-                </Link>
-              </motion.div>
-            ))}
-            {/* <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
-              transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
+                  <a
+                    href={item.href}
+                    className={`font-display block px-8 py-4 text-2xl font-semibold transition-colors ${
+                      isActive ? "text-noir-accent" : "text-noir-text"
+                    }`}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
+                    {item.name}
+                  </a>
+                </motion.div>
+              );
+            })}
+            <motion.a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 12 }}
+              transition={{ duration: 0.25, delay: NAV_ITEMS.length * 0.04 }}
+              className="mt-4 bg-noir-accent-soft text-black px-8 py-3 rounded-sm
+                         font-mono font-bold uppercase tracking-[0.1em] text-[12px]"
             >
-              <Button className="mt-6 bg-gradient-to-r from-black via-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-black border border-zinc-700 rounded-full px-8 py-6 text-lg font-semibold">
-                Resume
-              </Button>
-            </motion.div> */}
+              Hire Me
+            </motion.a>
           </div>
         </motion.div>
       )}
