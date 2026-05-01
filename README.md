@@ -1,6 +1,6 @@
 # Creative Portfolio
 
-A modern and responsive creative portfolio built using [v0.dev](https://v0.dev) by Vercel.
+A modern and responsive creative portfolio built by Abzaek.
 
 
 ## Live Demo
