@@ -25,105 +25,97 @@ export function ProjectGallery({ images }: ProjectGalleryProps) {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
   }, [images.length])
 
-  // Auto-play functionality
   useEffect(() => {
-    let interval: NodeJS.Timeout
-    if (isPlaying) {
-      interval = setInterval(() => {
-        handleNext()
-      }, 5000)
-    }
+    if (!isPlaying) return
+    const interval = setInterval(handleNext, 5000)
     return () => clearInterval(interval)
   }, [isPlaying, handleNext])
 
   return (
     <div
-      className="w-full h-full bg-zinc-900/20 relative overflow-hidden flex flex-col border-l border-white/5 group/gallery"
+      className="w-full h-full bg-noir-surface-dim relative overflow-hidden flex flex-col group/gallery"
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
     >
-      {/* Background Pattern */}
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}
-      />
+      <div className="absolute inset-0 grid-overlay opacity-40 pointer-events-none" />
 
-      {/* Main Image Display */}
-      <div className="flex-1 relative flex items-center justify-center p-4 md:p-8 group/focus overflow-hidden">
+      <div className="flex-1 relative flex items-center justify-center p-4 md:p-8 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="relative w-full h-full max-w-5xl max-h-full rounded-lg overflow-hidden shadow-2xl border border-white/10 bg-black/50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="relative w-full h-full max-w-5xl max-h-full rounded-lg overflow-hidden border border-noir-line bg-noir-surface"
           >
             <Image
               src={images[currentIndex].src}
               alt={`Gallery image ${currentIndex + 1}`}
               fill
               className="object-contain"
-              priority
+              priority={currentIndex === 0}
+              sizes="(max-width: 768px) 100vw, 60vw"
             />
 
-            {/* Image Counter Badge */}
-            <div className="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full border border-white/10 text-xs text-white/70">
-              {currentIndex + 1} / {images.length}
+            <div className="absolute top-3 right-3 px-2.5 py-1 rounded bg-noir-surface-1/90 border border-noir-line">
+              <span className="font-mono text-[11px] tracking-wider text-noir-text-mute">
+                {String(currentIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+              </span>
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation Buttons - Visible on Hover/Interaction */}
         <button
           onClick={(e) => {
             e.stopPropagation()
             handlePrev()
           }}
-          className="absolute left-4 p-3 rounded-full bg-black/50 hover:bg-white/10 text-white border border-white/10 backdrop-blur-sm transition-all opacity-0 group-hover/gallery:opacity-100 -translate-x-4 group-hover/gallery:translate-x-0 z-20"
+          className="absolute left-4 w-10 h-10 flex items-center justify-center rounded
+                     bg-noir-surface-1 border border-noir-line text-noir-text-mute
+                     transition-[opacity,colors,transform] duration-200
+                     opacity-0 -translate-x-2 group-hover/gallery:opacity-100 group-hover/gallery:translate-x-0
+                     hover:border-noir-accent hover:text-noir-accent z-20"
+          aria-label="Previous image"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5" />
         </button>
         <button
           onClick={(e) => {
             e.stopPropagation()
             handleNext()
           }}
-          className="absolute right-4 p-3 rounded-full bg-black/50 hover:bg-white/10 text-white border border-white/10 backdrop-blur-sm transition-all opacity-0 group-hover/gallery:opacity-100 translate-x-4 group-hover/gallery:translate-x-0 z-20"
+          className="absolute right-4 w-10 h-10 flex items-center justify-center rounded
+                     bg-noir-surface-1 border border-noir-line text-noir-text-mute
+                     transition-[opacity,colors,transform] duration-200
+                     opacity-0 translate-x-2 group-hover/gallery:opacity-100 group-hover/gallery:translate-x-0
+                     hover:border-noir-accent hover:text-noir-accent z-20"
+          aria-label="Next image"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Thumbnails Strip */}
-      <div className="h-24 border-t border-white/10 bg-black/40 p-3 flex gap-3 overflow-x-auto justify-center items-center backdrop-blur-md">
+      <div className="h-24 border-t border-noir-line bg-noir-surface-dim p-3 flex gap-2 overflow-x-auto items-center">
         {images.map((img, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
             className={cn(
-              "relative w-20 h-14 rounded-md overflow-hidden border transition-all flex-shrink-0 group/thumb",
+              "relative w-20 h-14 rounded-sm overflow-hidden border transition-all flex-shrink-0",
               currentIndex === idx
-                ? "border-white ring-2 ring-white/20 scale-105"
-                : "border-transparent opacity-50 hover:opacity-100 hover:scale-105"
+                ? "border-noir-accent opacity-100"
+                : "border-noir-line opacity-50 hover:opacity-100 hover:border-noir-text-faint"
             )}
+            aria-label={`Show image ${idx + 1}`}
           >
             <Image
               src={img.src}
-              alt={`Go to image ${idx + 1}`}
+              alt=""
               fill
               className="object-cover"
+              sizes="80px"
             />
-            {/* Active Indicator Line */}
-            {currentIndex === idx && (
-              <motion.div
-                layoutId="activeThumb"
-                className="absolute bottom-0 left-0 right-0 h-1 bg-white"
-              />
-            )}
           </button>
         ))}
       </div>

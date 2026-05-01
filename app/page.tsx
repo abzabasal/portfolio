@@ -12,46 +12,38 @@ import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
-    <main className="w-full min-h-screen bg-black text-white overflow-x-hidden">
+    <main className="w-full min-h-screen bg-noir-bg text-noir-text overflow-x-hidden">
       <FloatingNav />
 
-      {/* Hero Section */}
       <CreativeHero />
 
-
-      {/* Skills Section */}
       <SkillsSection />
 
-      {/* Projects Section */}
       <ProjectsSection />
 
-      {/* Experience Section */}
       <section
         id="experience"
-        className="py-32 bg-gradient-to-b from-zinc-900 via-zinc-950 to-black relative overflow-hidden"
+        className="py-32 bg-noir-bg relative overflow-hidden"
       >
-        {/* Noise texture overlay matching other sections */}
-        <div
-          className="absolute inset-0 z-0 opacity-20 pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' /%3E%3C/svg%3E")`,
-          }}
-        />
-
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute top-2/3 right-1/3 w-[300px] h-[300px] bg-purple-500/8 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise" />
+        <div className="absolute top-1/4 left-1/4 w-[420px] h-[420px] bg-noir-accent/[0.04] rounded-full blur-[60px] pointer-events-none" />
 
         <motion.div
-          className="container relative z-10"
-          initial={{ opacity: 0, y: 50 }}
+          className="container max-w-container-max relative z-10"
+          initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <SectionHeading title="Experience" subtitle="Career Journey" />
+          <div className="max-w-2xl">
+            <SectionHeading title="Experience" subtitle="Career Journey" />
+            <p className="mt-4 text-noir-text-mute leading-relaxed">
+              Recent roles, with the architectural calls and measurable
+              outcomes attached.
+            </p>
+          </div>
 
-          <div className="mt-20">
+          <div className="mt-16">
             <Timeline />
           </div>
         </motion.div>
@@ -59,30 +51,28 @@ export default function Home() {
 
       <section
         id="contact"
-        className="py-32 bg-gradient-to-b from-black via-zinc-950 to-zinc-900 relative overflow-hidden"
+        className="py-32 bg-noir-surface-dim relative overflow-hidden"
       >
-        {/* Noise texture overlay */}
-        <div
-          className="absolute inset-0 z-0 opacity-20 pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' /%3E%3C/svg%3E")`,
-          }}
-        />
-
-        {/* Subtle glow accents */}
-        <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/3 left-1/4 w-[300px] h-[300px] bg-zinc-400/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise" />
+        <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-noir-accent/[0.05] rounded-full blur-[60px] pointer-events-none" />
 
         <motion.div
-          className="container relative z-10"
-          initial={{ opacity: 0, y: 50 }}
+          className="container max-w-container-max relative z-10"
+          initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <SectionHeading title="Get In Touch" subtitle="Let's Connect" />
+          <div className="max-w-2xl">
+            <SectionHeading title="Get In Touch" subtitle="Let's Connect" />
+            <p className="mt-4 text-noir-text-mute leading-relaxed">
+              Currently open to senior full-stack and platform engineering
+              roles. Happy to talk about a project, a team, or anything in
+              between.
+            </p>
+          </div>
 
-          <div className="mt-20 max-w-2xl mx-auto">
+          <div className="mt-16 max-w-2xl">
             <ContactForm />
           </div>
         </motion.div>

@@ -97,93 +97,66 @@ export function ContactForm() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.4 }}
       viewport={{ once: true }}
-      className="relative z-0"
+      className="relative"
     >
-      <div className="relative p-[2px] rounded-2xl overflow-visible group">
-        {/* Animated Borders */}
-        <div
-          className="absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background:
-              "conic-gradient(from var(--border-angle, 0deg), #ffffff, #71717a, #ffffff, #a1a1aa, #ffffff)",
-            animation: "rotateBorder 8s linear infinite",
-          }}
-        />
-        <div
-          className="absolute inset-0 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-          style={{
-            background:
-              "conic-gradient(from var(--border-angle, 0deg), #ffffff, #71717a, #ffffff)",
-            animation: "rotateBorder 8s linear infinite",
-          }}
-        />
+      <div className="relative rounded-lg bg-noir-surface-1 border border-noir-line overflow-visible">
+        <div className="relative z-10 p-8">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="h-px w-8 bg-noir-accent/60" />
+            <span className="noir-label text-noir-accent">Direct Line</span>
+          </div>
+          <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-noir-text mb-3">
+            Send a Message
+          </h3>
+          <p className="text-noir-text-mute mb-8 flex items-center gap-2 flex-wrap text-sm">
+            Or reach me directly at{" "}
+            <a
+              href="mailto:abzaeko@gmail.com"
+              className="inline-flex items-center gap-1.5 text-noir-accent hover:underline underline-offset-2 transition-colors font-medium"
+            >
+              <Mail className="w-4 h-4" />
+              abzaeko@gmail.com
+            </a>
+          </p>
 
-        {/* Inner Card */}
-        <div className="relative rounded-2xl bg-zinc-900/80 backdrop-blur-xl border border-zinc-700/30 overflow-visible">
-          <div
-            className="absolute inset-0 opacity-[0.08] mix-blend-overlay pointer-events-none z-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-            }}
-          />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <Input
+              name="name"
+              placeholder="Your Name"
+              required
+              className="bg-noir-surface-dim border-noir-line text-noir-text placeholder:text-noir-text-faint h-11 rounded transition-colors focus-visible:border-noir-accent focus-visible:ring-1 focus-visible:ring-noir-accent/30 focus-visible:ring-offset-0"
+            />
+            <Input
+              name="email"
+              type="email"
+              placeholder="Your Email"
+              required
+              className="bg-noir-surface-dim border-noir-line text-noir-text placeholder:text-noir-text-faint h-11 rounded transition-colors focus-visible:border-noir-accent focus-visible:ring-1 focus-visible:ring-noir-accent/30 focus-visible:ring-offset-0"
+            />
+            <Input
+              name="subject"
+              placeholder="Subject"
+              required
+              className="bg-noir-surface-dim border-noir-line text-noir-text placeholder:text-noir-text-faint h-11 rounded transition-colors focus-visible:border-noir-accent focus-visible:ring-1 focus-visible:ring-noir-accent/30 focus-visible:ring-offset-0"
+            />
+            <Textarea
+              name="message"
+              placeholder="Your Message"
+              rows={5}
+              required
+              className="bg-noir-surface-dim border-noir-line text-noir-text placeholder:text-noir-text-faint resize-none rounded transition-colors focus-visible:border-noir-accent focus-visible:ring-1 focus-visible:ring-noir-accent/30 focus-visible:ring-offset-0"
+            />
 
-          <div className="relative z-10 p-8">
-            <h3 className="text-2xl font-bold mb-2 text-white">
-              Send Me a Message
-            </h3>
-            <p className="text-zinc-400 mb-6 flex items-center gap-2 flex-wrap">
-              Or reach me directly at{" "}
-              <a
-                href="mailto:abzaeko@gmail.com"
-                className="inline-flex items-center gap-1.5 text-white hover:text-zinc-300 transition-colors font-medium group/email"
-              >
-                <Mail className="w-4 h-4" />
-                <span className="underline underline-offset-2 decoration-zinc-500 group-hover/email:decoration-white transition-colors">
-                  abzaeko@gmail.com
-                </span>
-              </a>
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* RESTORED ORIGINAL INPUT STYLES */}
-              <Input
-                name="name"
-                placeholder="Your Name"
-                required
-                className="bg-zinc-800/50 border-zinc-700/50 text-white placeholder:text-zinc-500 focus:border-zinc-400/60 focus:ring-1 focus:ring-zinc-400/30 focus-visible:ring-zinc-400/30 focus-visible:ring-offset-0 focus-visible:border-zinc-400/60 transition-all duration-300"
-              />
-              <Input
-                name="email"
-                type="email"
-                placeholder="Your Email"
-                required
-                className="bg-zinc-800/50 border-zinc-700/50 text-white placeholder:text-zinc-500 focus:border-zinc-400/60 focus:ring-1 focus:ring-zinc-400/30 focus-visible:ring-zinc-400/30 focus-visible:ring-offset-0 focus-visible:border-zinc-400/60 transition-all duration-300"
-              />
-              <Input
-                name="subject"
-                placeholder="Subject"
-                required
-                className="bg-zinc-800/50 border-zinc-700/50 text-white placeholder:text-zinc-500 focus:border-zinc-400/60 focus:ring-1 focus:ring-zinc-400/30 focus-visible:ring-zinc-400/30 focus-visible:ring-offset-0 focus-visible:border-zinc-400/60 transition-all duration-300"
-              />
-              <Textarea
-                name="message"
-                placeholder="Your Message"
-                rows={5}
-                required
-                className="bg-zinc-800/50 border-zinc-700/50 text-white placeholder:text-zinc-500 resize-none focus:border-zinc-400/60 focus:ring-1 focus:ring-zinc-400/30 focus-visible:ring-zinc-400/30 focus-visible:ring-offset-0 focus-visible:border-zinc-400/60 transition-all duration-300"
-              />
-
-              {/* RESTORED ORIGINAL BUTTON STYLE */}
-              <Button
-                type="submit"
-                disabled={isSubmitting || didSend}
-                ref={buttonRef}
-                className="w-full bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 text-white hover:from-zinc-700 hover:via-zinc-600 hover:to-zinc-700 font-semibold border border-zinc-600/50 h-12 text-base transition-all duration-300 hover:border-zinc-500/70 hover:shadow-lg hover:shadow-zinc-500/10"
-              >
+            <Button
+              type="submit"
+              disabled={isSubmitting || didSend}
+              ref={buttonRef}
+              className="w-full h-12 rounded bg-noir-accent text-black font-semibold hover:bg-noir-accent-bright transition-[background,box-shadow] hover:shadow-noir-glow disabled:opacity-70"
+            >
                 <span className="relative w-full flex items-center justify-center z-50">
                   <AnimatePresence mode="wait" initial={false}>
                     {didSend ? (
@@ -259,10 +232,8 @@ export function ContactForm() {
                             ease: "easeInOut", // Ensures a smooth curve with no sharp edges
                           }}
                         >
-                          {/* Visual Glow behind the plane */}
-                          <span className="absolute inset-0 bg-white/20 blur-2xl rounded-full scale-150" />
-                          <Send className="relative h-10 w-10" />{" "}
-                          {/* ICON SIZE INCREASED */}
+                          <span className="absolute inset-0 bg-noir-accent/30 blur-2xl rounded-full scale-150" />
+                          <Send className="relative h-10 w-10" />
                         </motion.span>
                       </motion.span>
                     )}
@@ -270,7 +241,6 @@ export function ContactForm() {
                 </span>
               </Button>
             </form>
-          </div>
         </div>
       </div>
     </motion.div>

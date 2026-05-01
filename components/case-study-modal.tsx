@@ -2,18 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Github,
-  ExternalLink,
-} from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import type { ProjectData } from "./projects-section";
 // react-markdown ships non-ESModule typings; silence the import error
 // @ts-ignore: react-markdown's type declaration is not a module
 import ReactMarkdown from "react-markdown";
-import Image from "next/image";
 
 import { ProjectGallery } from "./project-gallery";
 
@@ -39,7 +32,6 @@ export function CaseStudyModal({
     };
   }, []);
 
-  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -59,25 +51,17 @@ export function CaseStudyModal({
   const slideVariants = {
     initial: (direction: "next" | "prev") => ({
       opacity: 0,
-      y: direction === "next" ? 32 : -32,
-      scale: 0.98,
+      y: direction === "next" ? 16 : -16,
     }),
     animate: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: {
-        type: "spring" as const,
-        damping: 25,
-        stiffness: 300,
-        mass: 0.8,
-      },
+      transition: { duration: 0.25, ease: "easeOut" as const },
     },
     exit: (direction: "next" | "prev") => ({
       opacity: 0,
-      y: direction === "next" ? -28 : 28,
-      scale: 0.98,
-      transition: { duration: 0.2, ease: "easeInOut" as const },
+      y: direction === "next" ? -16 : 16,
+      transition: { duration: 0.18, ease: "easeIn" as const },
     }),
   };
 
@@ -96,19 +80,22 @@ export function CaseStudyModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 bg-black/85 z-50 flex items-center justify-center px-3 md:px-12"
       onClick={onClose}
     >
-      {/* Navigation Buttons - Outside Modal */}
       <button
         onClick={(e) => {
           e.stopPropagation();
           handlePrev();
         }}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all z-50 hidden md:flex border border-white/5 hover:border-white/20 backdrop-blur-sm"
+        className="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center rounded
+                   bg-noir-surface-1 border border-noir-line text-noir-text-mute
+                   transition-colors duration-200
+                   hover:border-noir-accent hover:text-noir-accent z-50"
         aria-label="Previous project"
       >
-        <ChevronLeft className="w-8 h-8" />
+        <ChevronLeft className="w-5 h-5" />
       </button>
 
       <button
@@ -116,25 +103,34 @@ export function CaseStudyModal({
           e.stopPropagation();
           handleNext();
         }}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all z-50 hidden md:flex border border-white/5 hover:border-white/20 backdrop-blur-sm"
+        className="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-11 h-11 items-center justify-center rounded
+                   bg-noir-surface-1 border border-noir-line text-noir-text-mute
+                   transition-colors duration-200
+                   hover:border-noir-accent hover:text-noir-accent z-50"
         aria-label="Next project"
       >
-        <ChevronRight className="w-8 h-8" />
+        <ChevronRight className="w-5 h-5" />
       </button>
 
       <motion.div
-        layoutId={`card-${project.id}`}
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.97 }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
-        style={{ perspective: 1400 }}
-        className="relative w-[95vw] h-[90vh] md:w-[85vw] md:h-[85vh] bg-zinc-950 border border-white/10 rounded-3xl overflow-hidden flex flex-col shadow-2xl"
+        className="relative w-full max-w-[1200px] h-[90vh] md:h-[85vh]
+                   bg-noir-surface border border-noir-line rounded-lg overflow-hidden flex flex-col
+                   shadow-noir-lift"
       >
-        {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-50 p-2 bg-black/50 backdrop-blur-sm rounded-full hover:bg-white/10 transition-colors border border-white/10 group"
+          className="absolute top-4 right-4 z-50 w-9 h-9 flex items-center justify-center rounded
+                     bg-noir-surface-1 border border-noir-line text-noir-text-mute
+                     transition-colors duration-200
+                     hover:border-noir-accent hover:text-noir-accent"
           aria-label="Close modal"
         >
-          <X className="w-5 h-5 text-white group-hover:rotate-90 transition-transform duration-300" />
+          <X className="w-4 h-4" />
         </button>
 
         <AnimatePresence mode="wait" initial={false} custom={navDirection}>
@@ -147,115 +143,60 @@ export function CaseStudyModal({
             exit="exit"
             className="absolute inset-0 flex flex-col"
           >
-            {/* Header Section */}
-            <div className="relative px-8 py-7 border-b border-white/10 bg-zinc-950/70 backdrop-blur-xl z-20 flex justify-between items-start md:items-center gap-6 shrink-0">
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-fuchsia-500/10" />
-                <div className="absolute -left-10 top-0 h-40 w-40 rounded-full bg-fuchsia-500/10 blur-3xl" />
-                <div className="absolute right-6 bottom-0 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl" />
-              </div>
-
-              <div className="relative flex-1">
-                <motion.h2
-                  key={project.title}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", damping: 24, stiffness: 260 }}
-                  className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
-                >
-                  {project.title}
-                </motion.h2>
-                <p className="mt-3 text-sm text-zinc-400 max-w-2xl">
-                  Crafting a high-touch experience with thoughtful flows,
-                  resilient architecture, and a cinematic presentation layer.
-                </p>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-3 py-1 rounded-full bg-white/10 text-zinc-100 border border-white/15 shadow-[0_6px_24px_rgba(0,0,0,0.2)]"
-                    >
-                      {tag}
+            <div className="relative px-6 md:px-10 py-6 md:py-7 border-b border-noir-line bg-noir-surface-dim z-20 shrink-0">
+              <div className="flex items-start md:items-center justify-between gap-6 flex-col md:flex-row">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="h-px w-6 bg-noir-accent/60" />
+                    <span className="noir-label text-noir-accent">
+                      Case Study
                     </span>
-                  ))}
+                  </div>
+                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-noir-text leading-tight">
+                    {project.title}
+                  </h2>
+                  <p className="mt-3 text-sm md:text-base text-noir-text-mute max-w-2xl leading-relaxed">
+                    {project.caseStudy.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mt-4">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="noir-chip-neutral">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div className="relative flex gap-3 hidden md:flex">
                 <a
                   href={project.caseStudy.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white text-black text-sm font-semibold shadow-[0_10px_35px_rgba(255,255,255,0.15)] transition-transform transition-colors duration-200 hover:-translate-y-[1px] hover:bg-zinc-50"
+                  className="noir-btn-primary shrink-0"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Open
+                  Live site
                 </a>
-                {/* <a
-                  href={project.caseStudy.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-white text-sm font-semibold hover:border-white/30 transition-colors backdrop-blur-sm"
-                >
-                  <Github className="w-4 h-4" />
-                  Source
-                </a> */}
               </div>
             </div>
 
-            {/* Main Content Area */}
-            <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-              {/* Left Column: Markdown Content (40%) */}
-              <div className="w-full md:w-[40%] h-full overflow-y-auto p-8 md:p-12 bg-zinc-950 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent border-r border-white/5">
-                <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-zinc-400 prose-strong:text-white prose-li:text-zinc-400">
+            <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
+              <div className="w-full md:w-[40%] h-full overflow-y-auto px-6 md:px-10 py-8 bg-noir-surface border-r border-noir-line">
+                <article className="prose prose-invert prose-sm md:prose-base max-w-none
+                                    prose-headings:font-display prose-headings:tracking-tight prose-headings:text-noir-text
+                                    prose-h1:text-2xl prose-h1:mb-4
+                                    prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3
+                                    prose-p:text-noir-text-mute prose-p:leading-relaxed
+                                    prose-strong:text-noir-text prose-strong:font-semibold
+                                    prose-li:text-noir-text-mute prose-li:my-1
+                                    prose-a:text-noir-accent prose-a:no-underline hover:prose-a:underline">
                   <ReactMarkdown>
                     {project.caseStudy.markdownContent ||
                       project.caseStudy.description}
                   </ReactMarkdown>
-                </div>
-
-                {/* Mobile Links */}
-                <div className="flex gap-3 mt-8 md:hidden">
-                  <a
-                    href={project.caseStudy.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex justify-center items-center gap-2 px-4 py-3 bg-white text-black text-sm font-semibold rounded-lg shadow-lg"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Open
-                  </a>
-                  {/* <a
-                    href={project.caseStudy.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex justify-center items-center gap-2 px-4 py-3 bg-zinc-900 text-white text-sm font-semibold rounded-lg border border-white/10"
-                  >
-                    <Github className="w-4 h-4" />
-                    Source
-                  </a> */}
-                </div>
-
-                {/* Content Scroll Indicator */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  className="sticky bottom-0 mx-auto flex justify-end pb-2 pt-12 pointer-events-none bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent"
-                >
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-                    <motion.div
-                      animate={{ y: [0, 4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                      className="w-1 h-3 rounded-full bg-white/50"
-                    />
-                    <span className="text-[10px] uppercase tracking-wider text-white/50 font-medium">Scroll</span>
-                  </div>
-                </motion.div>
+                </article>
               </div>
 
-              {/* Right Column: Interactive Gallery (60%) */}
-              <div className="w-full md:w-[60%] h-full bg-zinc-900/20 relative overflow-hidden">
+              <div className="w-full md:w-[60%] h-[420px] md:h-full bg-noir-surface-dim relative overflow-hidden">
                 <ProjectGallery images={project.caseStudy.images} />
               </div>
             </div>

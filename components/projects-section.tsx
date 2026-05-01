@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { AwwwardsCard } from "./awwwards-card";
 import { CaseStudyModal } from "./case-study-modal";
-import { CursorSpotlight } from "./cursor-spotlight";
+import { SectionHeading } from "./section-heading";
 
 export interface ProjectData {
   id: string;
@@ -196,61 +196,44 @@ export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
     null
   );
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
     if (!selectedProject) return;
     const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
-    const nextIndex = (currentIndex + 1) % projects.length;
-    setSelectedProject(projects[nextIndex]);
+    setSelectedProject(projects[(currentIndex + 1) % projects.length]);
   };
 
   const handlePrev = () => {
     if (!selectedProject) return;
     const currentIndex = projects.findIndex((p) => p.id === selectedProject.id);
-    const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
-    setSelectedProject(projects[prevIndex]);
+    setSelectedProject(
+      projects[(currentIndex - 1 + projects.length) % projects.length]
+    );
   };
 
   return (
-    <section id="projects" className="py-32 relative overflow-hidden">
-      <CursorSpotlight containerRef={containerRef} />
+    <section id="projects" className="py-32 relative overflow-hidden bg-noir-surface-dim">
+      <div className="absolute inset-0 z-0 opacity-20 bg-noise pointer-events-none" />
 
-      {/* Noise texture background */}
-      <div className="absolute inset-0 z-0 opacity-30">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' /%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+      <div className="container relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="mb-20 max-w-2xl"
+        >
+          <SectionHeading
+            title="Featured Projects"
+            subtitle="Selected Work"
+          />
+          <p className="mt-4 text-noir-text-mute leading-relaxed">
+            Deep dives into recent builds — the architecture, the constraints,
+            and the measurable outcomes.
+          </p>
+        </motion.div>
 
-      <div ref={containerRef} className="container relative z-10">
-        {/* Section Header */}
-        <div className="mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
-          >
-            Featured Projects
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg text-zinc-400"
-          >
-            Immersive experiences built to sell the visual story
-          </motion.p>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <AwwwardsCard
               key={project.id}
@@ -262,7 +245,6 @@ export function ProjectsSection() {
         </div>
       </div>
 
-      {/* Case Study Modal */}
       <AnimatePresence>
         {selectedProject && (
           <CaseStudyModal
