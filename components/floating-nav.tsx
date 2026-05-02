@@ -8,9 +8,10 @@ import { Menu, X } from "lucide-react";
 import { useMobile } from "@/hooks/use-mobile";
 
 const NAV_ITEMS = [
-  { name: "Skills", href: "#skills" },
+  { name: "Services", href: "#services" },
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
+  { name: "Skills", href: "#skills" },
   { name: "Network", href: "#network" },
   { name: "Contact", href: "#contact" },
 ];
