@@ -8,6 +8,7 @@ import { Timeline } from "@/components/timeline"
 import { ContactForm } from "@/components/contact-form"
 import { ProjectsSection } from "@/components/projects-section"
 import { SkillsSection } from "@/components/skills-section"
+import { NetworkSection } from "@/components/network-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -48,6 +49,8 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <NetworkSection />
 
       <section
         id="contact"

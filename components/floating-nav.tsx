@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
+  { name: "Network", href: "#network" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -105,8 +106,8 @@ export function FloatingNav() {
           {/* Right side: Hire Me CTA (desktop) or menu toggle (mobile) */}
           {!isMobile ? (
             <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+              href="#network"
+              onClick={(e) => handleNavClick(e, "#network")}
               className="bg-noir-accent-soft text-black px-5 py-2 rounded-sm
                          font-mono font-bold uppercase tracking-[0.1em] text-[12px]
                          transition-transform duration-200 hover:scale-95"
@@ -160,8 +161,8 @@ export function FloatingNav() {
               );
             })}
             <motion.a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+              href="#network"
+              onClick={(e) => handleNavClick(e, "#network")}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 12 }}
               transition={{ duration: 0.25, delay: NAV_ITEMS.length * 0.04 }}
