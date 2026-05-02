@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -8,9 +9,11 @@ import { Menu, X } from "lucide-react";
 import { useMobile } from "@/hooks/use-mobile";
 
 const NAV_ITEMS = [
-  { name: "Skills", href: "#skills" },
+  { name: "Services", href: "#services" },
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
+  { name: "Skills", href: "#skills" },
+  { name: "Network", href: "#network" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -73,9 +76,20 @@ export function FloatingNav() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-mono font-bold text-xl tracking-tighter text-noir-text"
+            className="group flex items-center gap-2.5"
+            aria-label="Abdulazez Zeinu — Home"
           >
-            ABZ_<span className="text-noir-accent">CORE</span>
+            <Image
+              src="/logo.png"
+              alt=""
+              width={36}
+              height={36}
+              priority
+              className="w-9 h-9 object-contain transition-transform duration-200 group-hover:scale-105"
+            />
+            <span className="font-mono font-bold text-xl tracking-tighter text-noir-text hidden sm:inline">
+              ABZ_<span className="text-noir-accent">CORE</span>
+            </span>
           </Link>
 
           {/* Desktop nav */}
@@ -105,8 +119,8 @@ export function FloatingNav() {
           {/* Right side: Hire Me CTA (desktop) or menu toggle (mobile) */}
           {!isMobile ? (
             <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+              href="#network"
+              onClick={(e) => handleNavClick(e, "#network")}
               className="bg-noir-accent-soft text-black px-5 py-2 rounded-sm
                          font-mono font-bold uppercase tracking-[0.1em] text-[12px]
                          transition-transform duration-200 hover:scale-95"
@@ -160,8 +174,8 @@ export function FloatingNav() {
               );
             })}
             <motion.a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+              href="#network"
+              onClick={(e) => handleNavClick(e, "#network")}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 12 }}
               transition={{ duration: 0.25, delay: NAV_ITEMS.length * 0.04 }}

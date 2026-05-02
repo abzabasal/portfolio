@@ -34,7 +34,7 @@ export function CreativeHero() {
           >
             <span className="w-12 h-px bg-noir-accent" />
             <span className="font-mono text-[14px] font-medium tracking-[0.05em] uppercase text-noir-accent">
-              Available for new opportunities
+              Currently @ Reisearch · Open to new roles
             </span>
           </motion.div>
 
@@ -45,11 +45,11 @@ export function CreativeHero() {
             transition={{ duration: 0.6, delay: 0.15, ease: [0.215, 0.61, 0.355, 1] }}
             className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] leading-[1.05] text-noir-text mb-8 text-balance"
           >
-            Building fast, scalable products through{" "}
+            Building software that{" "}
             <span className="text-noir-accent italic font-semibold">
-              rigorous code
+              stays fast
             </span>{" "}
-            and clean architecture.
+            as it scales — and simple as it grows.
           </motion.h1>
 
           {/* Body */}
@@ -59,10 +59,10 @@ export function CreativeHero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-base md:text-lg text-noir-text-soft leading-relaxed max-w-2xl mb-10"
           >
-            Full-stack engineer specializing in high-performance web systems —
-            Next.js / React on the front, Go / TypeScript / Python services on
-            the back. I deliver measurable wins like 30% faster page loads, 25%
-            leaner API responses, and production-ready AI features.
+            Full-stack engineer with a bias for measurable outcomes. I rebuild
+            sluggish systems into ones that scream — Next.js front-ends that
+            load before you blink, AWS architectures that scale without drama,
+            and AI integrations that ship past the demo.
           </motion.p>
 
           {/* CTAs — sharp rounded-sm, uppercase label-caps */}
@@ -79,7 +79,7 @@ export function CreativeHero() {
                          font-mono font-bold uppercase tracking-[0.1em] text-[12px]
                          transition-transform duration-200 hover:scale-95"
             >
-              View Projects
+              See the Work
             </a>
             <a
               href="#contact"
@@ -89,7 +89,7 @@ export function CreativeHero() {
                          transition-colors duration-200
                          hover:border-noir-accent hover:text-noir-accent"
             >
-              Get in touch
+              Start a Conversation
             </a>
           </motion.div>
 
@@ -98,14 +98,18 @@ export function CreativeHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-14 flex items-center gap-3 text-noir-text-faint"
+            className="mt-14 flex flex-wrap items-center gap-3 text-noir-text-faint"
           >
             <span className="font-mono text-[11px] uppercase tracking-[0.18em]">
               Abdulazez Zeinu
             </span>
-            <span className="h-px w-8 bg-noir-line" />
+            <span className="h-px w-6 bg-noir-line" />
             <span className="font-mono text-[11px] uppercase tracking-[0.18em]">
-              Full-Stack Engineer
+              Addis Ababa
+            </span>
+            <span className="h-px w-6 bg-noir-line" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em]">
+              Remote-Friendly
             </span>
           </motion.div>
         </div>

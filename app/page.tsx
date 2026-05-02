@@ -7,7 +7,9 @@ import { SectionHeading } from "@/components/section-heading"
 import { Timeline } from "@/components/timeline"
 import { ContactForm } from "@/components/contact-form"
 import { ProjectsSection } from "@/components/projects-section"
+import { ServicesSection } from "@/components/services-section"
 import { SkillsSection } from "@/components/skills-section"
+import { NetworkSection } from "@/components/network-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -17,7 +19,7 @@ export default function Home() {
 
       <CreativeHero />
 
-      <SkillsSection />
+      <ServicesSection />
 
       <ProjectsSection />
 
@@ -48,6 +50,10 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <SkillsSection />
+
+      <NetworkSection />
 
       <section
         id="contact"
