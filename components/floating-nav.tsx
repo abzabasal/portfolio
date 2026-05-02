@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -75,9 +76,20 @@ export function FloatingNav() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-mono font-bold text-xl tracking-tighter text-noir-text"
+            className="group flex items-center gap-2.5"
+            aria-label="Abdulazez Zeinu — Home"
           >
-            ABZ_<span className="text-noir-accent">CORE</span>
+            <Image
+              src="/logo.png"
+              alt=""
+              width={36}
+              height={36}
+              priority
+              className="w-9 h-9 object-contain transition-transform duration-200 group-hover:scale-105"
+            />
+            <span className="font-mono font-bold text-xl tracking-tighter text-noir-text hidden sm:inline">
+              ABZ_<span className="text-noir-accent">CORE</span>
+            </span>
           </Link>
 
           {/* Desktop nav */}
