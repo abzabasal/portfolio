@@ -17,13 +17,11 @@ const experiences = [
     `,
   },
   {
-    title: "Fullstack Developer",
+    title: "Web Developer",
     company: "Nuclues Institute",
     companyUrl: "#",
-    period: "Jul 2024 – Nov 2024 · Canada",
+    period: "Oct 2024 · Canada",
     contributions: `
-* Optimized the **frontend component structure**, reducing unnecessary renders and improving asset loading for smoother navigation.
-* Enhanced **backend performance** by refining API logic, improving database query efficiency, and streamlining key request/response workflows.
 * Improved **accessibility and mobile usability** by refining responsive layouts and ensuring components met accessibility guidelines.
     `,
   },
