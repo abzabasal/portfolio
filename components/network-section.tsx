@@ -85,12 +85,8 @@ export function NetworkSection() {
   return (
     <section
       id="network"
-      className="relative py-24 md:py-32 bg-noir-bg overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
     >
-      <div
-        aria-hidden
-        className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise"
-      />
       <div
         aria-hidden
         className="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[500px] h-[500px] bg-noir-accent/[0.05] blur-[120px] rounded-full -z-0"

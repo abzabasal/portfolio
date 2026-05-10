@@ -2,51 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Theme tokens are defined as HSL channel components so Tailwind can compose
+ * `bg-noir-X/40` style alpha modifiers.
+ *
+ *   :root          → Bitstream Light defaults
+ *   :root.dark     → Bitstream Noir overrides (applied by next-themes when
+ *                    the user (or their system) prefers dark mode)
+ */
+
 @layer base {
   :root {
-    /* Bitstream Noir tokens (HSL components for shadcn-compatible vars) */
-    --background: 0 0% 7.5%;          /* #131313 */
-    --foreground: 0 0% 89%;           /* #e2e2e2 */
-    --card: 0 0% 11%;                 /* #1b1b1b */
-    --card-foreground: 0 0% 89%;
-    --popover: 0 0% 11%;
-    --popover-foreground: 0 0% 89%;
-    --primary: 187 100% 50%;          /* #00e5ff */
-    --primary-foreground: 0 0% 0%;
-    --secondary: 240 3% 23%;          /* #393939 */
-    --secondary-foreground: 0 0% 89%;
-    --accent: 187 100% 50%;
-    --accent-foreground: 0 0% 0%;
-    --muted: 0 0% 14%;                /* #242424 */
-    --muted-foreground: 240 5% 65%;   /* ~#a1a1aa */
-    --destructive: 4 100% 71%;        /* #ffb4ab */
-    --destructive-foreground: 0 0% 0%;
-    --border: 240 5% 16%;             /* #27272a */
-    --input: 240 5% 11%;              /* #1c1c1f */
-    --ring: 187 100% 50%;
-    --radius: 0.375rem;
+    /* Stellar Blueprint — high-key technical paper, blueprint cyan accent */
+    --noir-bg:           204  80% 98%;  /* #f4fafe (cool airy paper) */
+    --noir-surface:      204  80% 98%;
+    --noir-surface-dim:  200  12% 85%;  /* #d4dbdf (recessed inputs / inset bands) */
+    --noir-surface-1:      0   0% 100%; /* #ffffff (elevated cards / Level 1) */
+    --noir-surface-2:    198  37% 95%;  /* #eef5f8 (surface-container-low) */
+    --noir-surface-3:    198  23% 93%;  /* #e8eff2 (surface-container — header bars) */
+    --noir-surface-4:    204  18% 91%;  /* #e3e9ed (surface-container-high) */
+    --noir-line:         199  16% 90%;  /* ~#e0e8ed (the schematic hairline + grid line color) */
+    --noir-line-strong:  198  15% 77%;  /* #bbc9cf (outline-variant — for stronger dividers) */
+    --noir-outline:      199   8% 46%;  /* #6c797f */
+    --noir-text:         193  17% 10%;  /* #161d1f (deep slate — on-surface) */
+    --noir-text-soft:    197  13% 27%;  /* #3c494e (on-surface-variant — body sub-text) */
+    --noir-text-mute:    225  14% 39%;  /* #545f72 (secondary — annotation metadata) */
+    --noir-text-faint:   199   8% 46%;  /* #6c797f (outline — small labels, IDs) */
+    --noir-accent:       191 100% 25%;  /* #00677f (primary — deep teal, AAA on white) */
+    --noir-accent-bright:191 100% 50%;  /* #00d1ff (primary-container — bright blueprint cyan) */
+    --noir-accent-soft:  197 100% 86%;  /* #b7eaff (primary-fixed — pale cyan for tints/glows) */
+    --noir-accent-deep:  193 100% 21%;  /* #00566a (on-primary-container — dark teal text) */
+
+    /* CTA — Stellar primary buttons fill bright cyan with dark-teal text. */
+    --noir-cta-bg:       191 100% 50%;  /* #00d1ff (bright blueprint cyan) */
+    --noir-cta-fg:       193 100% 21%;  /* #00566a (dark teal) */
+    --noir-cta-edge:     191 100% 50%;  /* same as bg — Stellar drops the bottom-edge accent */
+
+    --shadow-noir-glow:  0 0 0 1px rgba(0, 209, 255, 0.30),
+                         0 4px 12px rgba(0, 103, 127, 0.05);
+    --shadow-noir-lift:  0 12px 32px rgba(22, 29, 31, 0.10);
+
+    /* shadcn-compatible aliases (light) */
+    --background:               204  80% 98%;
+    --foreground:               193  17% 10%;
+    --card:                       0   0% 100%;
+    --card-foreground:          193  17% 10%;
+    --popover:                    0   0% 100%;
+    --popover-foreground:       193  17% 10%;
+    --primary:                  191 100% 25%;
+    --primary-foreground:         0   0% 100%;
+    --secondary:                198  23% 93%;
+    --secondary-foreground:     193  17% 10%;
+    --accent:                   191 100% 25%;
+    --accent-foreground:          0   0% 100%;
+    --muted:                    198  37% 95%;
+    --muted-foreground:         199   8% 46%;
+    --destructive:                0  84% 50%;
+    --destructive-foreground:     0   0% 100%;
+    --border:                   199  16% 90%;
+    --input:                    199  16% 90%;
+    --ring:                     191 100% 50%;
+    --radius: 0.25rem;
   }
 
+  :root.dark,
   .dark {
-    --background: 0 0% 7.5%;
-    --foreground: 0 0% 89%;
-    --card: 0 0% 11%;
-    --card-foreground: 0 0% 89%;
-    --popover: 0 0% 11%;
-    --popover-foreground: 0 0% 89%;
-    --primary: 187 100% 50%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 240 3% 23%;
-    --secondary-foreground: 0 0% 89%;
-    --accent: 187 100% 50%;
-    --accent-foreground: 0 0% 0%;
-    --muted: 0 0% 14%;
-    --muted-foreground: 240 5% 65%;
-    --destructive: 4 100% 71%;
-    --destructive-foreground: 0 0% 0%;
-    --border: 240 5% 16%;
-    --input: 240 5% 11%;
-    --ring: 187 100% 50%;
+    /* Bitstream Noir — surface scale */
+    --noir-bg:             0  0%  7.5%;  /* #131313 */
+    --noir-surface:        0  0%  7.5%;
+    --noir-surface-dim:    0  0%  5.5%;  /* #0e0e0e */
+    --noir-surface-1:      0  0% 11%;    /* #1b1b1b */
+    --noir-surface-2:      0  0% 12%;    /* #1f1f1f */
+    --noir-surface-3:      0  0% 16%;    /* #2a2a2a */
+    --noir-surface-4:      0  0% 21%;    /* #353535 */
+    --noir-line:         240  5% 16%;    /* #27272a */
+    --noir-line-strong:  189 13% 26%;    /* #3b494c */
+    --noir-outline:      187  7% 55%;    /* #849396 */
+    --noir-text:           0  0% 89%;    /* #e2e2e2 */
+    --noir-text-soft:    189 14% 76%;    /* #bac9cc */
+    --noir-text-mute:    240  5% 65%;    /* #a1a1aa */
+    --noir-text-faint:   240  4% 46%;    /* #71717a */
+    --noir-accent:       186 100% 50%;   /* #00e5ff */
+    --noir-accent-bright:186 100% 48%;   /* #00daf3 */
+    --noir-accent-soft:  189 100% 81%;   /* #9cf0ff (pale cyan — used as fills + glows) */
+    --noir-accent-deep:  186 100% 23%;   /* #006875 */
+
+    /* CTA — Bitstream Noir keeps the pale cyan fill on the primary button.
+       Edge matches the bg so the bottom-border accent disappears. */
+    --noir-cta-bg:       189 100% 81%;   /* #9cf0ff (pale cyan) */
+    --noir-cta-fg:         0   0%  0%;   /* black */
+    --noir-cta-edge:     189 100% 81%;   /* same as bg → invisible */
+
+    --shadow-noir-glow:  0 0 0 1px rgba(0, 229, 255, 0.18),
+                         0 8px 32px -12px rgba(0, 229, 255, 0.25);
+    --shadow-noir-lift:  0 12px 40px -16px rgba(0, 0, 0, 0.6);
+
+    /* shadcn-compatible aliases (dark) */
+    --background:                 0  0%  7.5%;
+    --foreground:                 0  0% 89%;
+    --card:                       0  0% 11%;
+    --card-foreground:            0  0% 89%;
+    --popover:                    0  0% 11%;
+    --popover-foreground:         0  0% 89%;
+    --primary:                  186 100% 50%;
+    --primary-foreground:         0  0%  0%;
+    --secondary:                240  3% 23%;
+    --secondary-foreground:       0  0% 89%;
+    --accent:                   186 100% 50%;
+    --accent-foreground:          0  0%  0%;
+    --muted:                      0  0% 14%;
+    --muted-foreground:         240  5% 65%;
+    --destructive:                4 100% 71%;
+    --destructive-foreground:     0  0%  0%;
+    --border:                   240  5% 16%;
+    --input:                    240  5% 11%;
+    --ring:                     186 100% 50%;
   }
 }
 
@@ -55,21 +125,29 @@
     @apply border-border;
   }
   html {
+    color-scheme: light;
+  }
+  html.dark {
     color-scheme: dark;
   }
   body {
     @apply bg-noir-bg text-noir-text font-sans;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='2' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+    /* Stellar Blueprint — schematic 20px grid backdrop. The grid color uses the
+       --noir-line token so it stays visible in both themes. */
+    background-image:
+      linear-gradient(to right, hsl(var(--noir-line) / 0.55) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--noir-line) / 0.55) 1px, transparent 1px);
+    background-size: 20px 20px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight text-noir-text;
   }
-  /* Selection in accent */
+  /* Selection — accent-tinted in both modes */
   ::selection {
-    background: rgba(0, 229, 255, 0.25);
-    color: #ffffff;
+    background: hsl(var(--noir-accent) / 0.25);
+    color: hsl(var(--noir-text));
   }
 }
 
@@ -85,13 +163,13 @@
   .noir-chip {
     @apply inline-flex items-center gap-1.5 px-2.5 py-1
            rounded font-mono uppercase tracking-[0.08em] text-[11px]
-           bg-noir-accent/[0.06] border border-noir-accent/20
-           text-noir-accent-soft;
+           bg-noir-accent/[0.08] border border-noir-accent/25
+           text-noir-accent;
   }
   .noir-chip-neutral {
     @apply inline-flex items-center gap-1.5 px-2.5 py-1
            rounded font-mono uppercase tracking-[0.08em] text-[11px]
-           bg-white/[0.03] border border-noir-line
+           bg-noir-surface-2 border border-noir-line
            text-noir-text-soft;
   }
   .noir-label {
@@ -101,14 +179,19 @@
   .noir-btn-primary {
     @apply inline-flex items-center justify-center gap-2
            rounded px-5 py-2.5 text-sm font-semibold
-           bg-noir-accent text-black
-           transition-[background,transform,box-shadow] duration-200
-           hover:bg-noir-accent-bright hover:shadow-noir-glow;
+           transition-[background,color,box-shadow] duration-200
+           hover:shadow-noir-glow;
+    background-color: hsl(var(--noir-cta-bg));
+    color: hsl(var(--noir-cta-fg));
+  }
+  .noir-btn-primary:hover {
+    background-color: hsl(var(--noir-accent));
+    color: hsl(0 0% 100%);
   }
   .noir-btn-ghost {
     @apply inline-flex items-center justify-center gap-2
            rounded px-5 py-2.5 text-sm font-medium
-           bg-transparent border border-noir-text-faint text-noir-text
+           bg-transparent border border-noir-outline text-noir-text
            transition-colors duration-200
            hover:border-noir-accent hover:text-noir-accent;
   }
@@ -120,10 +203,19 @@
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' /%3E%3C/svg%3E");
   }
+  /* Schematic 20px grid — for sections that set their own bg and want the
+     grid pattern overlaid. Page bg already has it via `body`. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--noir-line) / 0.55) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--noir-line) / 0.55) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  /* Subtle grid overlay — muted in both themes via CSS var */
   .grid-overlay {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      linear-gradient(hsl(var(--noir-text) / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--noir-text) / 0.04) 1px, transparent 1px);
     background-size: 32px 32px;
   }
 }

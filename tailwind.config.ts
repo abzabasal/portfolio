@@ -53,32 +53,41 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Bitstream Noir palette
+        // Bitstream Noir palette — driven by CSS variables so values flip with theme.
+        // See app/globals.css for the actual hex values per theme.
         noir: {
-          bg: "#131313",
-          surface: "#131313",
-          "surface-dim": "#0e0e0e",
-          "surface-1": "#1b1b1b",
-          "surface-2": "#1f1f1f",
-          "surface-3": "#2a2a2a",
-          "surface-4": "#353535",
-          line: "#27272a",
-          "line-strong": "#3b494c",
-          outline: "#849396",
-          text: "#e2e2e2",
-          "text-soft": "#bac9cc",
-          "text-mute": "#a1a1aa",
-          "text-faint": "#71717a",
-          accent: "#00e5ff",
-          "accent-bright": "#00daf3",
-          "accent-soft": "#9cf0ff",
-          "accent-deep": "#006875",
+          bg: "hsl(var(--noir-bg) / <alpha-value>)",
+          surface: "hsl(var(--noir-surface) / <alpha-value>)",
+          "surface-dim": "hsl(var(--noir-surface-dim) / <alpha-value>)",
+          "surface-1": "hsl(var(--noir-surface-1) / <alpha-value>)",
+          "surface-2": "hsl(var(--noir-surface-2) / <alpha-value>)",
+          "surface-3": "hsl(var(--noir-surface-3) / <alpha-value>)",
+          "surface-4": "hsl(var(--noir-surface-4) / <alpha-value>)",
+          line: "hsl(var(--noir-line) / <alpha-value>)",
+          "line-strong": "hsl(var(--noir-line-strong) / <alpha-value>)",
+          outline: "hsl(var(--noir-outline) / <alpha-value>)",
+          text: "hsl(var(--noir-text) / <alpha-value>)",
+          "text-soft": "hsl(var(--noir-text-soft) / <alpha-value>)",
+          "text-mute": "hsl(var(--noir-text-mute) / <alpha-value>)",
+          "text-faint": "hsl(var(--noir-text-faint) / <alpha-value>)",
+          accent: "hsl(var(--noir-accent) / <alpha-value>)",
+          "accent-bright": "hsl(var(--noir-accent-bright) / <alpha-value>)",
+          "accent-soft": "hsl(var(--noir-accent-soft) / <alpha-value>)",
+          "accent-deep": "hsl(var(--noir-accent-deep) / <alpha-value>)",
+          // Theme-aware CTA: obsidian on light, pale cyan on dark
+          cta: "hsl(var(--noir-cta-bg) / <alpha-value>)",
+          "cta-fg": "hsl(var(--noir-cta-fg) / <alpha-value>)",
+          "cta-edge": "hsl(var(--noir-cta-edge) / <alpha-value>)",
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-manrope)", "system-ui", "sans-serif"],
-        mono: ["var(--font-grotesk)", "ui-monospace", "monospace"],
+        // Stellar Blueprint typography:
+        //   display → Space Grotesk (geometric, "engineered" feel)
+        //   sans (body) → Manrope (humanist, neutral)
+        //   mono → JetBrains Mono (developer code)
+        sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        display: ["var(--font-grotesk)", "system-ui", "sans-serif"],
+        mono: ["var(--font-jetbrains)", "ui-monospace", "monospace"],
       },
       fontSize: {
         "display-xl": ["3rem", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
@@ -99,8 +108,8 @@ const config = {
         gutter: "1.5rem",
       },
       boxShadow: {
-        "noir-glow": "0 0 0 1px rgba(0, 229, 255, 0.18), 0 8px 32px -12px rgba(0, 229, 255, 0.25)",
-        "noir-lift": "0 12px 40px -16px rgba(0, 0, 0, 0.6)",
+        "noir-glow": "var(--shadow-noir-glow)",
+        "noir-lift": "var(--shadow-noir-lift)",
       },
       keyframes: {
         "accordion-down": {

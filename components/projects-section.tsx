@@ -212,8 +212,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-32 relative overflow-hidden bg-noir-surface-dim">
-      <div className="absolute inset-0 z-0 opacity-20 bg-noise pointer-events-none" />
+    <section id="projects" className="py-32 relative overflow-hidden bg-noir-surface-2 bg-grid">
 
       <div className="container relative z-10">
         <motion.div

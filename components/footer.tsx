@@ -17,12 +17,11 @@ export function Footer() {
     { icon: Linkedin, href: "https://linkedin.com/in/abzaek", label: "LinkedIn" },
     { icon: SiWhatsapp, href: "https://wa.me/251985045300", label: "WhatsApp" },
     { icon: SiLeetcode, href: "https://leetcode.com/abzaek", label: "LeetCode" },
-    { icon: Mail, href: "mailto:abzaeko@gmail.com", label: "Email" },
+    { icon: Mail, href: "mailto:me@abzaek.dev", label: "Email" },
   ];
 
   return (
-    <footer className="relative py-16 bg-noir-bg border-t border-noir-line overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise" />
+    <footer className="relative py-16 bg-noir-surface-2 bg-grid border-t border-noir-line overflow-hidden">
 
       <div className="container max-w-container-max relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">

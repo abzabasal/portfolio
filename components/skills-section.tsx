@@ -117,13 +117,12 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="relative py-24 md:py-32 bg-noir-bg overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
     >
       <div
         aria-hidden
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[420px] max-w-4xl bg-noir-accent/[0.06] blur-[120px] rounded-full -z-0"
       />
-      <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise" />
 
       <div className="container max-w-container-max relative z-10 px-6">
         {/* Hero header */}
@@ -191,7 +190,7 @@ export function SkillsSection() {
                   between dev, staging, and production.
                 </p>
               </div>
-              <pre className="mt-6 p-4 rounded-lg font-mono text-[12px] text-noir-accent-soft bg-noir-surface-dim border border-noir-line overflow-x-auto leading-relaxed">
+              <pre className="mt-6 p-4 rounded-lg font-mono text-[12px] text-noir-accent bg-noir-surface-dim border border-noir-line overflow-x-auto leading-relaxed">
                 <code>
                   <span className="text-noir-text-faint">$</span> docker compose up -d --build{"\n"}
                   <span className="text-noir-text-faint">$</span> docker exec api migrate up
@@ -388,7 +387,7 @@ function FeatureCard({ skill, index }: { skill: Skill; index: number }) {
             <span
               key={tag}
               className="font-mono text-[10px] uppercase tracking-[0.08em] px-2 py-1 rounded
-                         bg-noir-surface-dim border border-noir-line text-noir-accent-soft"
+                         bg-noir-surface-dim border border-noir-line text-noir-accent"
             >
               {tag}
             </span>
