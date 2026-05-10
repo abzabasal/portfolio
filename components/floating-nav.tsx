@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "next-themes";
 
 import { useMobile } from "@/hooks/use-mobile";
 
@@ -16,6 +17,15 @@ const NAV_ITEMS = [
   { name: "Network", href: "#network" },
   { name: "Contact", href: "#contact" },
 ];
+
+// Stellar Blueprint label-caps style: Space Grotesk, 12px, weight 700, tracking 0.1em, uppercase.
+const LABEL_CAPS = "font-display text-[12px] font-bold tracking-[0.1em] uppercase";
+
+/** "Services" → "[ 01_SERVICES ]" — Stellar Blueprint nav-link semantics. */
+function blueprintLabel(index: number, name: string) {
+  const num = String(index + 1).padStart(2, "0");
+  return `[ ${num}_${name.toUpperCase()} ]`;
+}
 
 export function FloatingNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +43,6 @@ export function FloatingNav() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // pick the entry with the largest intersectionRatio that's intersecting
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -72,11 +81,11 @@ export function FloatingNav() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <div className="max-w-container-max mx-auto px-6 h-16 flex justify-between items-center">
-          {/* Logo */}
+        <div className="max-w-container-max mx-auto px-6 h-16 flex justify-between items-center gap-6">
+          {/* Logo — Stellar Blueprint headline-md style: Space Grotesk, bold, tracking-tighter, in primary teal */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5"
+            className="group flex items-center gap-2.5 shrink-0"
             aria-label="Abdulazez Zeinu — Home"
           >
             <Image
@@ -87,15 +96,15 @@ export function FloatingNav() {
               priority
               className="w-9 h-9 object-contain transition-transform duration-200 group-hover:scale-105"
             />
-            <span className="font-mono font-bold text-xl tracking-tighter text-noir-text hidden sm:inline">
-              ABZ_<span className="text-noir-accent">CORE</span>
+            <span className="font-display text-2xl font-bold tracking-[-0.02em] text-noir-accent hidden sm:inline">
+              ABZAEK.DEV
             </span>
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop nav — bracket-syntax label-caps with section numbers */}
           {!isMobile && (
-            <div className="flex items-center gap-8 font-display tracking-tight text-sm">
-              {NAV_ITEMS.map((item) => {
+            <div className="flex items-center gap-5 lg:gap-6">
+              {NAV_ITEMS.map((item, index) => {
                 const id = item.href.replace("#", "");
                 const isActive = activeSection === id;
                 return (
@@ -103,39 +112,43 @@ export function FloatingNav() {
                     key={item.name}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className={
+                    className={`${LABEL_CAPS} pb-1 border-b-2 transition-[color,border-color,transform] duration-150 active:scale-95 ${
                       isActive
-                        ? "text-noir-accent border-b-2 border-noir-accent pb-1 transition-colors"
-                        : "text-noir-text-mute hover:text-noir-text border-b-2 border-transparent pb-1 transition-colors"
-                    }
+                        ? "text-noir-accent border-noir-accent"
+                        : "text-noir-text-soft border-transparent hover:text-noir-accent-bright"
+                    }`}
                   >
-                    {item.name}
+                    {blueprintLabel(index, item.name)}
                   </a>
                 );
               })}
             </div>
           )}
 
-          {/* Right side: Hire Me CTA (desktop) or menu toggle (mobile) */}
+          {/* Right side: theme toggle + Hire Me CTA (desktop) or menu toggle (mobile) */}
           {!isMobile ? (
-            <a
-              href="#network"
-              onClick={(e) => handleNavClick(e, "#network")}
-              className="bg-noir-accent-soft text-black px-5 py-2 rounded-sm
-                         font-mono font-bold uppercase tracking-[0.1em] text-[12px]
-                         transition-transform duration-200 hover:scale-95"
-            >
-              Hire Me
-            </a>
+            <div className="flex items-center gap-3 shrink-0">
+              <ThemeToggle />
+              <a
+                href="#network"
+                onClick={(e) => handleNavClick(e, "#network")}
+                className={`${LABEL_CAPS} bg-noir-accent text-white px-5 py-2 transition-[background,color,transform] duration-150 hover:bg-noir-accent-bright hover:text-noir-accent-deep active:scale-95`}
+              >
+                Hire Me
+              </a>
+            </div>
           ) : (
-            <button
-              type="button"
-              className="text-noir-text-mute hover:text-noir-text p-2"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-            >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              <ThemeToggle />
+              <button
+                type="button"
+                className="text-noir-text-soft hover:text-noir-accent p-2"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? "Close menu" : "Open menu"}
+              >
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
           )}
         </div>
       </motion.nav>
@@ -150,7 +163,7 @@ export function FloatingNav() {
           animate={{ opacity: isOpen ? 1 : 0 }}
           transition={{ duration: 0.2 }}
         >
-          <div className="flex flex-col items-center justify-center h-full pt-16 gap-2">
+          <div className="flex flex-col items-center justify-center h-full pt-16 gap-3">
             {NAV_ITEMS.map((item, index) => {
               const id = item.href.replace("#", "");
               const isActive = activeSection === id;
@@ -163,12 +176,12 @@ export function FloatingNav() {
                 >
                   <a
                     href={item.href}
-                    className={`font-display block px-8 py-4 text-2xl font-semibold transition-colors ${
-                      isActive ? "text-noir-accent" : "text-noir-text"
-                    }`}
                     onClick={(e) => handleNavClick(e, item.href)}
+                    className={`font-display block px-8 py-3 text-lg font-bold tracking-[0.1em] uppercase transition-colors ${
+                      isActive ? "text-noir-accent" : "text-noir-text-soft hover:text-noir-accent-bright"
+                    }`}
                   >
-                    {item.name}
+                    {blueprintLabel(index, item.name)}
                   </a>
                 </motion.div>
               );
@@ -179,8 +192,7 @@ export function FloatingNav() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 12 }}
               transition={{ duration: 0.25, delay: NAV_ITEMS.length * 0.04 }}
-              className="mt-4 bg-noir-accent-soft text-black px-8 py-3 rounded-sm
-                         font-mono font-bold uppercase tracking-[0.1em] text-[12px]"
+              className={`${LABEL_CAPS} mt-6 bg-noir-accent text-white px-8 py-3`}
             >
               Hire Me
             </motion.a>
@@ -188,5 +200,50 @@ export function FloatingNav() {
         </motion.div>
       )}
     </>
+  );
+}
+
+/**
+ * Light/dark toggle. Hydration-safe: renders an inert placeholder until
+ * mounted so the server render and the first client render match.
+ */
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === "dark";
+  const next = isDark ? "light" : "dark";
+  const label = mounted
+    ? isDark
+      ? "Switch to light theme"
+      : "Switch to dark theme"
+    : "Toggle theme";
+
+  return (
+    <button
+      type="button"
+      onClick={() => mounted && setTheme(next)}
+      aria-label={label}
+      title={label}
+      className="flex items-center justify-center w-9 h-9
+                 text-noir-text-soft border border-noir-line
+                 transition-colors duration-200
+                 hover:border-noir-accent hover:text-noir-accent
+                 focus:outline-none focus-visible:border-noir-accent"
+    >
+      {mounted ? (
+        isDark ? (
+          <Sun className="h-4 w-4" />
+        ) : (
+          <Moon className="h-4 w-4" />
+        )
+      ) : (
+        <span className="block h-4 w-4" />
+      )}
+    </button>
   );
 }

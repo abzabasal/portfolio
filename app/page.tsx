@@ -25,10 +25,8 @@ export default function Home() {
 
       <section
         id="experience"
-        className="py-32 bg-noir-bg relative overflow-hidden"
+        className="py-32 relative overflow-hidden"
       >
-        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise" />
-        <div className="absolute top-1/4 left-1/4 w-[420px] h-[420px] bg-noir-accent/[0.04] rounded-full blur-[60px] pointer-events-none" />
 
         <motion.div
           className="container max-w-container-max relative z-10"
@@ -57,10 +55,8 @@ export default function Home() {
 
       <section
         id="contact"
-        className="py-32 bg-noir-surface-dim relative overflow-hidden"
+        className="py-32 bg-noir-surface-2 bg-grid relative overflow-hidden"
       >
-        <div className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise" />
-        <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-noir-accent/[0.05] rounded-full blur-[60px] pointer-events-none" />
 
         <motion.div
           className="container max-w-container-max relative z-10"

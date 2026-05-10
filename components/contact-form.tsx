@@ -115,11 +115,11 @@ export function ContactForm() {
           <p className="text-noir-text-mute mb-8 flex items-center gap-2 flex-wrap text-sm">
             Or reach me directly at{" "}
             <a
-              href="mailto:abzaeko@gmail.com"
+              href="mailto:me@abzaek.dev"
               className="inline-flex items-center gap-1.5 text-noir-accent hover:underline underline-offset-2 transition-colors font-medium"
             >
               <Mail className="w-4 h-4" />
-              abzaeko@gmail.com
+              me@abzaek.dev
             </a>
           </p>
 
@@ -155,7 +155,7 @@ export function ContactForm() {
               type="submit"
               disabled={isSubmitting || didSend}
               ref={buttonRef}
-              className="w-full h-12 rounded bg-noir-accent text-black font-semibold hover:bg-noir-accent-bright transition-[background,box-shadow] hover:shadow-noir-glow disabled:opacity-70"
+              className="w-full h-12 rounded bg-noir-cta text-noir-cta-fg font-semibold hover:bg-noir-accent hover:text-white transition-[background,color,box-shadow] hover:shadow-noir-glow disabled:opacity-70"
             >
                 <span className="relative w-full flex items-center justify-center z-50">
                   <AnimatePresence mode="wait" initial={false}>

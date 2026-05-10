@@ -1,16 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope, Space_Grotesk } from "next/font/google";
+import { JetBrains_Mono, Manrope, Space_Grotesk } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
+// Stellar Blueprint typography:
+//   Manrope        → body / sans
+//   Space Grotesk  → display / headings
+//   JetBrains Mono → monospace / metadata labels
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
@@ -20,6 +19,12 @@ const manrope = Manrope({
 const grotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-grotesk",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -33,7 +38,7 @@ export const metadata: Metadata = {
   },
   description:
     "Full-stack engineer building software that stays fast as it scales — Next.js front-ends, Go / TypeScript / Python services, and AWS architectures. Open for new roles.",
-  generator: "abzaeko@gmail.com",
+  generator: "me@abzaek.dev",
   applicationName: "Abdulazez Zeinu — Portfolio",
   authors: [{ name: "Abdulazez Zeinu" }],
   keywords: [
@@ -86,8 +91,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#131313",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4fafe" },
+    { media: "(prefers-color-scheme: dark)", color: "#131313" },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({
@@ -99,12 +107,26 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${manrope.variable} ${grotesk.variable}`}
+      className={`${manrope.variable} ${grotesk.variable} ${jetbrains.variable}`}
     >
       <body className="font-sans antialiased">
-        {children}
-        <Toaster />
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          {/* Stellar Blueprint — viewport corner crop markers (decorative) */}
+          <div aria-hidden className="pointer-events-none fixed inset-0 z-[60]">
+            <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-noir-accent-bright/40" />
+            <span className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-noir-accent-bright/40" />
+            <span className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-noir-accent-bright/40" />
+            <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-noir-accent-bright/40" />
+          </div>
+          <Toaster />
+          <Analytics />
+        </ThemeProvider>
       </body>
       <GoogleAnalytics gaId="G-PRMYJQGP5Z" />
     </html>

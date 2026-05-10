@@ -6,7 +6,7 @@ export function CreativeHero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center bg-noir-bg overflow-hidden pt-24 pb-20 px-6"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24 pb-20 px-6"
     >
       {/* Ambient cyan glow */}
       <div
@@ -17,10 +17,6 @@ export function CreativeHero() {
       <div
         aria-hidden
         className="absolute inset-0 grid-overlay opacity-[0.35] pointer-events-none -z-0"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 z-0 opacity-15 pointer-events-none bg-noise"
       />
 
       <div className="container max-w-container-max relative z-10 mx-auto">
@@ -75,9 +71,10 @@ export function CreativeHero() {
             <a
               href="#projects"
               className="inline-flex items-center justify-center px-8 py-4 rounded-sm
-                         bg-noir-accent-soft text-black
+                         bg-noir-cta text-noir-cta-fg
                          font-mono font-bold uppercase tracking-[0.1em] text-[12px]
-                         transition-transform duration-200 hover:scale-95"
+                         transition-[background,color,transform] duration-200
+                         hover:bg-noir-accent hover:text-white hover:scale-95"
             >
               See the Work
             </a>
