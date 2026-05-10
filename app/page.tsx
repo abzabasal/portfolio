@@ -10,6 +10,7 @@ import { ProjectsSection } from "@/components/projects-section"
 import { ServicesSection } from "@/components/services-section"
 import { SkillsSection } from "@/components/skills-section"
 import { NetworkSection } from "@/components/network-section"
+import { AboutSection } from "@/components/about-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -18,6 +19,8 @@ export default function Home() {
       <FloatingNav />
 
       <CreativeHero />
+
+      <AboutSection />
 
       <ServicesSection />
 

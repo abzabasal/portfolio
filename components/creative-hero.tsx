@@ -2,66 +2,61 @@
 
 import { motion } from "framer-motion";
 
+const STAT_TOKENS = [
+  { num: "4 yrs", label: "PRO_EXPERIENCE" },
+  { num: "3.9", label: "GPA" },
+  { num: "7", label: "SHIPPED_SYSTEMS" },
+  { num: "3", label: "LANGUAGES" },
+  { num: "9.6M", label: "RECORDS_INGESTED" },
+];
+
 export function CreativeHero() {
   return (
     <section
       id="hero"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24 pb-20 px-6"
     >
-      {/* Ambient cyan glow */}
-      <div
-        aria-hidden
-        className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-noir-accent/[0.06] blur-[120px] rounded-full -z-0"
-      />
-      {/* Subtle grid + noise */}
-      <div
-        aria-hidden
-        className="absolute inset-0 grid-overlay opacity-[0.35] pointer-events-none -z-0"
-      />
-
       <div className="container max-w-container-max relative z-10 mx-auto">
-        <div className="max-w-3xl">
-          {/* Eyebrow row: short cyan rule + uppercase code-sm label */}
+        <div className="max-w-3xl border-l-2 border-noir-accent pl-6">
+          {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="flex items-center gap-4 mb-8"
+            className="font-mono text-[14px] text-noir-accent mb-5"
           >
-            <span className="w-12 h-px bg-noir-accent" />
-            <span className="font-mono text-[14px] font-medium tracking-[0.05em] uppercase text-noir-accent">
-              Currently @ Reisearch · Open to new roles
-            </span>
+            [ SECTION_00 // INTRO ]
           </motion.div>
 
-          {/* Headline — italic cyan span mid-phrase */}
+          {/* Stat-stack headline */}
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.215, 0.61, 0.355, 1] }}
-            className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.02em] leading-[1.05] text-noir-text mb-8 text-balance"
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.04em] leading-[1.05] text-noir-text mb-4 uppercase"
           >
-            Building software that{" "}
-            <span className="text-noir-accent italic font-semibold">
-              stays fast
-            </span>{" "}
-            as it scales — and simple as it grows.
+            <span className="text-noir-accent">4 Years In.</span>{" "}
+            <span className="text-noir-accent">3.9 GPA.</span>
+            <br className="hidden md:block" />{" "}
+            7 Products Shipped.
+            <br className="hidden md:block" />{" "}
+            <span className="text-noir-accent">3 Languages.</span>
           </motion.h1>
 
-          {/* Body */}
+          {/* Outcome-focused body */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-base md:text-lg text-noir-text-soft leading-relaxed max-w-2xl mb-10"
+            className="text-lg md:text-xl text-noir-text-soft leading-relaxed max-w-2xl mb-10"
           >
-            Full-stack engineer with a bias for measurable outcomes. I rebuild
-            sluggish systems into ones that scream — Next.js front-ends that
-            load before you blink, AWS architectures that scale without drama,
-            and AI integrations that ship past the demo.
+            I ship things that move numbers. A Go pipeline that cut 40 minutes
+            to 4. Infrastructure costs down 40%. Production bugs down 30%. User
+            engagement up 25%. Four years, seven shipped systems, several of
+            them mine end to end.
           </motion.p>
 
-          {/* CTAs — sharp rounded-sm, uppercase label-caps */}
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -70,43 +65,65 @@ export function CreativeHero() {
           >
             <a
               href="#projects"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-sm
+              className="inline-flex items-center justify-center px-8 py-4
                          bg-noir-cta text-noir-cta-fg
-                         font-mono font-bold uppercase tracking-[0.1em] text-[12px]
+                         font-display font-bold uppercase tracking-[0.1em] text-[12px]
                          transition-[background,color,transform] duration-200
-                         hover:bg-noir-accent hover:text-white hover:scale-95"
+                         hover:bg-noir-accent hover:text-white active:scale-95"
             >
-              See the Work
+              View_Archive
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-sm
+              className="inline-flex items-center justify-center px-8 py-4
                          border border-noir-outline text-noir-text
-                         font-mono font-bold uppercase tracking-[0.1em] text-[12px]
+                         font-display font-bold uppercase tracking-[0.1em] text-[12px]
                          transition-colors duration-200
                          hover:border-noir-accent hover:text-noir-accent"
             >
-              Start a Conversation
+              Init_Contact
             </a>
           </motion.div>
 
-          {/* Identity strip — small introduction line below CTAs */}
+          {/* Stat-token row, replaces identity strip */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-14 flex flex-wrap items-center gap-3 text-noir-text-faint"
+            className="mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-px bg-noir-line border border-noir-line max-w-3xl"
+          >
+            {STAT_TOKENS.map((s) => (
+              <div
+                key={s.label}
+                className="flex flex-col gap-1 px-4 py-3 bg-noir-surface-1"
+              >
+                <span className="font-display text-2xl font-bold tracking-[-0.02em] text-noir-accent leading-none">
+                  {s.num}
+                </span>
+                <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-noir-text-faint">
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Identity strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.75 }}
+            className="mt-8 flex flex-wrap items-center gap-3 text-noir-text-faint"
           >
             <span className="font-mono text-[11px] uppercase tracking-[0.18em]">
               Abdulazez Zeinu
             </span>
-            <span className="h-px w-6 bg-noir-line" />
+            <span className="h-px w-6 bg-noir-line-strong" />
             <span className="font-mono text-[11px] uppercase tracking-[0.18em]">
               Addis Ababa
             </span>
-            <span className="h-px w-6 bg-noir-line" />
+            <span className="h-px w-6 bg-noir-line-strong" />
             <span className="font-mono text-[11px] uppercase tracking-[0.18em]">
-              Remote-Friendly
+              Remote_Native
             </span>
           </motion.div>
         </div>
