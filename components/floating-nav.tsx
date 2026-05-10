@@ -12,8 +12,8 @@ import { useMobile } from "@/hooks/use-mobile";
 const NAV_ITEMS = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
-  { name: "Services", href: "#services" },
   { name: "Stack", href: "#skills" },
+  { name: "Services", href: "#services" },
   { name: "Contact", href: "#contact" },
 ];
 

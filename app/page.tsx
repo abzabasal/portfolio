@@ -22,9 +22,11 @@ export default function Home() {
 
       <AboutSection />
 
-      <ServicesSection />
-
       <ProjectsSection />
+
+      <SkillsSection />
+
+      <ServicesSection />
 
       <section
         id="experience"
@@ -51,8 +53,6 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
-
-      <SkillsSection />
 
       <NetworkSection />
 
