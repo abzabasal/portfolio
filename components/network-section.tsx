@@ -53,7 +53,7 @@ const networkLinks: NetworkLink[] = [
     service: "Upwork",
     label: "Consultancy",
     description:
-      "Available for freelance engagements — full-stack builds, performance audits, and platform work.",
+      "Available for freelance engagements. Full-stack builds, performance audits, and platform work.",
     cta: "Hire Direct",
     href: "https://www.upwork.com/freelancers/abzaek",
     Icon: SiUpwork,
@@ -73,7 +73,7 @@ const networkLinks: NetworkLink[] = [
     service: "WhatsApp",
     label: "Direct Line",
     description:
-      "Fastest way to reach me directly — message anytime, day or night.",
+      "Fastest way to reach me directly. Message anytime, day or night.",
     cta: "Open Chat",
     href: "https://wa.me/251985045300",
     Icon: SiWhatsapp,
@@ -148,7 +148,7 @@ function NetworkCard({ link, index }: { link: NetworkLink; index: number }) {
                  transition-[border-color,transform,box-shadow] duration-300
                  hover:border-noir-accent hover:-translate-y-1 hover:shadow-noir-glow
                  focus:outline-none focus-visible:border-noir-accent focus-visible:shadow-noir-glow"
-      aria-label={`${service} — ${label}`}
+      aria-label={`${service}: ${label}`}
     >
       {/* Faded oversized background icon, brightens on hover */}
       <div

@@ -9,18 +9,21 @@ const experiences = [
     title: "Software Engineer",
     company: "Reisearch",
     companyUrl: "https://reisearch.com",
-    period: "Nov 2024 – Present · Phoenix, AZ",
+    period: "Nov 2024 – Present · Remote · Addis Ababa, Ethiopia",
     contributions: `
-* Rebuilt a **Go-based comps orchestration system** into a high-throughput streaming pipeline with DynamoDB + SQS worker pools, cutting processing time from ~40 minutes to ~3–4 minutes.
-* Designed and maintained **AWS integrations** (DynamoDB, S3, SQS, Cognito) and Clean Architecture services to validate, enrich, score, and persist multi-source real-estate comps data.
-* Authored **architecture/orchestration docs**, introduced dependency-injection patterns, and mentored engineers for new property-service publishing workflows.
+* Working on a small engineering team building the platform: **34 frontend modules**, **16 Go microservices**, **23+ DynamoDB tables** in production.
+* Rebuilt a Go-based comps orchestration system into a high-throughput streaming pipeline with DynamoDB and SQS worker pools, cutting processing time from **40 minutes to 4 minutes**.
+* Built a **9.6M-record market data pipeline** that ingests raw government TSV files into queryable DynamoDB tables at every geographic level (ZIP, city, county, metro, state, national).
+* Shipped an **AI Renovation Copilot** using OpenAI and Gemini that generates photorealistic renovation previews and itemized cost estimates in under 30 seconds.
+* Co-led an AWS architecture redesign that cut **infrastructure costs by 40%**. Introduced strict typing, hypothesis-based tests, and pre-commit gates that dropped **production bugs by 30%**.
+* Authored architecture and orchestration docs, introduced dependency-injection patterns, and mentored other engineers on Clean Architecture practices.
     `,
   },
   {
     title: "Web Developer",
-    company: "Nuclues Institute",
+    company: "Nucleus Institute",
     companyUrl: "#",
-    period: "Oct 2024 · Canada",
+    period: "Oct 2024 · Remote · Canada",
     contributions: `
 * Improved **accessibility and mobile usability** by refining responsive layouts and ensuring components met accessibility guidelines.
     `,
@@ -31,19 +34,30 @@ const experiences = [
     companyUrl: "#",
     period: "Sep 2023 – Jul 2024 · Addis Ababa, Ethiopia",
     contributions: `
-* Led a team to build a **blog starter** with Go (Gin), Redis caching, and MongoDB following clean architecture principles.
+* Led a small team to build a **blog starter** with Go (Gin), Redis caching, and MongoDB following Clean Architecture principles.
 * Integrated **AI automation** to generate and review blog content, boosting user engagement.
-* Drove **performance optimizations** with concurrency and regular code reviews to maintain quality standards.
+* Drove **performance optimizations** through concurrency tuning and rigorous code reviews to maintain quality standards.
+    `,
+  },
+  {
+    title: "Competitive Engineering Fellowship",
+    company: "Africa to Silicon Valley (A2SV) · Generation 5",
+    companyUrl: "https://www.a2sv.org",
+    period: "2023 · Selected from thousands",
+    contributions: `
+* Selected from **thousands of applicants** as one of Africa's top engineering talents in a competitive selection.
+* Solved **700+ LeetCode and Codeforces problems** training to compete at the global level.
+* Placed into the Eskalate engineering team coming out of the program.
     `,
   },
   {
     title: "Fullstack Engineer",
     company: "NEO AI Technologies",
     companyUrl: "#",
-    period: "Nov 2022 – Sep 2023",
+    period: "Nov 2022 – Sep 2023 · Addis Ababa, Ethiopia",
     contributions: `
 * Built and maintained **hospital and inventory management systems** with React and TypeScript, delivering scalable frontends.
-* Integrated **Firebase/Firestore** for real-time data storage and synchronization.
+* Integrated **Firebase / Firestore** for real-time data storage and synchronization.
     `,
   },
 ];

@@ -247,7 +247,7 @@ function FullStackModule({ service }: { service: Service }) {
                      font-display text-[12px] font-bold tracking-[0.1em] uppercase text-noir-text
                      transition-colors duration-200
                      hover:bg-noir-accent-bright hover:text-noir-accent-deep hover:border-noir-accent-bright"
-          aria-label={`${cta} — open contact`}
+          aria-label={`${cta}: open contact`}
         >
           <Plus className="w-3.5 h-3.5" />
           View Specs
@@ -294,7 +294,7 @@ function ArchitectureModule({ service }: { service: Service }) {
                    font-display text-[12px] font-bold tracking-[0.1em] uppercase text-noir-text
                    transition-colors duration-200
                    hover:bg-noir-accent-bright hover:text-noir-accent-deep hover:border-noir-accent-bright"
-        aria-label={`${cta} — open contact`}
+        aria-label={`${cta}: open contact`}
       >
         <ArrowRight className="w-3.5 h-3.5" />
         Architecture Logs
@@ -340,7 +340,7 @@ function DevOpsModule({ service }: { service: Service }) {
                        px-6 py-3 font-display text-[12px] font-bold tracking-[0.1em] uppercase
                        transition-colors duration-200
                        hover:bg-noir-accent-bright hover:text-noir-accent-deep"
-            aria-label={`${cta} — open contact`}
+            aria-label={`${cta}: open contact`}
           >
             Init Deploy
           </a>

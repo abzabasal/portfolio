@@ -10,11 +10,10 @@ import { useTheme } from "next-themes";
 import { useMobile } from "@/hooks/use-mobile";
 
 const NAV_ITEMS = [
-  { name: "Services", href: "#services" },
+  { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Skills", href: "#skills" },
-  { name: "Network", href: "#network" },
+  { name: "Services", href: "#services" },
+  { name: "Stack", href: "#skills" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -86,7 +85,7 @@ export function FloatingNav() {
           <Link
             href="/"
             className="group flex items-center gap-2.5 shrink-0"
-            aria-label="Abdulazez Zeinu — Home"
+            aria-label="Abdulazez Zeinu, Home"
           >
             <Image
               src="/logo.png"

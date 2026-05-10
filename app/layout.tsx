@@ -33,13 +33,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://abzaek.dev";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Abdulazez Zeinu — Full-Stack Engineer",
+    default: "Abdulazez Zeinu · Full-Stack Engineer",
     template: "%s · Abdulazez Zeinu",
   },
   description:
-    "Full-stack engineer building software that stays fast as it scales — Next.js front-ends, Go / TypeScript / Python services, and AWS architectures. Open for new roles.",
+    "Full-stack engineer building software that stays fast as it scales. Next.js front-ends, Go / TypeScript / Python services, and AWS architectures. Open for new roles.",
   generator: "me@abzaek.dev",
-  applicationName: "Abdulazez Zeinu — Portfolio",
+  applicationName: "Abdulazez Zeinu · Portfolio",
   authors: [{ name: "Abdulazez Zeinu" }],
   keywords: [
     "full-stack engineer",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
-    title: "Abdulazez Zeinu — Full-Stack Engineer",
+    title: "Abdulazez Zeinu · Full-Stack Engineer",
     description:
       "Full-stack engineer building software that stays fast as it scales.",
     siteName: "Abdulazez Zeinu",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Abdulazez Zeinu — Full-Stack Engineer",
+    title: "Abdulazez Zeinu · Full-Stack Engineer",
     description:
       "Full-stack engineer building software that stays fast as it scales.",
     images: ["/logo.png"],
