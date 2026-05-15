@@ -38,9 +38,7 @@ interface AudioContextValue {
 const AudioCtx = createContext<AudioContextValue | null>(null);
 
 const TRACKS = [
-  "/the-builders-pace.mp3",
-  "/the-architect-in-the-frame.mp3",
-  "/slow-mornings-in-addis.mp3",
+  "/velvet-tide.mp3",
 ] as const;
 
 const BGM_KEY = "bgm";
