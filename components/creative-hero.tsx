@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const STAT_TOKENS = [
   { num: "4 yrs", label: "PRO_EXPERIENCE" },
-  { num: "3.9", label: "GPA" },
   { num: "7", label: "SHIPPED_SYSTEMS" },
   { num: "3", label: "LANGUAGES" },
   { num: "9.6M", label: "RECORDS_INGESTED" },
+  { num: "40%", label: "INFRA_COST_DOWN" },
 ];
 
 export function CreativeHero() {
@@ -36,11 +36,10 @@ export function CreativeHero() {
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.04em] leading-[1.05] text-noir-text mb-4 uppercase"
           >
             <span className="text-noir-accent">4 Years In.</span>{" "}
-            <span className="text-noir-accent">3.9 GPA.</span>
-            <br className="hidden md:block" />{" "}
             7 Products Shipped.
             <br className="hidden md:block" />{" "}
-            <span className="text-noir-accent">3 Languages.</span>
+            <span className="text-noir-accent">3 Languages.</span>{" "}
+            700+ Problems Solved.
           </motion.h1>
 
           {/* Outcome-focused body */}
