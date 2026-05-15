@@ -61,12 +61,10 @@ export function AudioConsentBanner() {
                 Background score available
               </h3>
               <p className="text-sm text-noir-text-soft leading-relaxed">
-                This portfolio has a soft instrumental playlist:{" "}
-                <span className="italic">The Builder's Pace</span>,{" "}
-                <span className="italic">The Architect in the Frame</span>, and{" "}
-                <span className="italic">Slow Mornings in Addis</span>,
-                crossfading on loop. Nothing plays unless you enable it. You
-                can pause anytime from the nav.
+                This portfolio has a soft instrumental score,{" "}
+                <span className="italic">Velvet Tide</span>, that loops in the
+                background. Nothing plays unless you enable it. You can pause
+                anytime from the nav.
               </p>
             </div>
           </div>
