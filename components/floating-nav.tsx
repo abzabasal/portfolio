@@ -8,6 +8,7 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { useMobile } from "@/hooks/use-mobile";
+import { AudioToggle } from "@/components/audio-toggle";
 
 const NAV_ITEMS = [
   { name: "About", href: "#about" },
@@ -126,18 +127,20 @@ export function FloatingNav() {
 
           {/* Right side: theme toggle + Hire Me CTA (desktop) or menu toggle (mobile) */}
           {!isMobile ? (
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
+              <AudioToggle />
               <ThemeToggle />
               <a
                 href="#network"
                 onClick={(e) => handleNavClick(e, "#network")}
-                className={`${LABEL_CAPS} bg-noir-accent text-white px-5 py-2 transition-[background,color,transform] duration-150 hover:bg-noir-accent-bright hover:text-noir-accent-deep active:scale-95`}
+                className={`${LABEL_CAPS} bg-noir-accent text-white px-5 py-2 ml-1 transition-[background,color,transform] duration-150 hover:bg-noir-accent-bright hover:text-noir-accent-deep active:scale-95`}
               >
                 Hire Me
               </a>
             </div>
           ) : (
             <div className="flex items-center gap-2 shrink-0">
+              <AudioToggle />
               <ThemeToggle />
               <button
                 type="button"
